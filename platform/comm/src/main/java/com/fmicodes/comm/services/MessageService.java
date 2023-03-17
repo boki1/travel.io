@@ -124,13 +124,6 @@ public class MessageService {
 
 
     private Integer getDestinationIdByCityAndCountry(String cityName, String countryName) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://booking-com.p.rapidapi.com/v1/hotels/locations?name=" + cityName + "&locale=en-gb"))
-                .header("X-RapidAPI-Key", rapidApiKey)
-                .header("X-RapidAPI-Host", "booking-com.p.rapidapi.com")
-                .method("GET", HttpRequest.BodyPublishers.noBody())
-                .build();
-
         AsyncHttpClient client = new DefaultAsyncHttpClient();
         String destinationsResponse = null;
         try {
