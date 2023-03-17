@@ -1,5 +1,4 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from '../Home/index';
 
 
@@ -7,7 +6,9 @@ import Home from '../Home/index';
 function App() {
   return (
     <Router>
-      <Route path="/" element={<Home />} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </Router>
   );
 }
