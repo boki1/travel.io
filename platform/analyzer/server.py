@@ -28,7 +28,7 @@ def debug_main():
     for fname in listdir(test_path):
         task = create_task_from_desc(f'{test_path}/{fname}')
         output = analyser.perform(task)
-
+        print(f"For input: '{fname}' locations are [{', '.join([l.country for l in output.locations])}]")
 
 # We are not called this way usually. The analyzer module is supposed to be
 # used by API from the "flask" server. However, in order to mock the stages that
@@ -83,6 +83,8 @@ def openai_communication():
 
 if DEBUG_MODE:
     debug_main()
+elif __name__ == '__main__':
+    # This line loads the values from the .env file into the environment
+    load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), 'props.env'))
 
-if __name__ == '__main__':
     app.run()
