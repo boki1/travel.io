@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class AnalyzerService {
 
-    private static String analyzerHost = "http://localhost:5005/";
+    private static String analyzerHost = "http://localhost:5000/";
 
 
     public String analyzeMessage(String message) {
