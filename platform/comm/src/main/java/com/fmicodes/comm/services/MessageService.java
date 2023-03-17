@@ -12,6 +12,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 
 @Service
 public class MessageService {
@@ -20,9 +21,11 @@ public class MessageService {
 
     private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
 
-    public String getHotelsByParams() {
+    public ArrayList<Hotel> getHotelsByParams(String city, String country) {
 
-        Integer destinationID = getDestinationIdByCityAndCountry("Berlin", "Germany");
+        Integer destinationID = getDestinationIdByCityAndCountry("Istanbul", "Turkey");
+
+//        Integer destinationID = -1746443;
 
         StringBuilder url = new StringBuilder("https://booking-com.p.rapidapi.com/v1/hotels/search?");
         url.append("adults_number=2");           // REQUIRED
@@ -32,15 +35,16 @@ public class MessageService {
         url.append("&checkin_date=2023-09-05");  // REQUIRED
         url.append("&order_by=popularity");      // REQUIRED
         url.append("&locale=en-gb");             // REQUIRED
-        url.append("&dest_id=-553173");          // REQUIRED - is problematic. You can get this from GET Search locations
+
+        if (destinationID != null) {
+            System.out.println("DESTINATION ID THAT WE END UP USING: " + destinationID);
+            url.append("&dest_id=" + destinationID);
+        } else {
+            // TODO: Handle case when destinationID is null after API call
+            url.append("&dest_id=-1746443");
+        }
         url.append("&units=metric");             // REQUIRED
         url.append("&room_number=1");            // REQUIRED
-//        url.append("&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1");
-//        url.append("&children_number=2");
-//        url.append("&children_ages=5%2C0");
-//        url.append("&page_number=0");
-//        url.append("&include_adjacency=true");
-
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url.toString()))
@@ -49,39 +53,47 @@ public class MessageService {
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
 
-        HttpResponse<String> response = null;
+        HttpResponse<String> hotelsResponse = null;
         try {
-            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            hotelsResponse = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
+            System.out.println("ERROR: Making a call to the /hotels/search Booking API");
             throw new RuntimeException(e);
         }
 
-        JSONArray hotels;
+        JSONArray hotelsArray;
         try {
-            JSONObject responseBodyJson = new JSONObject(response.body());
-            hotels = responseBodyJson.getJSONArray("result");
+            System.out.println("RESPONSE BODY: " + hotelsResponse.body());
+            JSONObject responseBodyJson = new JSONObject(hotelsResponse.body());
+            hotelsArray = responseBodyJson.getJSONArray("result");
         } catch (JSONException e) {
+            System.out.println("ERROR: Parsing hotels response body to JSON");
             throw new RuntimeException(e);
         }
 
-        for (int i = 0; i < hotels.length(); i++) {
+        ArrayList<Hotel> hotelSuggestions = new ArrayList<>();
+        for (int i = 0; i < hotelsArray.length(); i++) {
             try {
-                JSONObject JSONhotel = hotels.getJSONObject(i);
+                JSONObject hotelJSON = hotelsArray.getJSONObject(i);
 
                 Hotel hotel = new Hotel();
-                hotel.setHotelId(JSONhotel.getInt("hotel_id"));
-                hotel.setHotelName(JSONhotel.getString("hotel_name_trans"));
+                hotel.setHotelId(hotelJSON.getInt("hotel_id"));
+                hotel.setHotelName(hotelJSON.getString("hotel_name_trans"));
+                hotel.setUrl(hotelJSON.getString("url"));
+                hotel.setAddress(hotelJSON.getString("address"));
+                hotel.setReviewScore(hotelJSON.getDouble("review_score"));
+                hotel.setMaxPhotoUrl(hotelJSON.getString("max_photo_url"));
 
-//                System.out.println(hotel);
+                hotelSuggestions.add(hotel);
             } catch (JSONException e) {
+                System.out.println("ERROR: Parsing hotel JSON object");
                 throw new RuntimeException(e);
             }
         }
 
-
-        return "Hello World";
+        return hotelSuggestions;
     }
 
 
@@ -93,39 +105,36 @@ public class MessageService {
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
 
-        HttpResponse<String> response = null;
+        HttpResponse<String> destinationsResponse = null;
         try {
-            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            destinationsResponse = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
+            System.out.println("ERROR: Making a call to the /hotels/locations Booking API");
             throw new RuntimeException(e);
         }
 
-        JSONArray destinations = null;
+        JSONArray destinationsArray = null;
         try {
-            destinations = new JSONArray(response.body());
+            destinationsArray = new JSONArray(destinationsResponse.body());
         } catch (JSONException e) {
+            System.out.println("ERROR: Parsing destinations response body to JSON");
             throw new RuntimeException(e);
         }
 
         Integer destinationId = null;
-
-        for (int i = 0; i < destinations.length(); i++) {
+        for (int i = 0; i < destinationsArray.length(); i++) {
             try {
-                JSONObject destination = destinations.getJSONObject(i);
-                System.out.println("DESTINATION: " + destination);
-                System.out.println(destination.getString("label") + ": " + destination.getInt("dest_id"));
+                JSONObject destination = destinationsArray.getJSONObject(i);
 
-                if (destination.get("country").equals(countryName)) {
+                if (destination.get("country").equals(countryName) && destination.getInt("dest_id") < 0) {
                     destinationId = destination.getInt("dest_id");
                 }
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
         }
-
-        System.out.println(response.body());
 
         return destinationId;
     }
