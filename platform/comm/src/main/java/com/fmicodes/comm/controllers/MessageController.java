@@ -33,8 +33,8 @@ public class MessageController {
                 "  }\n" +
                 "}";
         // These will be extracted from the python code response, I PROMISE
-        String cityMock = "Istanbul";
-        String countryMock = "Turkey";
+        String cityMock = "London";
+        String countryMock = "United Kingdom";
 
 
         VacationSuggestion vacationSuggestions = new VacationSuggestion();
