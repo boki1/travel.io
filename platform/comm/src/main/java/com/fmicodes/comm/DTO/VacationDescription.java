@@ -7,7 +7,13 @@ public class VacationDescription {
 
     private Double maxPrice;
 
-    private String currentLocation;
+    private String currentCity;
+
+    private String currentCountry;
+
+    private String checkInDate;
+
+    private String checkOutDate;
 
     public String getVacationDescription() {
         return vacationDescription;
@@ -33,11 +39,35 @@ public class VacationDescription {
         this.maxPrice = maxPrice;
     }
 
-    public String getCurrentLocation() {
-        return currentLocation;
+    public String getCurrentCity() {
+        return currentCity;
     }
 
-    public void setCurrentLocation(String currentLocation) {
-        this.currentLocation = currentLocation;
+    public void setCurrentCity(String currentCity) {
+        this.currentCity = currentCity;
+    }
+
+    public String getCurrentCountry() {
+        return currentCountry;
+    }
+
+    public void setCurrentCountry(String currentCountry) {
+        this.currentCountry = currentCountry;
+    }
+
+    public String getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(String checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public String getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(String checkOutDate) {
+        this.checkOutDate = checkOutDate;
     }
 }
