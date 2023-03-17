@@ -1,5 +1,6 @@
 package com.fmicodes.comm.services;
 
+import com.fmicodes.comm.services.util.CredentialsUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,14 +15,14 @@ import java.net.http.HttpResponse;
 @Service
 public class MessageService {
 
-    private static String rapidAPIKey = "";
     private static String bookingAPIHost = "booking-com.p.rapidapi.com";
 
     public String getHotelsByParams() {
+        String rapidApiKey = CredentialsUtil.getRapidAPIKey();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://booking-com.p.rapidapi.com/v1/hotels/search?adults_number=2&dest_type=city&filter_by_currency=AED&checkout_date=2023-09-06&checkin_date=2023-09-05&order_by=popularity&locale=en-gb&dest_id=-553173&units=metric&room_number=1&categories_filter_ids=class%3A%3A2%2Cclass%3A%3A4%2Cfree_cancellation%3A%3A1&children_number=2&children_ages=5%2C0&page_number=0&include_adjacency=true"))
-                .header("X-RapidAPI-Key", rapidAPIKey)
+                .header("X-RapidAPI-Key", rapidApiKey)
                 .header("X-RapidAPI-Host", bookingAPIHost)
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();

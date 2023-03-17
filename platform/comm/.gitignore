@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Credentials File ###
+/src/main/resources/credentials.yaml
