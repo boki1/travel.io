@@ -26,16 +26,11 @@ public class MessageController {
 
         // return 3-4 VacationSuggestion objects with data for: location (city, country), hotels, flights and attractions
 
-        String mockKrisResponse = "{\n" +
-                "  \"Destination\": {\n" +
-                "    \"city\": \"Istanbul\",\n" +
-                "    \"country\": \"Turkey\"\n" +
-                "  }\n" +
-                "}";
         // These will be extracted from the python code response, I PROMISE
         String cityMock = "London";
         String countryMock = "United Kingdom";
 
+        String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
 
         VacationSuggestion vacationSuggestions = new VacationSuggestion();
 
