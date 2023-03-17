@@ -1,4 +1,10 @@
 from os import listdir
+import json
+import os
+from flask import Flask, request, jsonify
+import openai
+from dotenv import load_dotenv
+
 from config import *
 from analyzer import *
 
@@ -28,8 +34,19 @@ def debug_main():
 # a couple of parts of the overall process such as invoking the OpenAI API,
 # construcing a task and communicating it to the Redis backup log.
 
-# TODO: Implement a flask endpoint here.
+app = Flask(__name__)
+openai.api_key = os.getenv('OPENAI_SECRET_KEY', 'default-secret-key')
 
+# FIXME: Dummy entrypoint
+@app.route('/travelerio/api/v1.0/hello', methods=['GET'])
+def openai_communication():
+    return jsonify({'message': os.getenv('OPENAI_SECRET_KEY', 'default-secret-key')})
 
 if DEBUG_MODE:
     debug_main()
+
+if __name__ == '__main__':
+    # This line loads the values from the .env file into the environment
+    load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), 'props.env'))
+
+    app.run()
