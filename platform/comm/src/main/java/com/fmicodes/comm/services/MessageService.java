@@ -8,6 +8,7 @@ import org.asynchttpclient.Response;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -28,9 +29,17 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class MessageService {
 
+    @Autowired
+    private AnalyzerService analyzerService;
+
     private static String bookingAPIHost = "booking-com.p.rapidapi.com";
 
     private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
+
+    public String getMessageAnalysis(String message) {
+        String analyzerResponse = analyzerService.analyzeMessage(message);
+        return analyzerResponse;
+    }
 
     public ArrayList<Hotel> getHotelsByParams(String city, String country) {
         StringBuilder url = new StringBuilder("https://booking-com.p.rapidapi.com/v1/hotels/search?");

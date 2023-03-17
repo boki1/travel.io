@@ -36,6 +36,7 @@ public class MessageController {
         String cityMock = "London";
         String countryMock = "United Kingdom";
 
+        String krisResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
 
         VacationSuggestion vacationSuggestions = new VacationSuggestion();
 
