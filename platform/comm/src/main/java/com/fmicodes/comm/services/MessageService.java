@@ -44,8 +44,8 @@ public class MessageService {
         return hotelSuggestions;
     }
 
-    public ArrayList<Flight> getAirplaneRoutesByParams(String locationAirportCode, String destinationAirportCode, String originDepartureDate) {
-        ArrayList<Flight> routesResponse = ryanAirService.getFlightsBetweenTwoAirports(locationAirportCode, destinationAirportCode, originDepartureDate);
+    public Flight getAirplaneRoutesByParams(String locationAirportCode, String destinationAirportCode, String originDepartureDate) {
+        Flight routesResponse = ryanAirService.getFlightBetweenTwoAirports(locationAirportCode, destinationAirportCode, originDepartureDate);
         return routesResponse;
     }
 
@@ -65,10 +65,10 @@ public class MessageService {
         ArrayList<VacationOffer> vacationOffers = new ArrayList<>();
         for (Hotel hotel : hotels) {
             System.out.println("HOTEL: " + hotel.getHotelName() + " AIRPORT CODE: " + hotel.getAirportCode());
-            ArrayList<Flight> flights = ryanAirService.getFlightsBetweenTwoAirports("SOF", hotel.getAirportCode(), departureDate);
+            Flight flight = ryanAirService.getFlightBetweenTwoAirports("SOF", hotel.getAirportCode(), departureDate);
             VacationOffer vacationOffer = new VacationOffer();
             vacationOffer.setHotel(hotel);
-            vacationOffer.setPossibleFLights(flights);
+            vacationOffer.setFlight(flight);
             vacationOffers.add(vacationOffer);
         }
 

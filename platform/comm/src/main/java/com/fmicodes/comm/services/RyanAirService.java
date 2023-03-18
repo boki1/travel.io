@@ -21,9 +21,11 @@ public class RyanAirService {
     @Value("${ryanair.host}")
     private String ryanAirHost;
 
+    private static final Integer DESIRED_AMOUNT_OF_FLIGHTS = 1;
+
     private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
 
-    public ArrayList<Flight> getFlightsBetweenTwoAirports(String locationAirportCode, String destinationAirportCode, String originDepartureDate) {
+    public Flight getFlightBetweenTwoAirports(String locationAirportCode, String destinationAirportCode, String originDepartureDate) {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
         JSONObject routesJson = null;
         JSONArray originToDestinationRoutes = null;
@@ -74,7 +76,11 @@ public class RyanAirService {
             throw new RuntimeException(e);
         }
 
-        return sortFlightsByPriceDesc(availableFlights, 2);
+        if (availableFlights.size() == 0) {
+            return null;
+        }
+
+        return sortFlightsByPriceDesc(availableFlights).get(0); // We are only interested in the cheapest flight option.
     }
 
     /**
@@ -82,7 +88,7 @@ public class RyanAirService {
      * @param flights
      * @return ArrayList<Flight> sorted by price in descending order
      */
-    private ArrayList<Flight> sortFlightsByPriceDesc(ArrayList<Flight> flights, int desiredAmountOfFlights) {
+    private ArrayList<Flight> sortFlightsByPriceDesc(ArrayList<Flight> flights) {
         flights.sort((Flight f1, Flight f2) -> {
             if (f1.getPrice() > f2.getPrice()) {
                 return 1;
@@ -92,12 +98,6 @@ public class RyanAirService {
                 return 0;
             }
         });
-
-        for (int i = 0; i < desiredAmountOfFlights; i++) {
-            if (i >= desiredAmountOfFlights) {
-                flights.remove(i);
-            }
-        }
 
         return flights;
     }
