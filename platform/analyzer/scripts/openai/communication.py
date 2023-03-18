@@ -22,10 +22,11 @@ class OpenAICommunication:
             "Authorization": f"Bearer {openai_api_key}",
         }
 
+        question += " Provide data, formatted as: City, Country: Description."
         data = {
             "model": "gpt-3.5-turbo",
             "messages": [{"role": "user", "content": question}],
-            "temperature": 0.7,
+            "temperature": 0.2,
         }
 
         response = requests.post(
