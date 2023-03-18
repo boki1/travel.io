@@ -1,10 +1,8 @@
 package com.fmicodes.comm.services;
 
-import com.fmicodes.comm.DTO.Location;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.exceptions.AirportCompatibilityException;
 import com.fmicodes.comm.exceptions.DeserializingJSONException;
-import com.fmicodes.comm.exceptions.DestinationNotFoundException;
 import com.fmicodes.comm.services.util.CredentialsUtil;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
@@ -177,16 +175,6 @@ public class BookingService {
         return destinationId;
     }
 
-    /**
-     * Filters hotels based on the following criteria:
-     * 1. Hotel must be within the maximum budget
-     * 2. Hotel must have an airport to it
-     * 3. Sort by review score
-     * 4. Get the first 2 hotels
-     *
-     * @param hotels
-     * @return
-     */
     public ArrayList<Hotel> filterHotels(ArrayList<Hotel> hotels) {
         hotels = hotels.stream().filter(hotel -> hotel.getAirportCode() != null).collect(Collectors.toCollection(ArrayList::new));
         hotels.stream().filter(hotel -> hotel.getReviewScore() != null).sorted(Comparator.comparing(Hotel::getReviewScore).reversed()).collect(Collectors.toList());

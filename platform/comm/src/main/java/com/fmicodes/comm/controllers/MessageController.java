@@ -34,8 +34,6 @@ public class MessageController {
 
         ArrayList<Location> locationData = messageService.getLocationDataFromOpenAIResponse(analyzerResponse);
 
-
-        // Do the same thing as the for loop on line 39 but with streams! NOW!
         locationData = (ArrayList<Location>) locationData.stream().limit(2).collect(Collectors.toList());
 
         ArrayList<VacationSuggestion> vacationSuggestions = new ArrayList<>();
