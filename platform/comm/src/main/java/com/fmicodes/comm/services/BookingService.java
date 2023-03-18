@@ -1,6 +1,7 @@
 package com.fmicodes.comm.services;
 
 import com.fmicodes.comm.DTO.booking.Hotel;
+import com.fmicodes.comm.exceptions.AirportCompatibilityException;
 import com.fmicodes.comm.exceptions.DeserializingJSONException;
 import com.fmicodes.comm.exceptions.DestinationNotFoundException;
 import com.fmicodes.comm.services.util.CredentialsUtil;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingService {
@@ -26,6 +29,7 @@ public class BookingService {
     private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
 
     private static final Integer MAX_HOTELS_SUGGESTION = 2;
+    private static final Integer MAX_HOTELS_SUGGESTION_TEST_PURPOSES = 3;
     private static final Double HOTEL_PRICE_BUFFER = 0.15;
 
     public ArrayList<Hotel> getHotelsByParams(String city, String country, String checkInDate, String checkOutDate, Double maximumBudget) {
@@ -108,7 +112,24 @@ public class BookingService {
             }
         }
 
+        try {
+            hotelSuggestions = checkAirportsCompatibility(hotelSuggestions);
+        } catch (IOException | RuntimeException | InterruptedException | ExecutionException e) {
+            throw new AirportCompatibilityException("ERROR - AirportCompatibility request failed: " + e.getMessage());
+        } catch (JSONException e) {
+            throw new DeserializingJSONException("ERROR - Deserializing response from airportCompatibility API: " + e.getMessage());
+        }
+
         hotelSuggestions = accountForMaximumBudget(hotelSuggestions, maximumBudget);
+
+        // For testing purposes we want to thin out this array as it makes a bunch of calls to the booking API and we have a limit on those.
+        for (int i = 0; i < hotelSuggestions.size(); i++) {
+            if (i > MAX_HOTELS_SUGGESTION_TEST_PURPOSES) {
+                hotelSuggestions.remove(i);
+            }
+        }
+
+        hotelSuggestions = filterHotels(hotelSuggestions);
 
         return hotelSuggestions;
     }
@@ -158,38 +179,56 @@ public class BookingService {
         return destinationId;
     }
 
-    private ArrayList<Hotel> accountForMaximumBudget(ArrayList<Hotel> hotels, Double maximumBudget) {
-        maximumBudget += maximumBudget * HOTEL_PRICE_BUFFER; // Add a 15% buffer to the maximum budget.
+    /**
+     * Filters hotels based on the following criteria:
+     * 1. Hotel must be within the maximum budget
+     * 2. Hotel must have an airport to it
+     * 3. Sort by review score
+     * 4. Get the first 2 hotels
+     *
+     * @param hotels
+     * @return
+     */
+    public ArrayList<Hotel> filterHotels(ArrayList<Hotel> hotels) {
+        hotels = hotels.stream().filter(hotel -> hotel.getAirportCode() != null).collect(Collectors.toCollection(ArrayList::new));
+        hotels.stream().filter(hotel -> hotel.getReviewScore() != null).sorted(Comparator.comparing(Hotel::getReviewScore).reversed()).collect(Collectors.toList());
 
-        ArrayList<Hotel> hotelsWithinBudget = new ArrayList<>();
-        for (Hotel hotel : hotels) {
-            if (hotel.getPrice() <= maximumBudget) {
-                hotelsWithinBudget.add(hotel);
-            }
-
-            if (hotelsWithinBudget.size() >= MAX_HOTELS_SUGGESTION) {
-                break;
+        for (int i = 0; i < hotels.size(); i++) {
+            if (i >= MAX_HOTELS_SUGGESTION) {
+                hotels.remove(i);
             }
         }
 
-        return hotelsWithinBudget;
+        return hotels;
+    }
+
+    private ArrayList<Hotel> accountForMaximumBudget(ArrayList<Hotel> hotels, Double maximumBudget) {
+        maximumBudget += maximumBudget * HOTEL_PRICE_BUFFER; // Add a 15% buffer to the maximum budget.
+
+        Double finalMaximumBudget = maximumBudget;
+        hotels.stream().filter(hotel -> hotel.getPrice() <= finalMaximumBudget).collect(Collectors.toList());
+
+        return hotels;
     }
 
     public ArrayList<Hotel> checkAirportsCompatibility(ArrayList<Hotel> hotels) throws IOException, ExecutionException, InterruptedException, JSONException {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
         for (Hotel hotel : hotels) {
-           Response response = client.prepare("GET", "https://" + bookingAPIHost + "/v1/hotels/nearby-places?locale=en-gb&hotel_id=" + hotel.getHotelId())
+            Response response = client.prepare("GET", "https://" + bookingAPIHost + "/v1/hotels/nearby-places?locale=en-gb&hotel_id=" + hotel.getHotelId())
                     .setHeader("X-RapidAPI-Key", rapidApiKey)
                     .setHeader("X-RapidAPI-Host", bookingAPIHost)
                     .execute()
                     .get();
 
-                JSONObject responseBodyJson = new JSONObject(response.getResponseBody());
+            JSONObject responseBodyJson = new JSONObject(response.getResponseBody());
+
+            if (responseBodyJson.has("transport")) {
                 JSONObject transport = responseBodyJson.getJSONObject("transport");
                 if (transport.has("airport")) {
                     JSONObject airport = transport.getJSONObject("airport");
                     hotel.setAirportCode(airport.getString("code"));
                 }
+            }
 
         }
 
