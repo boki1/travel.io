@@ -19,6 +19,7 @@ requests~=2.28.2
 geograpy3~=0.2.5
 geopy~=2.3.0
 pycountry~=22.3.0
+countryinfo~=0.1.2
 
 # NLP
 # Also this is required: python -m spacy download en_core_web_sm

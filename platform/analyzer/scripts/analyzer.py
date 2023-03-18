@@ -4,9 +4,11 @@ import spacy
 import geograpy as geo
 from geopy.geocoders import Nominatim
 import unittest
+from countryinfo import CountryInfo
 
 from task import *
-from config import debug_print, g_analyser_options
+from config import debug_print, g_analyser_options, debug_assert
+
 
 from scripts.task import *
 
@@ -30,6 +32,9 @@ class Analyser:
         debug_print(f'_city_to_countries: country_names "{country_names}"')
         return country_names
 
+    @staticmethod
+    def _produce_city(country: str):
+        return CountryInfo(country).capital()
 
     def get_locations_serial(self, task: Task) -> list[Location]:
         extractor = geo.Extractor(text=task.inp_answer)
@@ -40,12 +45,33 @@ class Analyser:
 
         # These are countries that are mentioned in the inp_answer
         # We use these to disambiguate country-relations.
-        expected_countries = place_ctx.countries
-        cities = set(place_ctx.cities)
+        expected_countries = list(set(place_ctx.countries) & set(general_locations))
+        cities = list(set(place_ctx.cities) & set(general_locations))
         for city in list(cities):
+            try:
+                # HACK: Make sure that country names are not mistakenly interpreted as city names.
+                # If no error is caused, then this is not a city so skip it.
+                country_info = CountryInfo(city)
+                _ignore = country_info.info()
+                continue
+            except KeyError:
+                # Expected :)
+                pass
+
             suggested_countries = self._city_to_countries(city)
             countries = list(set(suggested_countries) & set(expected_countries))
             locations.add(Location(city, country=countries[0] if countries else suggested_countries[0]))
+
+        # No city names were encountered. "Produce" one the country that was asked for.
+        if not locations:
+            for country in expected_countries:
+                city = self._produce_city(country)
+                locations.add(Location(city, country))
+
+        # There are some cases in which this is not exact. However, in the general case of proper input, this
+        # shouldn't happen. Restrain it in DEBUG_MODE.
+        debug_assert(len(locations) != 0, "We shouldn't return empty location list!")
+
         return list(locations)
 
 
@@ -118,3 +144,15 @@ class TestAnalyzer(unittest.TestCase):
             locations = geolocator.geocode(city, exactly_one=False, language="en")
             country_names = list({Analyser._country_from_full_location(loc) for loc in locations})
             self.assertTrue(expected_country in country_names)
+
+    def test_produce_country(self):
+        self.assertEqual(Analyser._produce_city("Bulgaria"), "Sofia")
+        self.assertEqual(Analyser._produce_city("Cambodia"), "Phnom Penh")
+        self.assertNotEqual(Analyser._produce_city("Greece"), "Gondor")
+
+    def test_only_country_task(self):
+        fpath = '../../test/inputs/only_country.txt'
+        task = TestAnalyzer.create_task_from_desc(fpath)
+        out = self.a.perform(task)
+        expected_location = Location(city='Sofia', country='Bulgaria')
+        self.assertEqual(out.locations[0], expected_location)

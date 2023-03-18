@@ -10,3 +10,11 @@ g_analyser_options = {
 def debug_print(msg):
     if DEBUG_MODE:
         print(f"MYDEBUG: {msg}")
+
+
+def debug_assert(expr, msg):
+    if not DEBUG_MODE:
+        return
+    if not expr:
+        print(f"FAIL: {msg}")
+        assert expr
