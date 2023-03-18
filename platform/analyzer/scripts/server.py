@@ -34,13 +34,12 @@ def openai_route():
 
 
 if DEBUG_MODE:
-    def suite():
+    def testsuite():
         suite = unittest.TestSuite()
-        suite.addTest(TestAnalyzer('test_city_to_country_list'))
-        suite.addTest(TestAnalyzer('test_france_task'))
-        suite.addTest(TestAnalyzer('test_country_to_name_basic_lib'))
+        suite.addTest(TestAnalyzer('test_samples'))
+        suite.addTest(TestAnalyzer('test_extract_locations'))
         return suite
 
 
     runner = unittest.TextTestRunner()
-    runner.run(suite())
+    runner.run(testsuite())
