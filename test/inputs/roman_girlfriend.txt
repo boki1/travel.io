@@ -1,42 +1,20 @@
 -- My girlfriend is really into archeology and Ancient Rome type of things, where should I take her
 -- for our 2 years anniversary?
---
--- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
--- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
-Sure, here are some great destinations for your anniversary trip with your
-girlfriend who is into archaeology and Ancient Rome:
-1. Rome, Italy: Rome is the capital of Italy and is known for its rich history,
-art, and architecture. It was once the capital of the Roman Empire, and
-there are plenty of historical sites to visit, such as the Colosseum, the
-Roman Forum, the Pantheon, and the Baths of Caracalla. You can also visit
-the Vatican City, which is home to the Sistine Chapel, St. Peter's
-Basilica, and the Vatican Museums. Other activities include visiting the
-many museums, galleries, and churches, trying the local cuisine, and
-shopping in the boutiques and markets.
-2. Athens, Greece: Athens is the capital of Greece and is known for its
-ancient history, culture, and art. It was once the center of the ancient
-Greek civilization, and there are plenty of archaeological sites to visit,
-such as the Acropolis, the Parthenon, the Ancient Agora, and the Temple of
-Olympian Zeus. You can also visit the many museums, such as the National
-Archaeological Museum and the Acropolis Museum. Other activities include
-exploring the city's vibrant neighborhoods, trying the local cuisine, and
-shopping in the markets and boutiques.
-3. Pompeii, Italy: Pompeii is an ancient Roman city that was buried by the
-eruption of Mount Vesuvius in AD 79. It is now a UNESCO World Heritage site
-and is one of the most popular archaeological sites in Italy. You can visit
-the ruins of the ancient city, including the Roman Forum, the Amphitheater,
-and the Villa of the Mysteries. You can also visit the Antiquarium Museum,
-which houses artifacts from Pompeii and the surrounding area. Other
-activities include visiting nearby Mount Vesuvius, trying the local food
-and wine, and enjoying the scenic views of the Bay of Naples.
-4. Ephesus, Turkey: Ephesus is an ancient Greek and Roman city located on the
-west coast of Turkey. It was once one of the largest cities in the Roman
-Empire and is now a popular archaeological site. You can visit the ruins of
-the ancient city, including the Library of Celsus, the Great Theater, and
-the Temple of Artemis. You can also visit the nearby House of the Virgin
-Mary, which is believed to be the final resting place of the Virgin Mary.
-Other activities include exploring the nearby town of Selcuk, trying the
-local cuisine, and shopping for traditional Turkish goods.
-Vacation activities in these destinations can include visiting ancient
-ruins and historical sites, exploring museums and galleries, trying the
-local cuisine, shopping, and enjoying the local culture and scenery.
+1. Rome, Italy: The city is full of ancient Roman landmarks such as the <LNDMARK>Colosseum</LNDMARK>,
+<LNDMARK>Pantheon</LNDMARK>, <LNDMARK>Forum Romanum</LNDMARK>, and the <LNDMARK>Palatine Hill</LNDMARK>.
+<ACTIVITY>Exploring</ACTIVITY> these sites will give your girlfriend a chance to immerse herself in
+ancient Roman history and culture.
+2. Pompeii, Italy: This ancient Roman city was buried by the eruption of Mount Vesuvius in 79 AD
+and was rediscovered in the 18th century. <ACTIVITY>Visiting</ACTIVITY> Pompeii allows you and your
+girlfriend to walk along ancient Roman streets and see the remains of homes, temples, and public
+buildings.
+3. Athens, Greece: Although not specifically related to Ancient Rome, Athens is home to many ancient
+Greek landmarks that your girlfriend might also be interested in. The most famous landmark is the
+<LNDMARK>Acropolis</LNDMARK>, which includes the <LNDMARK>Parthenon</LNDMARK>, an ancient temple
+dedicated to the goddess Athena.
+4. Ephesus, Turkey: This ancient Greek and Roman city was once a major commercial hub and is now a
+well-preserved archeological site. <ACTIVITY>Walking</ACTIVITY> through the ruins will allow your
+girlfriend to see the ancient agora, temples, and the famous <LNDMARK>Library of Celsus</LNDMARK>.
+5. Jerash, Jordan: This ancient Roman city is located in Jordan and is one of the largest and
+best-preserved Roman cities outside of Italy. <ACTIVITY>Visiting</ACTIVITY> the city will allow
+your girlfriend to explore the well-preserved amphitheater, temples, and the ancient Roman market.

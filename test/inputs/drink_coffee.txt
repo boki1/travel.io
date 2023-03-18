@@ -2,39 +2,27 @@
 --
 -- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
 -- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
-Certainly! Here are some cities around the world known for their coffee
-culture:
-1. Vienna, Austria: Vienna is famous for its coffee houses, which have
-been an integral part of the city's culture for centuries. Some of the most
-famous coffee houses include Cafe Central <LNDMARK>Cafe Central</LNDMARK>, Cafe
-Hawelka, and Cafe Sperl. In Vienna, you can enjoy a cup of coffee while reading
-the newspaper, people-watching, or listening to live music.
-2. Seattle, United
-States: Seattle is known for its vibrant coffee scene, with famous coffeehouses
-such as Starbucks, Tully's Coffee, and Seattle's Best Coffee all having
-originated in the city. Other popular coffee shops in Seattle include Espresso
-Vivace <LNDMARK>Espresso Vivace</LNDMARK>, Victrola Coffee Roasters, and
-Stumptown Coffee Roasters. In Seattle, you can explore the city's many coffee
-shops and attend coffee-related events and festivals.
-3. Melbourne, Australia:
-Melbourne is a city that takes its coffee seriously, with a thriving coffee
-culture that has been described as some of the best in the world. Popular
-coffee shops in Melbourne include Proud Mary <LNDMARK>Proud Mary</LNDMARK>,
-Market Lane Coffee, and Dukes Coffee Roasters. In Melbourne, you can
-attend coffee tastings, take barista courses, and explore the city's
-many coffee shops and roasteries.
-4. Istanbul, Turkey: Istanbul is
-famous for its Turkish coffee, which is served strong and sweet in small
-cups. Some of the most popular places to enjoy Turkish coffee in
-Istanbul include Mandabatmaz <LNDMARK>Mandabatmaz</LNDMARK>, Fazil Bey,
-and Mehmet Efendi. In Istanbul, you can also explore the city's many
-bazaars and try traditional Turkish sweets to accompany your coffee.
-5. Rome, Italy: Rome is famous for its coffee culture and the many coffee
-bars that can be found throughout the city. Some of the most popular
-coffee bars in Rome include Sant'Eustachio Il Caffè
-<LNDMARK>Sant'Eustachio Il Caffè</LNDMARK>, Tazza d'Oro, and Antico
-Caffè Greco. In Rome, you can enjoy a cappuccino or espresso while
-admiring the city's historic landmarks and architecture. Vacation
-activities in these cities can include attending coffee festivals and
-events, visiting coffee plantations and roasteries, or simply enjoying a
-leisurely cup of coffee in a local coffee shop.
+1. Vienna, Austria: Known for its Viennese coffee culture, with traditional cafes such
+as Café Central and Café Sacher. <LNDMARK>Vienna State Opera</LNDMARK>, <LNDMARK>St.
+Stephen's Cathedral</LNDMARK>, <LNDMARK>Belvedere Palace</LNDMARK>, <LNDMARK>Prater Park
+</LNDMARK>. Enjoy drinking coffee in traditional coffee houses and cafes. <ACTIVITY>
+Drinking coffee in a traditional Viennese coffeehouse</ACTIVITY>.
+2. Istanbul, Turkey: Famous for its Turkish coffee, with popular cafes such as Mandabatmaz
+and Fazil Bey. <LNDMARK>Blue Mosque</LNDMARK>, <LNDMARK>Hagia Sophia</LNDMARK>, <LNDMARK>
+Topkapi Palace</LNDMARK>, <LNDMARK>Grand Bazaar</LNDMARK>. Enjoy drinking Turkish coffee
+with a view of the city. <ACTIVITY>Drinking Turkish coffee in a rooftop café</ACTIVITY>.
+3. Rome, Italy: Known for its strong espresso and cappuccino, with cafes such as Sant'Eustachio
+and Tazza d'Oro. <LNDMARK>Colosseum</LNDMARK>, <LNDMARK>Pantheon</LNDMARK>, <LNDMARK>Trevi
+Fountain</LNDMARK>, <LNDMARK>Villa Borghese</LNDMARK>. Enjoy sipping on a cappuccino while
+people-watching in a piazza. <ACTIVITY>Drinking espresso in a local café</ACTIVITY>.
+4. Seattle, USA: Famous for its coffee culture, with iconic cafes such as Starbucks and
+Tully's. <LNDMARK>Space Needle</LNDMARK>, <LNDMARK>Pike Place Market</LNDMARK>, <LNDMARK>
+Gum Wall</LNDMARK>, <LNDMARK>Olympic Sculpture Park</LNDMARK>. Enjoy drinking coffee in
+the city where Starbucks originated. <ACTIVITY>Visiting the first Starbucks store and trying
+a local roast</ACTIVITY>.
+5. Melbourne, Australia: Known for its specialty coffee shops, with popular cafes such
+as Proud Mary and Seven Seeds. <LNDMARK>Federation Square</LNDMARK>, <LNDMARK>Royal
+Botanic Gardens Victoria</LNDMARK>, <LNDMARK>National Gallery of Victoria</LNDMARK>,
+<LNDMARK>St. Kilda Beach</LNDMARK>. Enjoy trying unique blends and single-origin coffee
+in trendy cafes. <ACTIVITY>Exploring the city's laneways and trying different coffee shops
+</ACTIVITY>.

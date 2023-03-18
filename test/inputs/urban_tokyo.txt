@@ -1,36 +1,22 @@
 -- I am a young man who enjoys seeing developed urban areas, please suggest me where should I travel
 -- to be satisfied.
---
--- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
--- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
-Sure! Here are some suggestions for developed urban areas that you might enjoy:
-1. Tokyo, Japan: Tokyo is one of the most modern and developed cities in the
-world. It has a great public transportation system, amazing architecture, and
-plenty of shopping and entertainment options. Vacation activities in Tokyo can
-include visiting landmarks such as the Tokyo Tower, the Imperial Palace, and
-the Tokyo Skytree, exploring the different neighborhoods of the city, trying
-the local food, and enjoying the nightlife.
-2. Singapore: Singapore is a small
-city-state that is known for its cleanliness, safety, and modernity. It has
-amazing architecture, beautiful parks, and plenty of shopping and dining
-options. Vacation activities in Singapore can include visiting landmarks such
-as the Marina Bay Sands, the Gardens by the Bay, and the Merlion, exploring the
-different neighborhoods of the city, trying the local food, and enjoying the
-nightlife.
-3. New York City, USA: New York City is one of the most iconic and
-developed cities in the world. It has amazing architecture, incredible museums,
-and plenty of shopping and entertainment options. Vacation activities
-in New York City can include visiting landmarks such as the Statue of
-Liberty, the Empire State Building, and Central Park, exploring the
-different neighborhoods of the city, trying the local food, and
-enjoying the nightlife.
-4. Dubai, United Arab Emirates: Dubai is a
-city that is known for its modern architecture, luxury shopping, and
-high-end hotels. It has some of the tallest buildings in the world
-and plenty of entertainment options. Vacation activities in Dubai can
-include visiting landmarks such as the Burj Khalifa, the Dubai Mall,
-and the Palm Jumeirah, exploring the different neighborhoods of the
-city, trying the local food, and enjoying the nightlife. Vacation
-activities in these destinations can include visiting landmarks and
-museums, exploring neighborhoods, trying local food, shopping, and
-enjoying the nightlife.
+1. Tokyo, Japan: A bustling metropolis with a mix of traditional and modern architecture,
+including the Tokyo Tower <LNDMARK>Tokyo Tower</LNDMARK> and the Tokyo Skytree <LNDMARK>Tokyo
+Skytree</LNDMARK>. Enjoy shopping in Shibuya <LNDMARK>Shibuya</LNDMARK>, sightseeing in Shinjuku
+<LNDMARK>Shinjuku</LNDMARK>, and visiting the Imperial Palace <LNDMARK>Imperial Palace</LNDMARK>.
+2. New York City, USA: A cultural hub with iconic landmarks such as the Statue of Liberty
+<LNDMARK>Statue of Liberty</LNDMARK>, the Empire State Building <LNDMARK>Empire State Building
+</LNDMARK>, and Central Park <LNDMARK>Central Park</LNDMARK>. Enjoy the nightlife in Times Square
+<LNDMARK>Times Square</LNDMARK> and Broadway <LNDMARK>Broadway</LNDMARK>, and visit museums such as
+the Metropolitan Museum of Art <LNDMARK>Metropolitan Museum of Art</LNDMARK> and the Museum of Modern
+Art <LNDMARK>Museum of Modern Art</LNDMARK>.
+3. Shanghai, China: A modern city with unique architecture such as the Oriental Pearl Tower
+<LNDMARK>Oriental Pearl Tower</LNDMARK> and the Shanghai Tower <LNDMARK>Shanghai Tower</LNDMARK>.
+Enjoy shopping on Nanjing Road <LNDMARK>Nanjing Road</LNDMARK>, sightseeing in the Bund <LNDMARK>
+The Bund</LNDMARK>, and visiting Yuyuan Garden <LNDMARK>Yuyuan Garden</LNDMARK> for a taste of
+traditional Chinese architecture and culture.
+4. Dubai, UAE: A city known for its modern architecture such as the Burj Khalifa <LNDMARK>Burj
+Khalifa</LNDMARK> and the Palm Jumeirah <LNDMARK>Palm Jumeirah</LNDMARK>. Enjoy shopping in the
+Dubai Mall <LNDMARK>Dubai Mall</LNDMARK>, visiting the Dubai Fountain <LNDMARK>Dubai Fountain
+</LNDMARK>, and experiencing the indoor ski resort <ACTIVITY>skiing</ACTIVITY> at Ski Dubai
+<LNDMARK>Ski Dubai</LNDMARK>.

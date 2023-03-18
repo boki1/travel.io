@@ -1,29 +1,14 @@
 -- I have been a baklava lover my whole life and the next weekend I am planning to do a trip abroad,
 -- suggest me a city, close to Bulgaria which is famous for its baklava.
---
--- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
--- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
-
 Certainly! Here are some cities near Bulgaria that are famous for their baklava:
-1. Istanbul, Turkey: Istanbul is known for its rich history and culture, as well as its delicious
-Turkish sweets. Baklava is a popular dessert in Istanbul, and you can find it in many bakeries and
-sweet shops throughout the city. Be sure to try the baklava at the famous Karaköy Güllüoğlu
-<LNDMARK>Karaköy Güllüoğlu</LNDMARK> bakery, which has been around since 1871.
-2. Thessaloniki, Greece: Thessaloniki is a vibrant city in northern Greece, known for its rich history
-and delicious cuisine. The city is home to many bakeries that specialize in traditional Greek
-sweets, including baklava. Try the baklava at Terkenlis <LNDMARK>Terkenlis</LNDMARK>, a famous
-bakery that has been making sweets since 1948.
-3. Skopje, North Macedonia: Skopje is the capital of North Macedonia and is known for its blend of
-cultures and cuisines. Baklava is a popular dessert in the region, and you can find it at many
-bakeries and sweet shops throughout the city. Check out the baklava at Pekara
-<LNDMARK>Pekara</LNDMARK>, a bakery that has been around for over 100 years.
-4. Belgrade, Serbia: Belgrade is the capital of Serbia and is known for its lively atmosphere and
-delicious food. Baklava is a popular dessert in the region, and you can find it at many bakeries and
-sweet shops throughout the city. Be sure to try the baklava at <LNDMARK>Mika Alas</LNDMARK>, a
-famous bakery that has been around since 1933.
-5. Bucharest, Romania: Bucharest is the capital of Romania and is known for its beautiful architecture
-and rich history. Baklava is a popular dessert in Romania, and you can find it at many bakeries and
-sweet shops throughout the city. Try the baklava at <LNDMARK>Granny's</LNDMARK>, a bakery that has
-been making traditional Romanian sweets since 1996.
-For vacation activities, you can explore the historic landmarks and museums of each city, enjoy a
-scenic walk through the streets, or take a food tour to sample local cuisine.
+1. Istanbul, Turkey: Known for its rich history and culture, Istanbul is famous for
+its baklava. The city has numerous shops and bakeries that sell various types of baklava,
+such as pistachio, walnut, and hazelnut. You can visit the iconic <LNDMARK>Hagia Sophia</LNDMARK>
+and the <LNDMARK>Blue Mosque</LNDMARK> and then indulge in a baklava tasting at one of the local
+bakeries.<ACTIVITY> Baklava tasting</ACTIVITY>, <ACTIVITY>visiting Hagia Sophia</ACTIVITY>,
+<ACTIVITY>visiting the Blue Mosque</ACTIVITY>.
+2. Thessaloniki, Greece: Thessaloniki is another city famous for its baklava. Here, you can
+visit traditional pastry shops and taste the delicious sweet treat made with layers of phyllo
+pastry, nuts, and honey syrup. You can also explore the charming old town and visit the <LNDMARK>
+White Tower</LNDMARK>, a symbol of the city.<ACTIVITY> Baklava tasting</ACTIVITY>, <ACTIVITY>
+baklexploring the old town</ACTIVITY>, <ACTIVITY>visiting the White Tower</ACTIVITY>.

@@ -1,41 +1,18 @@
 -- I love France and would like to go on a beach vacation there in July this year, please
 -- suggest me some nice resorts on the Atlantic ocean.
---
--- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
--- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
-Certainly! Here are some nice resorts on the Atlantic ocean in France where you
-can enjoy a beach vacation in July:
-1. Biarritz: Biarritz is a seaside town located on the Bay of Biscay in
-southwestern France. It is known for its beaches, surfing, and elegant belle
-époque architecture. One of the most famous beaches in Biarritz is La Grande
-Plage, a wide stretch of sand that is popular with surfers and sunbathers. You
-can also visit the historic lighthouse and the Rocher de la Vierge, a rocky
-outcrop with stunning views of the sea. Other activities include shopping,
-golfing, and exploring the local Basque culture and cuisine.
-2. Arcachon: Arcachon is a resort town located on the Arcachon Bay in
-southwestern France. It is known for its sandy beaches, dunes, and
-oyster farms. One of the most popular beaches in Arcachon is Plage
-d'Eyrac, a family-friendly beach with calm waters and plenty of
-amenities. You can also visit the Dune du Pilat, the highest sand dune
-in Europe, which offers panoramic views of the bay and the surrounding
-pine forest. Other activities include boat tours, cycling, and trying
-the local seafood and wine.
-3. La Rochelle: La Rochelle is a historic port city located on the Bay of
-Biscay in western France. It is known for its picturesque Old Town,
-maritime heritage, and beaches. One of the most popular beaches in La
-Rochelle is Plage des Minimes, a long stretch of sand that is popular
-with families and water sports enthusiasts. You can also visit the
-historic Vieux Port, the medieval towers, and the Aquarium La Rochelle,
-one of the largest aquariums in Europe. Other activities include
-sailing, kayaking, and sampling the local seafood and wine.
-4. Cap Ferret: Cap Ferret is a peninsula located on the Atlantic coast in
-southwestern France. It is known for its beaches, dunes, and pine
-forests. One of the most beautiful beaches in Cap Ferret is Plage du
-Truc Vert, a secluded beach that is surrounded by dunes and pine trees.
-You can also visit the picturesque fishing villages, such as L'Herbe
-and Le Canon, and sample the local oysters and wine. Other activities
-include cycling, birdwatching, and hiking in the nearby nature
-reserves.
-Vacation activities in these destinations can include swimming,
-sunbathing, water sports, exploring the local culture and history, and
-trying the local cuisine and wines.
+1. Biarritz, France: A popular seaside resort town on the Atlantic coast with a beautiful
+beach and surf culture. Relax on the sandy beaches and try surfing with <ACTIVITY>surfing
+lessons</ACTIVITY>. Visit the <LNDMARK>Rocher de la Vierge</LNDMARK>, a rock formation with
+a beautiful view of the sea, and explore the historic city center with its boutiques and cafes.
+2. La Rochelle, France: A historic port city on the Bay of Biscay with a vibrant atmosphere
+and beautiful beaches. Take a stroll along the old harbor and visit the <LNDMARK>Towers of
+La Rochelle</LNDMARK>, two medieval towers that offer stunning views of the city and the sea.
+Relax on the sandy beaches and enjoy seafood specialties in the many restaurants and cafes.
+3. Cap Ferret, France: A quiet and charming peninsula on the Atlantic coast with beautiful
+beaches and pine forests. Take a bike ride through the nature reserves and explore the local
+oyster farms. Relax on the sandy beaches and enjoy water activities such as <ACTIVITY>kayaking
+</ACTIVITY> and <ACTIVITY>paddleboarding</ACTIVITY>.
+4. Hossegor, France: A popular beach town on the Atlantic coast known for its surfing and
+natural beauty. Surf on the famous waves, relax on the sandy beaches, and explore the local
+markets and boutiques. Take a day trip to the nearby forests and lakes or visit the <LNDMARK>
+ferNotre Dame des Landes Church</LNDMARK>, a beautiful example of regional architecture.

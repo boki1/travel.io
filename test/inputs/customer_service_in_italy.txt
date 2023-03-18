@@ -1,43 +1,18 @@
--- Customer service is the most important thing for a vacation, suggest me resorts in Italy eith excellent staff.
---
--- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
--- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
-Sure, here are some resorts in Italy that are known for their excellent customer service:
-1. Sorrento, Italy: Sorrento is a beautiful coastal town in southern Italy known
-for its stunning views and luxurious resorts. The Grand Hotel Excelsior
-Vittoria <LNDMARK>Grand Hotel Excelsior Vittoria</LNDMARK> is a top-rated
-resort that is famous for its impeccable service and attention to detail. The
-staff is friendly and knowledgeable, and they go above and beyond to ensure
-that guests have a memorable vacation. Activities in Sorrento include exploring
-the historic city center, taking a boat tour of the Amalfi Coast, or relaxing
-on the beach.
-2. Lake Como, Italy: Lake Como is a picturesque lake in northern Italy surrounded
-by mountains and charming towns. The Grand Hotel Tremezzo <LNDMARK>Grand Hotel
-Tremezzo</LNDMARK> is a luxurious resort that is known for its excellent
-service and stunning views of the lake. The staff is attentive and friendly,
-and they are happy to help guests plan activities such as hiking,
-boating, or exploring the nearby towns.
-3. Florence, Italy: Florence is a beautiful city in central Italy known
-for its art, history, and architecture. The Four Seasons Hotel Firenze
-<LNDMARK>Four Seasons Hotel Firenze</LNDMARK> is a luxurious resort
-that is famous for its exceptional service and elegant accommodations.
-The staff is attentive and knowledgeable, and they are happy to help
-guests plan activities such as visiting the Uffizi Gallery, exploring
-the historic city center, or taking a cooking class.
-4. Venice, Italy: Venice is a unique and enchanting city in northeastern
-Italy known for its canals, bridges, and historic architecture. The
-Belmond Hotel Cipriani <LNDMARK>Belmond Hotel Cipriani</LNDMARK> is a
-luxurious resort located on its own private island in the Venetian
-Lagoon. The staff is known for their exceptional service and attention
-to detail, and they are happy to help guests plan activities such as
-exploring the city's canals, visiting St. Mark's Basilica, or taking a
-gondola ride.
-5. Sardinia, Italy: Sardinia is a beautiful island in the Mediterranean
-known for its crystal-clear waters and stunning beaches. The Forte
-Village Resort <LNDMARK>Forte Village Resort</LNDMARK> is a luxurious
-resort located on the southern coast of the island. The staff is
-friendly and attentive, and they are happy to help guests plan
-activities such as snorkeling, kayaking, or exploring the nearby towns.
-Vacation activities at these resorts can include taking guided tours,
-indulging in spa treatments, sampling local cuisine, or simply relaxing
-by the pool or beach.
+1. Ravello, Italy: <LNDMARK>Belmond Hotel Caruso</LNDMARK> is a luxurious resort
+with stunning views of the Amalfi Coast. The staff is known for their exceptional
+customer service, always going above and beyond to ensure guests have a wonderful
+stay. <ACTIVITY>Relaxing by the pool</ACTIVITY>, <ACTIVITY>enjoying a spa treatment
+</ACTIVITY>, and <ACTIVITY>tasting delicious Italian cuisine</ACTIVITY> are just a
+few of the activities guests can enjoy.
+2. Portofino, Italy: <LNDMARK>Belmond Hotel Splendido</LNDMARK> is a beautiful resort
+located in a picturesque fishing village on the Italian Riviera. The staff is known for
+their warm hospitality and attention to detail, making guests feel right at home. <ACTIVITY>
+Exploring the charming town of Portofino</ACTIVITY>, <ACTIVITY>relaxing on the private beach
+</ACTIVITY>, and <ACTIVITY>indulging in the delicious Italian cuisine</ACTIVITY> are just a
+few of the activities guests can enjoy.
+3. Florence, Italy: <LNDMARK>Portrait Firenze</LNDMARK> is a stunning hotel located in the
+heart of Florence, overlooking the Arno River. The staff is known for their exceptional
+service and attention to detail, making guests feel pampered and cared for. <ACTIVITY>
+Exploring the beautiful city of Florence</ACTIVITY>, <ACTIVITY>enjoying a glass of wine
+on the rooftop terrace</ACTIVITY>, and <ACTIVITY>indulging in delicious Italian cuisine
+</ACTIVITY> are just a few of the activities guests can enjoy during their stay.

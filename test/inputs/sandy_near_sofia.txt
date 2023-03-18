@@ -3,33 +3,19 @@
 --
 -- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
 -- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
-Sure, here are some budget-friendly beach destinations that are within a 2000km range from Sofia and offer sandy beaches:
-1. Sunny Beach, Bulgaria: Sunny Beach is a popular seaside resort on the Black
-Sea coast of Bulgaria. It is known for its long sandy beaches, crystal-clear
-waters, and vibrant nightlife. The resort has plenty of affordable hotels,
-restaurants, and bars, making it an ideal budget-friendly destination.
-Vacation activities in Sunny Beach can include sunbathing, swimming, water
-sports, exploring nearby historic sites, and enjoying the local cuisine and
-nightlife.
-2. Mamaia, Romania: Mamaia is a popular seaside resort on the
-Black Sea coast of Romania. It is known for its long sandy beaches,
-crystal-clear waters, and family-friendly atmosphere. The resort has plenty
-of affordable hotels, restaurants, and bars, making it an ideal
-budget-friendly destination. Vacation activities in Mamaia can include
-sunbathing, swimming, water sports, exploring nearby historic sites, and
-enjoying the local cuisine and nightlife.
-3. Golden Sands, Bulgaria: Golden Sands is a popular seaside resort on the Black Sea coast of Bulgaria. It is
-known for its long sandy beaches, crystal-clear waters, and natural beauty.
-The resort has plenty of affordable hotels, restaurants, and bars, making
-it an ideal budget-friendly destination. Vacation activities in Golden
-Sands can include sunbathing, swimming, water sports, exploring nearby
-natural parks, and enjoying the local cuisine and nightlife.
-4. Algarve, Portugal: The Algarve is a popular region in southern Portugal known for
-its beautiful beaches, stunning cliffs, and picturesque towns. It has
-plenty of budget-friendly accommodation options, especially if you avoid
-the peak season. Vacation activities in the Algarve can include sunbathing,
-swimming, exploring the coastline, visiting historic sites, enjoying the
-local cuisine and wine, and playing golf or other outdoor sports. Vacation
-activities in these destinations can include sunbathing, swimming, water
-sports, exploring nearby historic or natural sites, enjoying the local
-cuisine and nightlife, and more.
+1. Sunny Beach, Bulgaria: One of the most popular beach resorts in Bulgaria with a long sandy
+beach and a wide range of affordable accommodations and restaurants. <LNDMARK>Sunny Beach</LNDMARK>
+is also known for its vibrant nightlife and water sports activities such as jet skiing, parasailing,
+and banana boat rides. <ACTIVITY>Swimming in the sea</ACTIVITY> and <ACTIVITY>Sunbathing on the beach
+</ACTIVITY> are also popular here.
+2. Sarandë, Albania: A small coastal town in Albania with beautiful sandy beaches and crystal-clear
+waters. There are many affordable hotels and guesthouses along the coast, as well as restaurants
+serving delicious seafood dishes. <LNDMARK>Mango Beach</LNDMARK> is one of the most popular beaches
+in Sarandë, known for its white sand and shallow waters. <ACTIVITY>Exploring the Old Town</ACTIVITY>
+and <ACTIVITY>Boat trips to nearby islands</ACTIVITY> are also popular activities in Sarandë.
+3. Mamaia, Romania: A seaside resort on the Black Sea coast of Romania, Mamaia is known for its long
+sandy beach and vibrant nightlife. There are many affordable hotels and restaurants in the area, as
+well as water sports activities such as windsurfing and kiteboarding. <LNDMARK>Mamaia Beach</LNDMARK>
+is the main beach in the resort, with many bars and cafes along the shore. <ACTIVITY>Walking along
+the beach promenade</ACTIVITY> and <ACTIVITY>Visiting the Aqua Magic water park</ACTIVITY> are also
+popular here.
