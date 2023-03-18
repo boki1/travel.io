@@ -28,9 +28,6 @@ public class MessageController {
 
         ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(cityMock, countryMock);
 
-//        ArrayList<Flight> routesResponse = messageService.getAirplaneRoutesByParams("LGW", "DUB", "2023-11-28");
-//        vacationSuggestions.setFlightSuggestions(routesResponse);
-
         ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions);
 
 
