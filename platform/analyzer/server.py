@@ -87,7 +87,6 @@ def openai_communication():
 if DEBUG_MODE:
     debug_main()
 elif __name__ == '__main__':
-    # This line loads the values from the .env file into the environment
-    load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), 'props.env'))
-
-    app.run()
+    # To make the Flask server accessible from other devices on the same local network,
+    # it needs to be bound to a public IP address (0.0.0.0) instead of the loopback address (127.0.0.1).
+    app.run(host=os.getenv('FLASK_RUN_HOST', '0.0.0.0'), port=os.getenv('FLASK_RUN_PORT', 5005))
