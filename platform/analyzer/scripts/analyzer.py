@@ -46,14 +46,14 @@ class Analyser:
             suggestion_data_result = suggestion_data.split(': ', 1)
             if len(suggestion_data_result) != 2:
                 continue
-            city_country, _ = suggestion_data_result
+            city_country, description = suggestion_data_result
 
             city_country_result = city_country.split(', ', 1)
             if len(city_country_result) != 2:
                 continue
             city, country = city_country_result
 
-            location_list.append(Location(city.strip(), country.strip()))
+            location_list.append(Location(city.strip(), country.strip(), description.strip()))
 
         task.extracted_locations = location_list
         return location_list
