@@ -1,6 +1,6 @@
 import spacy
 
-from task import *
+from scripts.task import *
 
 
 class Analyser:

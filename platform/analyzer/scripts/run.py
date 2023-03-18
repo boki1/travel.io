@@ -3,7 +3,7 @@ import subprocess
 
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), 'props.env'))
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '../props.env'))
 
 workers = os.cpu_count()
 threads = os.getenv('FLASK_RUN_THREADS', 2)
