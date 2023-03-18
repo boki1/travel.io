@@ -30,7 +30,7 @@ public class MessageController {
     @PostMapping
     public ResponseEntity<ArrayList<VacationSuggestion>> makeVacationSuggestion(@RequestBody VacationDescription vacationDescription) {
 
-//        String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
+        String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
 
         ArrayList<Location> locationData = messageService.getLocationDataFromOpenAIResponse(analyzerResponse);
 
