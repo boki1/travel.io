@@ -53,14 +53,14 @@ def openai_communication():
     }
 
     # Get input data from the client request
-    input_data = request.get_data(as_text=True)
-    if not input_data:
+    question = request.get_data(as_text=True)
+    if not question:
         return jsonify({"error": "No input data provided"}), 400
 
-    # Use input_data as the messages for the API request
+    # Use question as the messages for the API request
     data = {
         "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": input_data}],
+        "messages": [{"role": "user", "content": question}],
         "temperature": 0.7,
     }
 
@@ -71,7 +71,12 @@ def openai_communication():
     )
 
     if response.status_code == 200:
-        return jsonify(response.json())
+        response_data = response.json()
+        answer = response_data["choices"][0]["message"]["content"]
+        task = Task(question, answer)
+        analyser = Analyser(g_analyser_options)
+        output = analyser.perform(task)
+        return str(output)
     else:
         return jsonify({"error": "Unable to communicate with OpenAI API"}), response.status_code
 
