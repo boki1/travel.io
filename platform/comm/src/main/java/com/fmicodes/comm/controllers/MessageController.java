@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/messages")
@@ -33,11 +34,9 @@ public class MessageController {
 
         ArrayList<Location> locationData = messageService.getLocationDataFromOpenAIResponse(analyzerResponse);
 
-        for (int i = 0; i < locationData.size(); i++) { // Use less data in order to save API calls.
-            if (i >= 2) {
-                locationData.remove(i);
-            }
-        }
+
+        // Do the same thing as the for loop on line 39 but with streams! NOW!
+        locationData = (ArrayList<Location>) locationData.stream().limit(2).collect(Collectors.toList());
 
         ArrayList<VacationSuggestion> vacationSuggestions = new ArrayList<>();
         for (Location location : locationData) {
