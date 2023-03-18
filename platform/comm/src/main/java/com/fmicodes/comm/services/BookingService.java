@@ -31,7 +31,7 @@ public class BookingService {
     private static final Integer MAX_HOTELS_SUGGESTION_TEST_PURPOSES = 3;
     private static final Double HOTEL_PRICE_BUFFER = 0.15;
 
-    public ArrayList<Hotel> getHotelsByParams(String city, String country, String checkInDate, String checkOutDate, Double maximumBudget) {
+    public ArrayList<Hotel> getHotelsByParams(String city, String country, String checkInDate, String checkOutDate, Double maximumBudget, String airportCode) {
         StringBuilder url = new StringBuilder("https://" + bookingAPIHost + "/v1/hotels/search?");
         url.append("adults_number=2");
         url.append("&dest_type=city");
@@ -99,6 +99,7 @@ public class BookingService {
                 hotel.setLongitude(hotelJSON.getDouble("longitude"));
                 hotel.setPrice(hotelJSON.getDouble("min_total_price"));
                 hotel.setCurrency(hotelJSON.getString("currencycode"));
+                hotel.setAirportCode(airportCode);
 
                 if (hotelJSON.has("review_score") && !hotelJSON.isNull("review_score")) {
                     hotel.setReviewScore(hotelJSON.getDouble("review_score"));
@@ -112,18 +113,10 @@ public class BookingService {
             }
         }
 
-        try {
-            hotelSuggestions = checkAirportsCompatibility(hotelSuggestions);
-        } catch (IOException | RuntimeException | InterruptedException | ExecutionException e) {
-            throw new AirportCompatibilityException("ERROR - AirportCompatibility request failed: " + e.getMessage());
-        } catch (JSONException e) {
-            throw new DeserializingJSONException("ERROR - Deserializing response from airportCompatibility API: " + e.getMessage());
-        }
 
         hotelSuggestions = accountForMaximumBudget(hotelSuggestions, maximumBudget);
 
         // For testing purposes we want to thin out this array as it makes a bunch of calls to the booking API and we have a limit on those.
-
         hotelSuggestions = (ArrayList<Hotel>) hotelSuggestions.stream().limit(MAX_HOTELS_SUGGESTION_TEST_PURPOSES).collect(Collectors.toList());
         hotelSuggestions = filterHotels(hotelSuggestions);
 
