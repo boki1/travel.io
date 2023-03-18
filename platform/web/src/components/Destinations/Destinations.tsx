@@ -1,5 +1,3 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import img from '../../assets/rome_pic.webp'
 import img2 from "../../assets/dubai.webp"
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,7 +6,7 @@ import './styles.css';
 
 export default function Destinations() {
     return (
-        <div className="container">
+        <div className="container" id="destinations">
                 <div className="wrapper">
                     <div className="header header_home">Rome</div>
                     <div className="content content_home">You can enjoy good whether and amazing food</div>

@@ -41,7 +41,7 @@ const HomeForm = () => {
     };
 
     return (
-        <Form>
+        <Form id="homeForm">
             <Row className=''>
                 <Col className=''>
                     <FloatingLabel label="Enter max price of the vacation">
