@@ -37,7 +37,6 @@ if DEBUG_MODE:
     def testsuite():
         suite = unittest.TestSuite()
         suite.addTest(TestAnalyzer('test_samples'))
-        suite.addTest(TestAnalyzer('test_extract_locations'))
         return suite
 
 

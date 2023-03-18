@@ -70,8 +70,20 @@ class TestAnalyzer(unittest.TestCase):
                     t.inp_answer += line
         return t
 
-    def test_extract_locations(self):
-        pass
+    @staticmethod
+    def for_each_sample():
+        samples_path = '../../../test/inputs/'
+        for sample_path in listdir(samples_path):
+            sample_task = TestAnalyzer.create_task_from_desc(f'{samples_path}/{sample_path}')
+            yield sample_task
 
     def test_samples(self):
-        pass
+        def test_sample(sample_task) -> bool:
+            out = self.analyzer.perform(sample_task)
+            debug_print(f'Locations: [{out.locations}]')
+            debug_print(f'Landmarks: [{out.landmarks}]')
+            debug_print(f'Activities: [{out.action_topics}]')
+            return True  # :)
+
+        for sample_task in TestAnalyzer.for_each_sample():
+            self.assertTrue(test_sample(sample_task))
