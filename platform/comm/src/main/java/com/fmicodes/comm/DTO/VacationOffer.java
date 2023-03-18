@@ -10,7 +10,6 @@ public class VacationOffer {
 
     private ArrayList<Flight> possibleFLights;
 
-
     public Hotel getHotel() {
         return hotel;
     }

@@ -39,8 +39,8 @@ public class MessageService {
         return analyzerResponse;
     }
 
-    public ArrayList<Hotel> getHotelsByParams(String city, String country) {
-        ArrayList<Hotel> hotelSuggestions = bookingService.getHotelsByParams(city, country);
+    public ArrayList<Hotel> getHotelsByParams(String city, String country, String checkInDate, String checkOutDate, Double maximumBudget) {
+        ArrayList<Hotel> hotelSuggestions = bookingService.getHotelsByParams(city, country, checkInDate, checkOutDate, maximumBudget);
         return hotelSuggestions;
     }
 
@@ -49,7 +49,7 @@ public class MessageService {
         return routesResponse;
     }
 
-    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels) {
+    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, String departureDate) {
         ArrayList<String> possibleAirportCodes;
 
         try {
@@ -64,12 +64,12 @@ public class MessageService {
 
         ArrayList<VacationOffer> vacationOffers = new ArrayList<>();
         for (Hotel hotel : hotels) {
-            ArrayList<Flight> flights = ryanAirService.getFlightsBetweenTwoAirports("SOF", hotel.getAirportCode(), "2023-04-05");
+            System.out.println("HOTEL: " + hotel.getHotelName() + " AIRPORT CODE: " + hotel.getAirportCode());
+            ArrayList<Flight> flights = ryanAirService.getFlightsBetweenTwoAirports("SOF", hotel.getAirportCode(), departureDate);
             VacationOffer vacationOffer = new VacationOffer();
             vacationOffer.setHotel(hotel);
             vacationOffer.setPossibleFLights(flights);
             vacationOffers.add(vacationOffer);
-
         }
 
         return vacationOffers;

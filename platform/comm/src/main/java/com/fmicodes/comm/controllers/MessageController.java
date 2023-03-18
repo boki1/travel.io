@@ -21,14 +21,14 @@ public class MessageController {
 
     @PostMapping
     public ResponseEntity<VacationSuggestion> makeVacationSuggestion(@RequestBody VacationDescription vacationDescription) {
-        String cityMock = "Bratislava";
-        String countryMock = "Slovakia";
+        String cityMock = "Zagreb";
+        String countryMock = "Croatia";
 
-//        String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
+        String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
 
-        ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(cityMock, countryMock);
+        ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(cityMock, countryMock, vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), vacationDescription.getMaxPrice());
 
-        ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions);
+        ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions, vacationDescription.getCheckInDate());
 
 
         VacationSuggestion vacationSuggestions = new VacationSuggestion();
