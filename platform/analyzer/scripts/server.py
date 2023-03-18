@@ -3,7 +3,8 @@ import unittest
 
 import openai
 from dotenv import load_dotenv
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
+from pyairports.airports import Airports
 
 from scripts.analyzer import Analyser, TestAnalyzer
 from scripts.config import *
@@ -19,6 +20,7 @@ openai.api_key = os.getenv('OPENAI_SECRET_KEY', 'default-secret-key')
 
 openai_communication = OpenAICommunication(app)
 
+g_airports = Airports().airports
 
 @app.route('/api/v1/analyzer', methods=['POST'])
 def openai_route():
@@ -31,6 +33,20 @@ def openai_route():
     analyser = Analyser(g_analyser_options)
     output = analyser.perform(task)
     return jsonify(output.full())
+
+
+@app.route('/api/v1/airports', methods=['POST'])
+def airport_iata_route():
+    data = request.get_json()
+    airport_city = data['city']
+    airport_country = data['country']
+
+    filtered_airports = {iata_code: airport_obj for iata_code, airport_obj in g_airports.items() \
+                         if airport_obj.city == airport_city and airport_obj.country == airport_country}
+
+    if len(filtered_airports) > 0:
+        return list(filtered_airports.keys())[0]
+    return ''
 
 
 if DEBUG_MODE:
