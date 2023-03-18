@@ -39,10 +39,9 @@ public class MessageService {
         return analyzerService.analyzeMessage(message);
     }
 
-    public ArrayList<Hotel> getHotelsByParams(String city, String country, String checkInDate, String checkOutDate, Double maximumBudget) {
-        String airportIATACode = analyzerService.getAirportIATACodeByLocation(new Location(city, country));
-        ArrayList<Hotel> hotelSuggestions = bookingService.getHotelsByParams(city, country, checkInDate, checkOutDate, maximumBudget, airportIATACode);
-        return hotelSuggestions;
+    public ArrayList<Hotel> getHotelsByParams(Location location, String checkInDate, String checkOutDate, Double maximumBudget) {
+        String airportIATACode = analyzerService.getAirportIATACodeByLocation(location);
+        return bookingService.getHotelsByParams(location, checkInDate, checkOutDate, maximumBudget, airportIATACode);
     }
 
     public ArrayList<Location> getLocationDataFromOpenAIResponse(String openAIResponse) {
@@ -56,7 +55,8 @@ public class MessageService {
                 JSONArray locationArray = locations.getJSONArray(i);
                 String city = locationArray.getString(0);
                 String country = locationArray.getString(1);
-                Location location = new Location(city, country);
+                String description = locationArray.getString(2);
+                Location location = new Location(city, country, description);
 
                 locationData.add(location);
             }
