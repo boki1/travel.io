@@ -2,7 +2,6 @@ package com.fmicodes.comm.services.util;
 
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -12,8 +11,17 @@ public class CredentialsUtil {
 
     private static final String CREDENTIALS_FILE_PATH = "src/main/resources/credentials.yaml";
     private static final String RAPID_API_KEY_YAML_VALUE = "rapidApiKey";
+    private static final String MAPS_API_KEY_YAML_VALUE = "mapsApiKey";
 
     public static String getRapidAPIKey() {
+        return getAPIKey(RAPID_API_KEY_YAML_VALUE);
+    }
+
+    public static String getMapsAPIKey() {
+        return getAPIKey(MAPS_API_KEY_YAML_VALUE);
+    }
+
+    private static String getAPIKey(String key) {
         InputStream inputStream = null;
         try {
             inputStream = new FileInputStream(CREDENTIALS_FILE_PATH);
@@ -23,6 +31,6 @@ public class CredentialsUtil {
 
         Yaml yaml = new Yaml();
         Map<String, Object> data = yaml.load(inputStream);
-        return (String) data.get(RAPID_API_KEY_YAML_VALUE);
+        return (String) data.get(key);
     }
 }

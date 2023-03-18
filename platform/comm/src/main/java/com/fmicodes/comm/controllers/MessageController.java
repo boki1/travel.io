@@ -18,6 +18,8 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
+    private static final Integer MAXIMUM_NUMBER_OF_LOCATIONS = 4;
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception e) {
         ErrorResponse errorResponse = new ErrorResponse();
@@ -33,21 +35,20 @@ public class MessageController {
         Location currentLocation = new Location(vacationDescription.getCurrentCity(), vacationDescription.getCurrentCountry());
 
         ArrayList<Location> locationData = messageService.getLocationDataFromOpenAIResponse(analyzerResponse);
-        locationData = (ArrayList<Location>) locationData.stream().limit(2).collect(Collectors.toList());
+        locationData = (ArrayList<Location>) locationData.stream().limit(MAXIMUM_NUMBER_OF_LOCATIONS).collect(Collectors.toList());
 
         ArrayList<VacationSuggestion> vacationSuggestions = new ArrayList<>();
 
-        Location location = locationData.get(0);
-        ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(location.getCity(), location.getCountry(), vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), vacationDescription.getMaxPrice());
+        for (Location location : locationData) {
+            ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(location.getCity(), location.getCountry(), vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), vacationDescription.getMaxPrice());
+            ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions, vacationDescription.getCheckInDate(), currentLocation);
 
-        ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions, vacationDescription.getCheckInDate(), currentLocation);
+            VacationSuggestion vacationSuggestion = new VacationSuggestion();
+            vacationSuggestion.setLocation(location);
+            vacationSuggestion.setVacationOffers(vacationOffers);
 
-        VacationSuggestion vacationSuggestion = new VacationSuggestion();
-        vacationSuggestion.setLocation(location);
-        vacationSuggestion.setVacationOffers(vacationOffers);
-
-        vacationSuggestions.add(vacationSuggestion);
-
+            vacationSuggestions.add(vacationSuggestion);
+        }
         return new ResponseEntity<>(vacationSuggestions, null, HttpStatus.OK);
     }
 

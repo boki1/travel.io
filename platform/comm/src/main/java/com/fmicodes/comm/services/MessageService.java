@@ -25,20 +25,18 @@ import java.util.ArrayList;
 @Service
 public class MessageService {
 
+    private static final String rapidApiKey = CredentialsUtil.getRapidAPIKey();
     @Autowired
     private AnalyzerService analyzerService;
-
     @Autowired
     private BookingService bookingService;
-
     @Autowired
     private RyanAirService ryanAirService;
-
-    private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
+    @Autowired
+    private GoogleMapsService googleMapsService;
 
     public String getMessageAnalysis(String message) {
-        String analyzerResponse = analyzerService.analyzeMessage(message);
-        return analyzerResponse;
+        return analyzerService.analyzeMessage(message);
     }
 
     public ArrayList<Hotel> getHotelsByParams(String city, String country, String checkInDate, String checkOutDate, Double maximumBudget) {
@@ -69,6 +67,10 @@ public class MessageService {
         return locationData;
     }
 
+    public String getNearbyRestaurants(Hotel hotel) {
+        return googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500).toString();
+    }
+
     public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, String departureDate, Location departureLocation) {
         String departureAirportIATACode = analyzerService.getAirportIATACodeByLocation(departureLocation);
 
@@ -76,6 +78,11 @@ public class MessageService {
         for (Hotel hotel : hotels) {
             System.out.println("HOTEL: " + hotel.getHotelName() + " AIRPORT CODE: " + hotel.getAirportCode());
             Flight flight = ryanAirService.getFlightBetweenTwoAirports(departureAirportIATACode, hotel.getAirportCode(), departureDate);
+
+            System.out.println("HOTEL DATA: " + hotel);
+            System.out.println(" NEARBY RESTAURANTS: " + getNearbyRestaurants(hotel));
+
+
             VacationOffer vacationOffer = new VacationOffer();
             vacationOffer.setHotel(hotel);
             vacationOffer.setFlight(flight);
@@ -84,5 +91,6 @@ public class MessageService {
 
         return vacationOffers;
     }
+
 
 }
