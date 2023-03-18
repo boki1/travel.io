@@ -8,7 +8,8 @@ import java.util.ArrayList;
 public class VacationOffer {
     private Hotel hotel;
 
-    private ArrayList<Flight> possibleFLights;
+    private Flight flight;
+
 
 
     public Hotel getHotel() {
@@ -19,11 +20,11 @@ public class VacationOffer {
         this.hotel = hotel;
     }
 
-    public ArrayList<Flight> getPossibleFLights() {
-        return possibleFLights;
+    public Flight getFlight() {
+        return flight;
     }
 
-    public void setPossibleFLights(ArrayList<Flight> possibleFLights) {
-        this.possibleFLights = possibleFLights;
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 }

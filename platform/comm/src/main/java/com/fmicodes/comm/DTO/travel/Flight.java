@@ -58,4 +58,8 @@ public class Flight {
     public void setArrivalDateTime(String arrivalDateTime) {
         this.arrivalDateTime = arrivalDateTime;
     }
+
+
+
+
 }

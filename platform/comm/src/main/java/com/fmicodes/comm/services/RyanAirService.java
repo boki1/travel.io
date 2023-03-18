@@ -21,21 +21,26 @@ public class RyanAirService {
     @Value("${ryanair.host}")
     private String ryanAirHost;
 
+    private static final Integer DESIRED_AMOUNT_OF_FLIGHTS = 1;
+
     private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
 
-    public ArrayList<Flight> getFlightsBetweenTwoAirports(String locationAirportCode, String destinationAirportCode, String originDepartureDate) {
+    public Flight getFlightBetweenTwoAirports(String locationAirportCode, String destinationAirportCode, String originDepartureDate) {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
         JSONObject routesJson = null;
         JSONArray originToDestinationRoutes = null;
         try {
-            Response response = client.prepare("GET", "https://ryanair.p.rapidapi.com/flights?origin_code=LGW&destination_code=DUB&origin_departure_date=2023-09-28&destination_departure_date=2023-10-28")
+            Response response = client.prepare("GET", "https://ryanair.p.rapidapi.com/flights?origin_code=" + locationAirportCode + "&destination_code=" + destinationAirportCode + "&origin_departure_date=" + originDepartureDate  + "&destination_departure_date=2023-10-28")
                     .setHeader("X-RapidAPI-Key", rapidApiKey)
                     .setHeader("X-RapidAPI-Host", ryanAirHost)
                     .execute()
                     .get();
 
             routesJson = new JSONObject(response.getResponseBody());
-            originToDestinationRoutes = routesJson.getJSONArray("origin_to_destination_trip");
+
+            if (routesJson.has("origin_to_destination_trip")) {
+                originToDestinationRoutes = routesJson.getJSONArray("origin_to_destination_trip");
+            }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (ExecutionException e) {
@@ -45,20 +50,23 @@ public class RyanAirService {
         }
 
         ArrayList<Flight> availableFlights = new ArrayList<>();
-        for (int i = 0; i < originToDestinationRoutes.length(); i++) {
-            try {
-                JSONObject route = originToDestinationRoutes.getJSONArray(i).getJSONObject(0); // The API response has bad formatting and what should be an Object here is returned as an Array, and thus we have the hardcoded .getJSONObject(0).
 
-                Flight flight = new Flight();
-                flight.setDepartureAirportCode(route.getString("origin_code"));
-                flight.setArrivalAirportCode(route.getString("destination_code"));
-                flight.setPrice(route.getDouble("regular_fare"));
-                flight.setCurrency(route.getString("currency"));
-                flight.setDepartureDateTime(route.getString("departure_datetime_utc"));
-                flight.setArrivalDateTime(route.getString("arrival_datetime_utc"));
-                availableFlights.add(flight);
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
+        if (originToDestinationRoutes != null) {
+            for (int i = 0; i < originToDestinationRoutes.length(); i++) {
+                try {
+                    JSONObject route = originToDestinationRoutes.getJSONArray(i).getJSONObject(0); // The API response has bad formatting and what should be an Object here is returned as an Array, and thus we have the hardcoded .getJSONObject(0).
+
+                    Flight flight = new Flight();
+                    flight.setDepartureAirportCode(route.getString("origin_code"));
+                    flight.setArrivalAirportCode(route.getString("destination_code"));
+                    flight.setPrice(route.getDouble("regular_fare"));
+                    flight.setCurrency(route.getString("currency"));
+                    flight.setDepartureDateTime(route.getString("departure_datetime_utc"));
+                    flight.setArrivalDateTime(route.getString("arrival_datetime_utc"));
+                    availableFlights.add(flight);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
 
@@ -68,7 +76,11 @@ public class RyanAirService {
             throw new RuntimeException(e);
         }
 
-        return sortFlightsByPriceDesc(availableFlights, 2);
+        if (availableFlights.size() == 0) {
+            return null;
+        }
+
+        return sortFlightsByPriceDesc(availableFlights).get(0); // We are only interested in the cheapest flight option.
     }
 
     /**
@@ -76,7 +88,7 @@ public class RyanAirService {
      * @param flights
      * @return ArrayList<Flight> sorted by price in descending order
      */
-    private ArrayList<Flight> sortFlightsByPriceDesc(ArrayList<Flight> flights, int desiredAmountOfFlights) {
+    private ArrayList<Flight> sortFlightsByPriceDesc(ArrayList<Flight> flights) {
         flights.sort((Flight f1, Flight f2) -> {
             if (f1.getPrice() > f2.getPrice()) {
                 return 1;
@@ -86,12 +98,6 @@ public class RyanAirService {
                 return 0;
             }
         });
-
-        for (int i = 0; i < desiredAmountOfFlights; i++) {
-            if(i >= desiredAmountOfFlights) {
-                flights.remove(i);
-            }
-        }
 
         return flights;
     }

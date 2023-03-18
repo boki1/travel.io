@@ -17,14 +17,14 @@ import java.util.concurrent.ExecutionException;
 public class AnalyzerService {
 
     @Value("${analyzer.host}")
-    private static String analyzerHost;
+    private String analyzerHost;
 
 
     public String analyzeMessage(String message) {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
         String analyzedMessageResponse = null;
         try {
-            Response response = client.prepare("POST",  analyzerHost + "api/v1/analyzer")
+            Response response = client.prepare("POST",  "http://" + analyzerHost + "/api/v1/analyzer")
                     .setBody(message)
                     .execute()
                     .get();
