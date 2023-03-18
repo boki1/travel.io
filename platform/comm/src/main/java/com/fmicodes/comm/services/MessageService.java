@@ -1,18 +1,17 @@
 package com.fmicodes.comm.services;
 
+import com.fmicodes.comm.DTO.Location;
 import com.fmicodes.comm.DTO.VacationOffer;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.DTO.travel.Flight;
-import com.fmicodes.comm.exceptions.AirportCompatibilityException;
-import com.fmicodes.comm.exceptions.DeserializingJSONException;
 import com.fmicodes.comm.services.util.CredentialsUtil;
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Destination IDs:
@@ -45,6 +44,28 @@ public class MessageService {
     public ArrayList<Hotel> getHotelsByParams(String city, String country, String checkInDate, String checkOutDate, Double maximumBudget) {
         ArrayList<Hotel> hotelSuggestions = bookingService.getHotelsByParams(city, country, checkInDate, checkOutDate, maximumBudget);
         return hotelSuggestions;
+    }
+
+    public ArrayList<Location> getLocationDataFromOpenAIResponse(String openAIResponse) {
+        ArrayList<Location> locationData = new ArrayList<>();
+        System.out.println("OPEN AI RESPONSE: " + openAIResponse);
+
+        try {
+            JSONObject openAIResponseJSON = new JSONObject(openAIResponse);
+            JSONArray locations = openAIResponseJSON.getJSONArray("locations");
+            for (int i = 0; i < locations.length(); i++) {
+                JSONArray locationArray = locations.getJSONArray(i);
+                String city = locationArray.getString(0);
+                String country = locationArray.getString(1);
+                Location location = new Location(city, country);
+
+                locationData.add(location);
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        return locationData;
     }
 
     public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, String departureDate) {

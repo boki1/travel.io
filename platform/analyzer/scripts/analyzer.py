@@ -1,3 +1,4 @@
+import re
 import unittest
 from os import listdir
 
@@ -39,10 +40,7 @@ class Analyser:
             if not suggestion.strip():
                 continue  # Ignore empty lines
 
-            suggestions_result = suggestion.split('. ', 1)
-            if len(suggestions_result) != 2:
-                continue
-            _, suggestion_data = suggestions_result
+            suggestion_data = re.sub(r'^\d+\. ', '', suggestion)
 
             # Remove the index number
             suggestion_data_result = suggestion_data.split(': ', 1)

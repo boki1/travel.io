@@ -50,8 +50,9 @@ public class BookingService {
             url.append("&dest_id=" + destinationID);
         } else {
             // TODO: Handle case when destinationID is null after API call
+            url.append("&dest_id=" + "-1746443"); // stupid error handling for now
 
-            throw new DestinationNotFoundException("Destination not found");
+//            throw new DestinationNotFoundException("Destination not found");
         }
 
         AsyncHttpClient client = new DefaultAsyncHttpClient();

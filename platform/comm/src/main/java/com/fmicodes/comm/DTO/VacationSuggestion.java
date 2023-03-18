@@ -9,11 +9,21 @@ public class VacationSuggestion {
 
     private ArrayList<VacationOffer> vacationOffers;
 
+    private Location location;
+
     public ArrayList<VacationOffer> getVacationOffers() {
         return vacationOffers;
     }
 
     public void setVacationOffers(ArrayList<VacationOffer> vacationOffers) {
         this.vacationOffers = vacationOffers;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
