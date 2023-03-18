@@ -1,7 +1,5 @@
 package com.fmicodes.comm.DTO;
 
-import java.util.concurrent.Executor;
-
 public class Location {
     private String city;
     private String country;
