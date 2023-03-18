@@ -1,6 +1,7 @@
 package com.fmicodes.comm.controllers;
 
 import com.fmicodes.comm.DTO.VacationDescription;
+import com.fmicodes.comm.DTO.VacationOffer;
 import com.fmicodes.comm.DTO.VacationSuggestion;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.DTO.travel.Flight;
@@ -22,18 +23,22 @@ public class MessageController {
 
     @PostMapping
     public ResponseEntity<VacationSuggestion> makeVacationSuggestion(@RequestBody VacationDescription vacationDescription) {
-        String cityMock = "London";
-        String countryMock = "United Kingdom";
+        String cityMock = "Bratislava";
+        String countryMock = "Slovakia";
 
 //        String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
 
+        ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(cityMock, countryMock);
+
+//        ArrayList<Flight> routesResponse = messageService.getAirplaneRoutesByParams("LGW", "DUB", "2023-11-28");
+//        vacationSuggestions.setFlightSuggestions(routesResponse);
+
+        ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions);
+
+
         VacationSuggestion vacationSuggestions = new VacationSuggestion();
+        vacationSuggestions.setVacationOffers(vacationOffers);
 
-//        ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(cityMock, countryMock);
-//        vacationSuggestions.setHotelSuggestions(hotelSuggestions);
-
-        ArrayList<Flight> routesResponse = messageService.getAirplaneRoutesByParams("LGW", "DUB", "2023-11-28");
-        vacationSuggestions.setFlightSuggestions(routesResponse);
 
         return new ResponseEntity<>(vacationSuggestions, null, HttpStatus.OK);
     }

@@ -44,8 +44,6 @@ public class RyanAirService {
             throw new RuntimeException(e);
         }
 
-        System.out.println(routesJson);
-
         ArrayList<Flight> availableFlights = new ArrayList<>();
         for (int i = 0; i < originToDestinationRoutes.length(); i++) {
             try {
@@ -70,6 +68,33 @@ public class RyanAirService {
             throw new RuntimeException(e);
         }
 
-        return availableFlights;
+        return sortFlightsByPriceDesc(availableFlights, 2);
     }
+
+    /**
+     * Sorts the flights by price in descending order.
+     * @param flights
+     * @return ArrayList<Flight> sorted by price in descending order
+     */
+    private ArrayList<Flight> sortFlightsByPriceDesc(ArrayList<Flight> flights, int desiredAmountOfFlights) {
+        flights.sort((Flight f1, Flight f2) -> {
+            if (f1.getPrice() > f2.getPrice()) {
+                return 1;
+            } else if (f1.getPrice() < f2.getPrice()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+
+        for (int i = 0; i < desiredAmountOfFlights; i++) {
+            if(i >= desiredAmountOfFlights) {
+                flights.remove(i);
+            }
+        }
+
+        return flights;
+    }
+
+
 }

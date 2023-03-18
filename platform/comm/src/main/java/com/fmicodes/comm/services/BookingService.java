@@ -23,6 +23,8 @@ public class BookingService {
 
     private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
 
+    private static final Integer MAX_HOTELS_SUGGESTION = 2;
+
     public ArrayList<Hotel> getHotelsByParams(String city, String country) {
         StringBuilder url = new StringBuilder("https://" + bookingAPIHost + "/v1/hotels/search?");
         url.append("adults_number=2");           // REQUIRED
@@ -78,7 +80,7 @@ public class BookingService {
 
         ArrayList<Hotel> hotelSuggestions = new ArrayList<>();
 
-        int amountOfHotels = hotelsArray.length() <= 2 ? hotelsArray.length() : 2;
+        int amountOfHotels = hotelsArray.length() <= MAX_HOTELS_SUGGESTION ? hotelsArray.length() : MAX_HOTELS_SUGGESTION;
         for (int i = 0; i < amountOfHotels; i++) {
             try {
                 JSONObject hotelJSON = hotelsArray.getJSONObject(i);
@@ -150,6 +152,35 @@ public class BookingService {
         }
 
         return destinationId;
+    }
+
+    public ArrayList<Hotel> checkAirportsCompatibility(ArrayList<Hotel> hotels) throws IOException, ExecutionException, InterruptedException {
+        AsyncHttpClient client = new DefaultAsyncHttpClient();
+        for (Hotel hotel : hotels) {
+           Response response = client.prepare("GET", "https://" + bookingAPIHost + "/v1/hotels/nearby-places?locale=en-gb&hotel_id=" + hotel.getHotelId())
+                    .setHeader("X-RapidAPI-Key", rapidApiKey)
+                    .setHeader("X-RapidAPI-Host", bookingAPIHost)
+                    .execute()
+                    .get();
+
+            try {
+                JSONObject responseBodyJson = new JSONObject(response.getResponseBody());
+                JSONObject transport = responseBodyJson.getJSONObject("transport");
+                if (transport.has("airport")) {
+                    JSONObject airport = transport.getJSONObject("airport");
+                    hotel.setAirportCode(airport.getString("code"));
+                }
+
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+
+        client.close();
+
+
+        return hotels;
     }
 
 }

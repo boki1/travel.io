@@ -1,22 +1,13 @@
 package com.fmicodes.comm.services;
 
+import com.fmicodes.comm.DTO.VacationOffer;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.DTO.travel.Flight;
 import com.fmicodes.comm.services.util.CredentialsUtil;
-import org.asynchttpclient.AsyncHttpClient;
-import org.asynchttpclient.DefaultAsyncHttpClient;
-import org.asynchttpclient.Response;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -54,6 +45,32 @@ public class MessageService {
     public ArrayList<Flight> getAirplaneRoutesByParams(String locationAirportCode, String destinationAirportCode, String originDepartureDate) {
         ArrayList<Flight> routesResponse = ryanAirService.getFlightsBetweenTwoAirports(locationAirportCode, destinationAirportCode, originDepartureDate);
         return routesResponse;
+    }
+
+    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels) {
+        ArrayList<String> possibleAirportCodes;
+
+        try {
+            hotels = bookingService.checkAirportsCompatibility(hotels);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        ArrayList<VacationOffer> vacationOffers = new ArrayList<>();
+        for (Hotel hotel : hotels) {
+            ArrayList<Flight> flights = ryanAirService.getFlightsBetweenTwoAirports("SOF", hotel.getAirportCode(), "2023-04-05");
+            VacationOffer vacationOffer = new VacationOffer();
+            vacationOffer.setHotel(hotel);
+            vacationOffer.setPossibleFLights(flights);
+            vacationOffers.add(vacationOffer);
+
+        }
+
+        return vacationOffers;
     }
 
 

@@ -6,23 +6,14 @@ import com.fmicodes.comm.DTO.travel.Flight;
 import java.util.ArrayList;
 
 public class VacationSuggestion {
-    private ArrayList<Hotel> hotelSuggestions;
 
-    private ArrayList<Flight> flightSuggestions;
+    private ArrayList<VacationOffer> vacationOffers;
 
-    public ArrayList<Hotel> getHotelSuggestions() {
-        return hotelSuggestions;
+    public ArrayList<VacationOffer> getVacationOffers() {
+        return vacationOffers;
     }
 
-    public void setHotelSuggestions(ArrayList<Hotel> hotelSuggestions) {
-        this.hotelSuggestions = hotelSuggestions;
-    }
-
-    public ArrayList<Flight> getFlightSuggestions() {
-        return flightSuggestions;
-    }
-
-    public void setFlightSuggestions(ArrayList<Flight> flightSuggestions) {
-        this.flightSuggestions = flightSuggestions;
+    public void setVacationOffers(ArrayList<VacationOffer> vacationOffers) {
+        this.vacationOffers = vacationOffers;
     }
 }
