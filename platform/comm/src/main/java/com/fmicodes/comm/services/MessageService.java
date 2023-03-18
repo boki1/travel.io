@@ -1,6 +1,7 @@
 package com.fmicodes.comm.services;
 
 import com.fmicodes.comm.DTO.Location;
+import com.fmicodes.comm.DTO.RestaurantInfo;
 import com.fmicodes.comm.DTO.VacationOffer;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.DTO.travel.Flight;
@@ -67,21 +68,16 @@ public class MessageService {
         return locationData;
     }
 
-    public String getNearbyRestaurants(Hotel hotel) {
-        return googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500).toString();
-    }
-
     public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, String departureDate, Location departureLocation) {
         String departureAirportIATACode = analyzerService.getAirportIATACodeByLocation(departureLocation);
 
         ArrayList<VacationOffer> vacationOffers = new ArrayList<>();
         for (Hotel hotel : hotels) {
-            System.out.println("HOTEL: " + hotel.getHotelName() + " AIRPORT CODE: " + hotel.getAirportCode());
             Flight flight = ryanAirService.getFlightBetweenTwoAirports(departureAirportIATACode, hotel.getAirportCode(), departureDate);
 
-            System.out.println("HOTEL DATA: " + hotel);
-            System.out.println(" NEARBY RESTAURANTS: " + getNearbyRestaurants(hotel));
-
+            ArrayList<RestaurantInfo> nearbyRestaurants = googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500);
+            hotel.setNearbyRestaurants(nearbyRestaurants);
+            System.out.println(" NEARBY RESTAURANTS: " + nearbyRestaurants);
 
             VacationOffer vacationOffer = new VacationOffer();
             vacationOffer.setHotel(hotel);

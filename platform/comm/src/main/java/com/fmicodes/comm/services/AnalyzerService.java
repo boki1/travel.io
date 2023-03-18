@@ -87,8 +87,6 @@ public class AnalyzerService {
             throw new RuntimeException("ERROR - Communicating with Flask API: " + e.getMessage());
         }
 
-        System.out.println("IATA CODE FROM PYTHON: " + airportIATACode);
-
         return airportIATACode;
     }
 }

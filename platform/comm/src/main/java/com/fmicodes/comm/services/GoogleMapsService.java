@@ -25,7 +25,7 @@ public class GoogleMapsService {
     }
 
 
-    public List<RestaurantInfo> getNearbyRestaurants(double latitude, double longitude, int radius) {
+    public ArrayList<RestaurantInfo> getNearbyRestaurants(double latitude, double longitude, int radius) {
         String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
                 + latitude + "," + longitude + "&radius=" + radius + "&type=restaurant&key=" + mapsApiKey;
 
@@ -33,7 +33,7 @@ public class GoogleMapsService {
                 .url(url)
                 .build();
 
-        List<RestaurantInfo> restaurants = new ArrayList<>();
+        ArrayList<RestaurantInfo> restaurants = new ArrayList<>();
 
         try (Response response = client.newCall(request).execute()) {
             String jsonResponse = Objects.requireNonNull(response.body()).string();
@@ -104,6 +104,7 @@ public class GoogleMapsService {
         } catch (IOException e) {
             throw new RuntimeException("ERROR - Getting nearby restaurants from Google Maps API: " + e.getMessage());
         }
+
         return restaurants;
     }
 }
