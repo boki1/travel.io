@@ -18,6 +18,8 @@ import java.util.concurrent.ExecutionException;
  * -755070: Istanbul
  */
 
+// TODO: do not make API calls for linking City to Airport code, because that can be done with a simple HashMap<String, ArrayList<String>> cityNameToAirportCodes
+
 @Service
 public class MessageService {
 
