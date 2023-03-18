@@ -28,7 +28,7 @@ def debug_main():
     for fname in listdir(test_path):
         task = create_task_from_desc(f'{test_path}/{fname}')
         output = analyser.perform(task)
-        print(f"For input: '{fname}' locations are [{', '.join([l.country for l in output.locations])}]")
+        print(f"For input: '{fname}' output is '{output}'")
 
 # We are not called this way usually. The analyzer module is supposed to be
 # used by API from the "flask" server. However, in order to mock the stages that

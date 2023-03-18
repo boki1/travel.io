@@ -1,5 +1,6 @@
 from collections import namedtuple
 import typing
+import json
 
 class Location(typing.NamedTuple):
     city: str
@@ -20,6 +21,9 @@ class Out(typing.NamedTuple):
     action_topics: list[ActionTopic]
     landmarks: list[Landmark]
 
+    def __str__(self):
+        # FIXME: Make JSON nicer. This looks kind of bad :/
+        return json.dumps(self._asdict())
 
 class Task:
 
