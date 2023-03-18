@@ -29,6 +29,7 @@ class Out(typing.NamedTuple):
 
 
 class Task:
+    extracted_locations: list[Location]
 
     def __init__(self, question, full_answer):
         self.inp_question = question

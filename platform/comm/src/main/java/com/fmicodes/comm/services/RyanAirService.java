@@ -54,7 +54,12 @@ public class RyanAirService {
                     Flight flight = new Flight();
                     flight.setDepartureAirportCode(route.getString("origin_code"));
                     flight.setArrivalAirportCode(route.getString("destination_code"));
-                    flight.setPrice(route.getDouble("regular_fare"));
+//                    flight.setPrice(route.getDouble("regular_fare"));
+                    if (route.has("regular_fare") && !route.isNull("regular_fare")) {
+                        flight.setPrice(route.getDouble("regular_fare"));
+                    } else {
+                        flight.setPrice(90.0);
+                    }
                     flight.setCurrency(route.getString("currency"));
                     flight.setDepartureDateTime(route.getString("departure_datetime_utc"));
                     flight.setArrivalDateTime(route.getString("arrival_datetime_utc"));
