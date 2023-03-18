@@ -1,11 +1,10 @@
 import unittest
 from os import listdir
 
-import geograpy as geo
 from countryinfo import CountryInfo
 from geopy.geocoders import Nominatim
 
-from scripts.config import debug_print, debug_assert
+from scripts.config import debug_print
 from scripts.task import *
 
 
@@ -33,43 +32,33 @@ class Analyser:
         return CountryInfo(country).capital()
 
     def get_locations_serial(self, task: Task) -> list[Location]:
-        extractor = geo.Extractor(text=task.inp_answer)
-        general_locations = list(set(extractor.find_geoEntities()))
-        place_ctx = geo.PlaceContext(place_names=general_locations)
+        location_list = []
+        suggestions = task.inp_answer.strip().split('\n')
 
-        locations = set()
+        for suggestion in suggestions:
+            if not suggestion.strip():
+                continue  # Ignore empty lines
 
-        # These are countries that are mentioned in the inp_answer
-        # We use these to disambiguate country-relations.
-        expected_countries = list(set(place_ctx.countries) & set(general_locations))
-        cities = list(set(place_ctx.cities) & set(general_locations))
-        for city in list(cities):
-            try:
-                # HACK: Make sure that country names are not mistakenly interpreted as city names.
-                # If no error is caused, then this is not a city so skip it.
-                country_info = CountryInfo(city)
-                _ignore = country_info.info()
+            suggestions_result = suggestion.split('. ', 1)
+            if len(suggestions_result) != 2:
                 continue
-            except KeyError:
-                # Expected :)
-                pass
+            _, suggestion_data = suggestions_result
 
-            suggested_countries = self._city_to_countries(city)
-            countries = list(set(suggested_countries) & set(expected_countries))
-            locations.add(Location(city, country=countries[0] if countries else suggested_countries[0]))
+            # Remove the index number
+            suggestion_data_result = suggestion_data.split(': ', 1)
+            if len(suggestion_data_result) != 2:
+                continue
+            city_country, _ = suggestion_data_result
 
-        # No city names were encountered. "Produce" one the country that was asked for.
-        if not locations:
-            for country in expected_countries:
-                city = self._produce_city(country)
-                locations.add(Location(city, country))
+            city_country_result = city_country.split(', ', 1)
+            if len(city_country_result) != 2:
+                continue
+            city, country = city_country_result
 
-        # There are some cases in which this is not exact. However, in the general case of proper input, this
-        # shouldn't happen. Restrain it in DEBUG_MODE.
-        debug_assert(len(locations) != 0, "We shouldn't return empty location list!")
+            location_list.append(Location(city.strip(), country.strip()))
 
-        return list(locations)
-
+        task.extracted_locations = location_list
+        return location_list
 
     def perform(self, task: Task) -> Out:
         locations = self.get_locations_serial(task)
@@ -89,7 +78,6 @@ class TestAnalyzer(unittest.TestCase):
         global g_analyser_options
         self.a = Analyser(g_analyser_options)
 
-
     def test_city_to_country_list(self):
         expected = 'Bulgaria'
         countries_that_contain_sofia = self.a._city_to_countries('Sofia')
@@ -106,10 +94,9 @@ class TestAnalyzer(unittest.TestCase):
         debug_print(f'countries_that_contain_berlin = "{countries_that_contain_berlin}"')
         self.assertTrue(expected in countries_that_contain_berlin)
 
-
     @staticmethod
     def create_task_from_desc(fname_path: str) -> Task:
-        t = Task('', '') # dummy construction
+        t = Task('', '')  # dummy construction
         with open(fname_path, 'r') as mock_task_desc:
             for line in mock_task_desc:
                 if line.startswith('--'):
@@ -135,7 +122,7 @@ class TestAnalyzer(unittest.TestCase):
     # Figure out how to use this library's API
     def test_country_to_name_basic_lib(self):
         geolocator = Nominatim(user_agent="my_app")
-        cities = { "Paris": "France", "Sofia": "Bulgaria", "Basque": "France" }
+        cities = {"Paris": "France", "Sofia": "Bulgaria", "Basque": "France"}
         for city, expected_country in cities.items():
             locations = geolocator.geocode(city, exactly_one=False, language="en")
             country_names = list({Analyser._country_from_full_location(loc) for loc in locations})
