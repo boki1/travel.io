@@ -1,6 +1,7 @@
 package com.fmicodes.comm.services;
 
 import com.fmicodes.comm.DTO.travel.Flight;
+import com.fmicodes.comm.exceptions.DeserializingJSONException;
 import com.fmicodes.comm.services.util.CredentialsUtil;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
@@ -21,13 +22,10 @@ public class RyanAirService {
     @Value("${ryanair.host}")
     private String ryanAirHost;
 
-    private static final Integer DESIRED_AMOUNT_OF_FLIGHTS = 1;
-
     private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
 
     public Flight getFlightBetweenTwoAirports(String locationAirportCode, String destinationAirportCode, String originDepartureDate) {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
-        JSONObject routesJson = null;
         JSONArray originToDestinationRoutes = null;
         try {
             Response response = client.prepare("GET", "https://ryanair.p.rapidapi.com/flights?origin_code=" + locationAirportCode + "&destination_code=" + destinationAirportCode + "&origin_departure_date=" + originDepartureDate  + "&destination_departure_date=2023-10-28")
@@ -36,21 +34,18 @@ public class RyanAirService {
                     .execute()
                     .get();
 
-            routesJson = new JSONObject(response.getResponseBody());
+            JSONObject routesJson = new JSONObject(response.getResponseBody());
 
             if (routesJson.has("origin_to_destination_trip")) {
                 originToDestinationRoutes = routesJson.getJSONArray("origin_to_destination_trip");
             }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("ERROR - Sending /flights request: " + e.getMessage());
         } catch (JSONException e) {
-            throw new RuntimeException(e);
+            throw new DeserializingJSONException("ERROR - Deserializing  origin_to_destination_trip: " + e.getMessage());
         }
 
         ArrayList<Flight> availableFlights = new ArrayList<>();
-
         if (originToDestinationRoutes != null) {
             for (int i = 0; i < originToDestinationRoutes.length(); i++) {
                 try {
@@ -65,7 +60,7 @@ public class RyanAirService {
                     flight.setArrivalDateTime(route.getString("arrival_datetime_utc"));
                     availableFlights.add(flight);
                 } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                    throw new DeserializingJSONException("ERROR - Deserializing flights response: " + e.getMessage());
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.fmicodes.comm.controllers;
 
+import com.fmicodes.comm.DTO.ErrorResponse;
 import com.fmicodes.comm.DTO.VacationDescription;
 import com.fmicodes.comm.DTO.VacationOffer;
 import com.fmicodes.comm.DTO.VacationSuggestion;
@@ -18,6 +19,15 @@ public class MessageController {
 
     @Autowired
     private MessageService messageService;
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        errorResponse.setMessage(e.getMessage());
+
+        return new ResponseEntity<>(errorResponse, null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     @PostMapping
     public ResponseEntity<VacationSuggestion> makeVacationSuggestion(@RequestBody VacationDescription vacationDescription) {
