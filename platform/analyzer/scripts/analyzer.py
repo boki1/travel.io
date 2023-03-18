@@ -1,15 +1,11 @@
-from os import listdir
-from typing import List, Any
-import spacy
-import geograpy as geo
-from geopy.geocoders import Nominatim
 import unittest
+from os import listdir
+
+import geograpy as geo
 from countryinfo import CountryInfo
+from geopy.geocoders import Nominatim
 
-from task import *
-from config import debug_print, g_analyser_options, debug_assert
-
-
+from scripts.config import debug_print, debug_assert
 from scripts.task import *
 
 
