@@ -18,9 +18,10 @@ class OpenAICommunication:
         return \
             f"""
                 Provide data, formatted as: {g_openai_hints['location_fmt']}
-                Mark each landmark, see-sight or other specific location in an  XML-like
-                tag {g_openai_hints['landmark_marker']} and each recreational activity verb
-                phrase with {g_openai_hints['activity_marker']}. 
+                Mark each landmark, town, facilities or other specific locations and
+                establishments enclosed in a XML-like tag {g_openai_hints['landmark_marker']}
+                and each vacation activity verb phrase with {g_openai_hints['activity_marker']}.
+                Make sure to put corresponding closing tags.
             """
 
 
