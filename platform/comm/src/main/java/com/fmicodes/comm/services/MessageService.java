@@ -47,21 +47,7 @@ public class MessageService {
         return hotelSuggestions;
     }
 
-    public Flight getAirplaneRoutesByParams(String locationAirportCode, String destinationAirportCode, String originDepartureDate) {
-        Flight routesResponse = ryanAirService.getFlightBetweenTwoAirports(locationAirportCode, destinationAirportCode, originDepartureDate);
-        return routesResponse;
-    }
-
     public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, String departureDate) {
-        ArrayList<String> possibleAirportCodes;
-
-        try {
-            hotels = bookingService.checkAirportsCompatibility(hotels);
-        } catch (IOException | RuntimeException | InterruptedException | ExecutionException e) {
-            throw new AirportCompatibilityException("ERROR - AirportCompatibility request failed: " + e.getMessage());
-        } catch (JSONException e) {
-            throw new DeserializingJSONException("ERROR - Deserializing response from airportCompatibility API: " + e.getMessage());
-        }
 
         ArrayList<VacationOffer> vacationOffers = new ArrayList<>();
         for (Hotel hotel : hotels) {
