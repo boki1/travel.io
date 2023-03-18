@@ -1,18 +1,35 @@
 -- I love sea and sandy beaches, suggest me a rather cheap destination in a range of 2000km from
 -- Sofia where my demands will be met.
-
-There are many beautiful beach destinations within 2000km from Sofia that can meet your requirements
-and also fit within a reasonable budget. Here are some suggestions: Sunny Beach, Bulgaria: This is
-one of the most popular and affordable beach destinations in Europe, located just 400km away from
-Sofia. It offers long stretches of sandy beaches, plenty of water sports activities, and a vibrant
-nightlife. Mamaia, Romania: This seaside resort is located 650km from Sofia and offers long and wide
-sandy beaches, a variety of water sports, and plenty of restaurants and bars. It's also known for
-its lively nightlife. Kalamata, Greece: This coastal town is located around 850km from Sofia and is
-famous for its beautiful beaches, crystal clear waters, and stunning landscapes. It's a perfect
-destination for those who love nature and tranquility. Alanya, Turkey: This Turkish resort town is
-located around 1200km from Sofia and offers beautiful sandy beaches, turquoise waters, and plenty of
-cultural and historical attractions. Budva, Montenegro: This coastal town is located around 1200km
-from Sofia and offers beautiful beaches, crystal clear waters, and a charming old town with plenty
-of restaurants and cafes. All of these destinations offer beautiful beaches and are located within
-your desired range from Sofia, and they offer plenty of affordable accommodation and activities that
-can fit within your budget.
+--
+-- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
+-- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
+Sure, here are some budget-friendly beach destinations that are within a 2000km range from Sofia and offer sandy beaches:
+1. Sunny Beach, Bulgaria: Sunny Beach is a popular seaside resort on the Black
+Sea coast of Bulgaria. It is known for its long sandy beaches, crystal-clear
+waters, and vibrant nightlife. The resort has plenty of affordable hotels,
+restaurants, and bars, making it an ideal budget-friendly destination.
+Vacation activities in Sunny Beach can include sunbathing, swimming, water
+sports, exploring nearby historic sites, and enjoying the local cuisine and
+nightlife.
+2. Mamaia, Romania: Mamaia is a popular seaside resort on the
+Black Sea coast of Romania. It is known for its long sandy beaches,
+crystal-clear waters, and family-friendly atmosphere. The resort has plenty
+of affordable hotels, restaurants, and bars, making it an ideal
+budget-friendly destination. Vacation activities in Mamaia can include
+sunbathing, swimming, water sports, exploring nearby historic sites, and
+enjoying the local cuisine and nightlife.
+3. Golden Sands, Bulgaria: Golden Sands is a popular seaside resort on the Black Sea coast of Bulgaria. It is
+known for its long sandy beaches, crystal-clear waters, and natural beauty.
+The resort has plenty of affordable hotels, restaurants, and bars, making
+it an ideal budget-friendly destination. Vacation activities in Golden
+Sands can include sunbathing, swimming, water sports, exploring nearby
+natural parks, and enjoying the local cuisine and nightlife.
+4. Algarve, Portugal: The Algarve is a popular region in southern Portugal known for
+its beautiful beaches, stunning cliffs, and picturesque towns. It has
+plenty of budget-friendly accommodation options, especially if you avoid
+the peak season. Vacation activities in the Algarve can include sunbathing,
+swimming, exploring the coastline, visiting historic sites, enjoying the
+local cuisine and wine, and playing golf or other outdoor sports. Vacation
+activities in these destinations can include sunbathing, swimming, water
+sports, exploring nearby historic or natural sites, enjoying the local
+cuisine and nightlife, and more.

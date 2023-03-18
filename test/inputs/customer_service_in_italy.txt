@@ -1,20 +1,43 @@
 -- Customer service is the most important thing for a vacation, suggest me resorts in Italy eith excellent staff.
-
-Certainly, here are some resorts in Italy that are known for their excellent customer service:
-Belmond Hotel Caruso, Amalfi Coast: This luxurious resort is perched on a clifftop in the
-picturesque town of Ravello and offers stunning views of the Amalfi Coast. Guests rave about the
-personalized service provided by the friendly and attentive staff. Borgo Egnazia, Puglia: This
-elegant resort is located in the charming region of Puglia and offers a range of activities and
-amenities for guests, including a golf course, spa, and multiple restaurants. The staff is known for
-their warm and welcoming demeanor. Castello di Casole, Tuscany: Set in a restored castle in the
-heart of Tuscany, this resort boasts breathtaking views of the rolling hills and vineyards. The
-staff is praised for their attentive service and willingness to go above and beyond to ensure guests
-have a memorable stay. Hotel Santa Caterina, Amalfi Coast: This historic hotel is located on a cliff
-overlooking the sea and has been family-owned and operated since 1904. The staff is known for their
-friendly and personable service, and guests appreciate the attention to detail throughout the
-property. Il Pellicano, Tuscany: Situated on a cliff overlooking the Tyrrhenian Sea, this glamorous
-resort has been a favorite of celebrities and jet-setters for decades. The staff is praised for
-their professional and discreet service, and guests appreciate the luxurious amenities and
-personalized attention. These are just a few of the many resorts in Italy that are known for their
-excellent customer service. Regardless of where you choose to stay, I hope you have a wonderful
-vacation in Italy!
+--
+-- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
+-- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
+Sure, here are some resorts in Italy that are known for their excellent customer service:
+1. Sorrento, Italy: Sorrento is a beautiful coastal town in southern Italy known
+for its stunning views and luxurious resorts. The Grand Hotel Excelsior
+Vittoria <LNDMARK>Grand Hotel Excelsior Vittoria</LNDMARK> is a top-rated
+resort that is famous for its impeccable service and attention to detail. The
+staff is friendly and knowledgeable, and they go above and beyond to ensure
+that guests have a memorable vacation. Activities in Sorrento include exploring
+the historic city center, taking a boat tour of the Amalfi Coast, or relaxing
+on the beach.
+2. Lake Como, Italy: Lake Como is a picturesque lake in northern Italy surrounded
+by mountains and charming towns. The Grand Hotel Tremezzo <LNDMARK>Grand Hotel
+Tremezzo</LNDMARK> is a luxurious resort that is known for its excellent
+service and stunning views of the lake. The staff is attentive and friendly,
+and they are happy to help guests plan activities such as hiking,
+boating, or exploring the nearby towns.
+3. Florence, Italy: Florence is a beautiful city in central Italy known
+for its art, history, and architecture. The Four Seasons Hotel Firenze
+<LNDMARK>Four Seasons Hotel Firenze</LNDMARK> is a luxurious resort
+that is famous for its exceptional service and elegant accommodations.
+The staff is attentive and knowledgeable, and they are happy to help
+guests plan activities such as visiting the Uffizi Gallery, exploring
+the historic city center, or taking a cooking class.
+4. Venice, Italy: Venice is a unique and enchanting city in northeastern
+Italy known for its canals, bridges, and historic architecture. The
+Belmond Hotel Cipriani <LNDMARK>Belmond Hotel Cipriani</LNDMARK> is a
+luxurious resort located on its own private island in the Venetian
+Lagoon. The staff is known for their exceptional service and attention
+to detail, and they are happy to help guests plan activities such as
+exploring the city's canals, visiting St. Mark's Basilica, or taking a
+gondola ride.
+5. Sardinia, Italy: Sardinia is a beautiful island in the Mediterranean
+known for its crystal-clear waters and stunning beaches. The Forte
+Village Resort <LNDMARK>Forte Village Resort</LNDMARK> is a luxurious
+resort located on the southern coast of the island. The staff is
+friendly and attentive, and they are happy to help guests plan
+activities such as snorkeling, kayaking, or exploring the nearby towns.
+Vacation activities at these resorts can include taking guided tours,
+indulging in spa treatments, sampling local cuisine, or simply relaxing
+by the pool or beach.

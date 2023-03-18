@@ -1,12 +1,48 @@
 -- The perfect vacation for me includes: a luxurious SPA hotel in the mountains in a resort full of
 -- mineral water. Suggest me some destinations on the old continent.
+--
+-- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
+-- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
 
-Sure, here are a few suggestions for luxurious SPA hotels in mountain resorts with mineral water in
-Europe: Bad Gastein, Austria: This historic spa town is situated in the Austrian Alps and is known
-for its thermal waters. The town offers various luxury SPA hotels such as the Grand Hotel de
-l'Europe, which features a modern SPA, indoor and outdoor pools, and stunning mountain views. Vals,
-Switzerland: This tiny mountain village in the Swiss Alps is famous for its thermal baths and is
-home to the renowned Therme Vals, a stunning modern SPA designed by architect Peter Zumthor.
-Rila Monastery, Bulgaria: The Rila Monastery is located in the Rila Mountains and is surrounded
-by natural mineral springs. The nearby village of Sapareva Banya offers various SPA hotels that
-use the mineral water for treatments, such as the Aqua Club Termal Hotel.
+Certainly! Here are some luxurious SPA hotels in the mountains in Europe, in
+destinations that are known for their mineral water resorts:
+1. Baden-Baden, Germany: Baden-Baden is a renowned spa town in the Black Forest
+region of Germany. It is known for its hot springs and luxurious spa hotels,
+such as the Brenners Park-Hotel & Spa <LNDMARK>Brenners Park-Hotel &
+Spa</LNDMARK>, which offers a range of treatments and facilities,
+including thermal baths, saunas, and outdoor pools. In Baden-Baden, you
+can also visit the Friedrichsbad Roman-Irish Bath, a historic thermal
+bath that has been in operation since the 19th century.
+2. Velingrad, Bulgaria: Velingrad is a spa town located in the Rhodope
+Mountains in Bulgaria. It is famous for its mineral springs and offers a
+range of luxurious spa hotels, such as the Grand Hotel Velingrad
+<LNDMARK>Grand Hotel Velingrad</LNDMARK>, which offers a range of
+treatments and facilities, including thermal baths, saunas, and indoor
+and outdoor pools. In Velingrad, you can also visit the Kleptuza, a
+natural mineral spring that is said to have healing properties.
+3. Montreux, Switzerland: Montreux is a picturesque town located on the
+shores of Lake Geneva in Switzerland. It is known for its mild climate
+and offers a range of luxurious spa hotels, such as the Fairmont Le
+Montreux Palace <LNDMARK>Fairmont Le Montreux Palace</LNDMARK>, which
+offers a range of treatments and facilities, including a thermal pool,
+sauna, and hammam. In Montreux, you can also visit the Lavey-les-Bains
+thermal baths, which are located nearby and offer a range of therapeutic
+treatments.
+4. Abano Terme, Italy: Abano Terme is a spa town located in the Veneto
+region of Italy, near the city of Padua. It is known for its hot springs
+and offers a range of luxurious spa hotels, such as the Hotel Terme Due
+Torri <LNDMARK>Hotel Terme Due Torri</LNDMARK>, which offers a range of
+treatments and facilities, including thermal pools, saunas, and a
+Turkish bath. In Abano Terme, you can also visit the Euganean Hills, a
+group of volcanic hills that are home to many thermal springs.
+5. Karlovy Vary, Czech Republic: Karlovy Vary is a historic spa town
+located in the western part of the Czech Republic. It is known for its
+hot springs and offers a range of luxurious spa hotels, such as the
+Grandhotel Pupp <LNDMARK>Grandhotel Pupp</LNDMARK>, which offers a range
+of treatments and facilities, including thermal baths, saunas, and a
+salt cave. In Karlovy Vary, you can also visit the many colonnades and
+springs that are located throughout the town, and sample the local
+Becherovka liqueur.
+Vacation activities in these destinations can include relaxing in
+thermal baths and pools, enjoying massages and spa treatments, exploring
+the local nature and scenery, and sampling local cuisine and wines.

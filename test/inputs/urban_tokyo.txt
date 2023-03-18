@@ -1,21 +1,36 @@
 -- I am a young man who enjoys seeing developed urban areas, please suggest me where should I travel
 -- to be satisfied.
-
-There are many developed urban areas around the world that you might enjoy visiting. Here are a few
-suggestions: Tokyo, Japan: Tokyo is one of the largest and most developed cities in the world, with
-a population of over 13 million people. It is famous for its high-tech architecture, advanced
-transportation system, and cutting-edge technology. New York City, United States: New York City is
-often referred to as the "capital of the world" due to its status as a global hub for finance,
-culture, and entertainment. It is home to many iconic landmarks such as the Empire State
-Building, Times Square, and the Statue of Liberty. Singapore: Singapore is a small island
-nation that is known for its ultra-modern architecture, high-tech infrastructure, and clean
-streets. It is a popular destination for those interested in urban planning and sustainable
-development. Dubai, United Arab Emirates: Dubai is a city that has undergone rapid development
-over the past few decades, with a focus on creating luxury shopping and entertainment
-destinations. It is known for its towering skyscrapers, extravagant malls, and man-made
-islands. Shanghai, China: Shanghai is a city that is rapidly developing into a global economic
-hub, with a population of over 24 million people. It is known for its impressive skyline,
-historic landmarks, and modern architecture. These are just a few suggestions, but there are
-many other cities around the world that offer a similar urban experience. When choosing a
-destination, it's important to consider factors such as cost, safety, and local culture in
-addition to the level of urban development.
+--
+-- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
+-- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
+Sure! Here are some suggestions for developed urban areas that you might enjoy:
+1. Tokyo, Japan: Tokyo is one of the most modern and developed cities in the
+world. It has a great public transportation system, amazing architecture, and
+plenty of shopping and entertainment options. Vacation activities in Tokyo can
+include visiting landmarks such as the Tokyo Tower, the Imperial Palace, and
+the Tokyo Skytree, exploring the different neighborhoods of the city, trying
+the local food, and enjoying the nightlife.
+2. Singapore: Singapore is a small
+city-state that is known for its cleanliness, safety, and modernity. It has
+amazing architecture, beautiful parks, and plenty of shopping and dining
+options. Vacation activities in Singapore can include visiting landmarks such
+as the Marina Bay Sands, the Gardens by the Bay, and the Merlion, exploring the
+different neighborhoods of the city, trying the local food, and enjoying the
+nightlife.
+3. New York City, USA: New York City is one of the most iconic and
+developed cities in the world. It has amazing architecture, incredible museums,
+and plenty of shopping and entertainment options. Vacation activities
+in New York City can include visiting landmarks such as the Statue of
+Liberty, the Empire State Building, and Central Park, exploring the
+different neighborhoods of the city, trying the local food, and
+enjoying the nightlife.
+4. Dubai, United Arab Emirates: Dubai is a
+city that is known for its modern architecture, luxury shopping, and
+high-end hotels. It has some of the tallest buildings in the world
+and plenty of entertainment options. Vacation activities in Dubai can
+include visiting landmarks such as the Burj Khalifa, the Dubai Mall,
+and the Palm Jumeirah, exploring the different neighborhoods of the
+city, trying the local food, and enjoying the nightlife. Vacation
+activities in these destinations can include visiting landmarks and
+museums, exploring neighborhoods, trying local food, shopping, and
+enjoying the nightlife.

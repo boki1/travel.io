@@ -1,2 +1,0 @@
--- This question was not passed to OpenAI. Used only for the test_only_country_task unittest in `analyzer.py`
-Bulgaria.

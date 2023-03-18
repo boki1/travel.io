@@ -1,0 +1,40 @@
+-- I want to visit some cities where I can drink coffee.
+--
+-- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
+-- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
+Certainly! Here are some cities around the world known for their coffee
+culture:
+1. Vienna, Austria: Vienna is famous for its coffee houses, which have
+been an integral part of the city's culture for centuries. Some of the most
+famous coffee houses include Cafe Central <LNDMARK>Cafe Central</LNDMARK>, Cafe
+Hawelka, and Cafe Sperl. In Vienna, you can enjoy a cup of coffee while reading
+the newspaper, people-watching, or listening to live music.
+2. Seattle, United
+States: Seattle is known for its vibrant coffee scene, with famous coffeehouses
+such as Starbucks, Tully's Coffee, and Seattle's Best Coffee all having
+originated in the city. Other popular coffee shops in Seattle include Espresso
+Vivace <LNDMARK>Espresso Vivace</LNDMARK>, Victrola Coffee Roasters, and
+Stumptown Coffee Roasters. In Seattle, you can explore the city's many coffee
+shops and attend coffee-related events and festivals.
+3. Melbourne, Australia:
+Melbourne is a city that takes its coffee seriously, with a thriving coffee
+culture that has been described as some of the best in the world. Popular
+coffee shops in Melbourne include Proud Mary <LNDMARK>Proud Mary</LNDMARK>,
+Market Lane Coffee, and Dukes Coffee Roasters. In Melbourne, you can
+attend coffee tastings, take barista courses, and explore the city's
+many coffee shops and roasteries.
+4. Istanbul, Turkey: Istanbul is
+famous for its Turkish coffee, which is served strong and sweet in small
+cups. Some of the most popular places to enjoy Turkish coffee in
+Istanbul include Mandabatmaz <LNDMARK>Mandabatmaz</LNDMARK>, Fazil Bey,
+and Mehmet Efendi. In Istanbul, you can also explore the city's many
+bazaars and try traditional Turkish sweets to accompany your coffee.
+5. Rome, Italy: Rome is famous for its coffee culture and the many coffee
+bars that can be found throughout the city. Some of the most popular
+coffee bars in Rome include Sant'Eustachio Il Caffè
+<LNDMARK>Sant'Eustachio Il Caffè</LNDMARK>, Tazza d'Oro, and Antico
+Caffè Greco. In Rome, you can enjoy a cappuccino or espresso while
+admiring the city's historic landmarks and architecture. Vacation
+activities in these cities can include attending coffee festivals and
+events, visiting coffee plantations and roasteries, or simply enjoying a
+leisurely cup of coffee in a local coffee shop.

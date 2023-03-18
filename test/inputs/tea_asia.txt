@@ -1,23 +1,34 @@
 -- Give me a vacation suggestion for a couple that loves drinking tea. I was thinking of somewhere
 -- in Asia.
-
-If you and your partner love drinking tea, then Asia is a fantastic destination for you! There are
-many beautiful places in Asia that are known for their tea culture and offer a perfect getaway for
-tea lovers. Here are some vacation suggestions for you: Japan: Japan is a tea lover's paradise, and
-there are many regions in Japan that are famous for their tea. One such region is Uji, which is just
-south of Kyoto. Uji is known for producing high-quality green tea, and you can visit tea fields and
-participate in tea ceremonies. You can also visit tea houses in Kyoto, such as the famous Ippodo Tea
-Co. There are many tea-related events and festivals in Japan, so you can plan your trip around them.
-China: China is the birthplace of tea, and there are many places in China where you can experience
-tea culture. One such place is Hangzhou, which is famous for its Longjing tea. You can visit tea
-plantations and take part in tea tastings. You can also visit the China Tea Museum in Hangzhou to
-learn about the history of tea in China. India: India is famous for its chai tea, and there are many
-regions in India that produce high-quality tea. One such region is Darjeeling, which is located in
-the foothills of the Himalayas. Darjeeling tea is considered one of the best teas in the world, and
-you can visit tea gardens and take part in tea tastings. You can also visit the Darjeeling Himalayan
-Railway, which is a UNESCO World Heritage Site. Taiwan: Taiwan is known for its high-mountain tea,
-which is grown in the mountains of Taiwan. You can visit tea plantations in Nantou and
-participate in tea tastings. You can also visit tea houses in Taipei, such as the Wistaria Tea
-House, which is over 100 years old. These are just a few suggestions for a tea-themed vacation
-in Asia. Each of these destinations offers a unique tea culture, and you can learn a lot about
-tea while also enjoying beautiful scenery and delicious food.
+--
+-- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
+-- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
+Certainly! Here are some vacation suggestions for a couple that loves drinking
+tea in Asia:
+1. Darjeeling, India: Darjeeling is a scenic hill station located in the Indian
+state of West Bengal. It is known for its tea plantations that produce some of
+the finest tea in the world. Vacation activities in Darjeeling can include
+visiting tea estates, attending tea tasting sessions, exploring local markets,
+hiking in the Himalayas, and enjoying the local cuisine.
+2. Kyoto, Japan: Kyoto is a historic city in Japan that is famous for its
+traditional tea ceremony. It has plenty of tea shops and tea houses
+where you can experience the art of tea-making and taste different
+varieties of Japanese tea. Vacation activities in Kyoto can include
+visiting historic temples and gardens, attending tea ceremonies,
+exploring local markets, and enjoying the local cuisine.
+3. Hangzhou, China: Hangzhou is a picturesque city in China that is
+famous for its Longjing tea. It has plenty of tea plantations, tea
+houses, and tea museums where you can learn about the history and
+culture of Chinese tea. Vacation activities in Hangzhou can include
+visiting tea estates, attending tea ceremonies, exploring local
+markets, boating on West Lake, and enjoying the local cuisine.
+4. Cameron Highlands, Malaysia: Cameron Highlands is a scenic hill
+station in Malaysia that is known for its tea plantations and cool
+climate. It has plenty of tea estates and tea factories where you can
+learn about the tea-making process and taste different varieties of
+tea. Vacation activities in Cameron Highlands can include visiting tea
+plantations, hiking in the hills, exploring local markets, and
+enjoying the local cuisine.
+Vacation activities in these destinations can include visiting tea
+estates and museums, attending tea ceremonies, exploring local
+markets, hiking or boating, and enjoying the local cuisine.
