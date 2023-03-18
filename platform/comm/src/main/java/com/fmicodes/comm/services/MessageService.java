@@ -35,6 +35,9 @@ public class MessageService {
     @Autowired
     private RyanAirService ryanAirService;
 
+    @Autowired
+    private GoogleMapsService googleMapsService;
+
     private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
 
     public String getMessageAnalysis(String message) {
@@ -52,6 +55,11 @@ public class MessageService {
         return routesResponse;
     }
 
+    public String getNearbyRestaurants(Hotel hotel) {
+        String restaurantsResponse = googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500);
+        return restaurantsResponse;
+    }
+
     public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, String departureDate) {
         ArrayList<String> possibleAirportCodes;
 
@@ -67,6 +75,11 @@ public class MessageService {
         for (Hotel hotel : hotels) {
             System.out.println("HOTEL: " + hotel.getHotelName() + " AIRPORT CODE: " + hotel.getAirportCode());
             Flight flight = ryanAirService.getFlightBetweenTwoAirports("DUB", hotel.getAirportCode(), departureDate);
+
+            System.out.println("HOTEL DATA: " + hotel);
+            System.out.println(" NEARBY RESTAURANTS: " + getNearbyRestaurants(hotel));
+
+
             VacationOffer vacationOffer = new VacationOffer();
             vacationOffer.setHotel(hotel);
             vacationOffer.setFlight(flight);

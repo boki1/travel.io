@@ -29,7 +29,7 @@ public class GoogleMapsService {
         }
     }
 
-    public String getNearbyRestaurants(double latitude, double longitude, int radius) throws IOException {
+    public String getNearbyRestaurants(double latitude, double longitude, int radius) {
         String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
                 + latitude + "," + longitude + "&radius=" + radius + "&type=restaurant&key=" + mapsApiKey;
 
@@ -38,8 +38,9 @@ public class GoogleMapsService {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-//            TODO: may return null
             return response.body().string();
+        } catch (IOException e) {
+            throw new RuntimeException("ERROR - Getting nearby restaurants from Google Maps API: " + e.getMessage());
         }
     }
 }

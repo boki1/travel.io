@@ -34,7 +34,7 @@ public class MessageController {
         String cityMock = "Zagreb";
         String countryMock = "Croatia";
 
-        String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
+//        String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
 
         ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(cityMock, countryMock, vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), vacationDescription.getMaxPrice());
 
