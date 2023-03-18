@@ -25,28 +25,22 @@ import java.util.ArrayList;
 @Service
 public class MessageService {
 
+    private static final String rapidApiKey = CredentialsUtil.getRapidAPIKey();
     @Autowired
     private AnalyzerService analyzerService;
-
     @Autowired
     private BookingService bookingService;
-
     @Autowired
     private RyanAirService ryanAirService;
-
     @Autowired
     private GoogleMapsService googleMapsService;
 
-    private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
-
     public String getMessageAnalysis(String message) {
-        String analyzerResponse = analyzerService.analyzeMessage(message);
-        return analyzerResponse;
+        return analyzerService.analyzeMessage(message);
     }
 
     public ArrayList<Hotel> getHotelsByParams(String city, String country, String checkInDate, String checkOutDate, Double maximumBudget) {
-        ArrayList<Hotel> hotelSuggestions = bookingService.getHotelsByParams(city, country, checkInDate, checkOutDate, maximumBudget);
-        return hotelSuggestions;
+        return bookingService.getHotelsByParams(city, country, checkInDate, checkOutDate, maximumBudget);
     }
 
     public ArrayList<Location> getLocationDataFromOpenAIResponse(String openAIResponse) {
@@ -72,8 +66,7 @@ public class MessageService {
     }
 
     public String getNearbyRestaurants(Hotel hotel) {
-        String restaurantsResponse = googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500);
-        return restaurantsResponse;
+        return googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500).toString();
     }
 
     public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, String departureDate) {
