@@ -1,4 +1,4 @@
-#homeForm .input {
+.input {
     background-color: rgba(0, 0, 0, 0.5);
     border: 1px solid #fff;
     border-radius: 0;
@@ -9,7 +9,7 @@
     min-width: 25%;
 }
 
-#homeForm .button {
+.button {
     border-radius: 0;
     color: #fff;
     padding: 1rem 1.5rem;
@@ -18,22 +18,22 @@
     width: 100%;
 }
 
-#homeForm .form-floating > label {
+.form-floating > label {
     color: #fff;
 }
 
-#homeForm .form-floating > .form-control:focus ~ label {
+.form-floating > .form-control:focus ~ label {
     color: #000000;
 }
 
-#homeForm .container {
+.container {
     display: flex;
     justify-content: space-between;
     width: 100%;
     padding: 0;
 }
 
-#homeForm .subContainer {
+.subContainer {
     width: 45%;
     display: flex;
     justify-content: space-between;

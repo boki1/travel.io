@@ -1,8 +1,6 @@
 import img from '../../assets/rome_pic.webp'
 import img2 from "../../assets/dubai.webp"
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import './styles.css';
+import './styles.css'
 
 export default function Destinations() {
     return (

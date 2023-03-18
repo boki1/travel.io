@@ -42,8 +42,8 @@ const HomeForm = () => {
 
     return (
         <Form id="homeForm">
-            <Row className=''>
-                <Col className=''>
+            <Row>
+                <Col>
                     <FloatingLabel label="Enter max price of the vacation">
                         <Form.Control className='input' placeholder=' ' type="number" value={maxPrice} onInput={(event: React.FormEvent<HTMLInputElement>) => setMaxPrice(parseFloat(event.currentTarget.value))} />
                     </FloatingLabel>
@@ -51,7 +51,7 @@ const HomeForm = () => {
                         <Form.Control className='input' placeholder=' ' type="text" value={`${currentCity || ''}/${currentCountry || ''}`} onInput={(event: React.FormEvent<HTMLInputElement>) => modifyCity(event)} />
                     </FloatingLabel>
                 </Col>
-                <Col className=''>
+                <Col>
                     <FloatingLabel label="Check in date">
                         <Form.Control className='input' placeholder=' ' type="date" value={checkInDate} onInput={(event: React.FormEvent<HTMLInputElement>) => setCheckInDate(event.currentTarget.value)} />
                     </FloatingLabel>
