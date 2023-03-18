@@ -1,10 +1,10 @@
-from collections import namedtuple
 import typing
-import json
+
 
 class Location(typing.NamedTuple):
     city: str
     country: str
+
 
 class ActionTopic(typing.NamedTuple):
     location: Location
@@ -12,18 +12,21 @@ class ActionTopic(typing.NamedTuple):
     # TODO: Maybe hardcode an enumeration for this value? e.g enum { sport, art, music, ... }
     category: str
 
+
 class Landmark(typing.NamedTuple):
     name: str
     location: Location
+
 
 class Out(typing.NamedTuple):
     locations: list[Location]
     action_topics: list[ActionTopic]
     landmarks: list[Landmark]
 
-    def __str__(self):
+    def full(self):
         # FIXME: Make JSON nicer. This looks kind of bad :/
-        return json.dumps(self._asdict())
+        return self._asdict()
+
 
 class Task:
 
@@ -36,5 +39,3 @@ class Task:
 
     def populate(self):
         pass
-
-

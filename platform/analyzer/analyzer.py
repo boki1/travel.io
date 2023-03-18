@@ -1,5 +1,7 @@
-from task import *
 import spacy
+
+from task import *
+
 
 class Analyser:
 

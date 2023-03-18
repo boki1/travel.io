@@ -1,13 +1,14 @@
-from os import listdir
 import json
 import os
-import requests
-from flask import Flask, request, jsonify
-import openai
-from dotenv import load_dotenv
+from os import listdir
 
-from config import *
+import openai
+import requests
+from dotenv import load_dotenv
+from flask import Flask, request, jsonify
+
 from analyzer import *
+from config import *
 
 
 def debug_main():
@@ -29,6 +30,7 @@ def debug_main():
         task = create_task_from_desc(f'{test_path}/{fname}')
         output = analyser.perform(task)
         print(f"For input: '{fname}' output is '{output}'")
+
 
 # We are not called this way usually. The analyzer module is supposed to be
 # used by API from the "flask" server. However, in order to mock the stages that
@@ -71,12 +73,13 @@ def openai_communication():
     )
 
     if response.status_code == 200:
+        # FIXME: rationalize this
         response_data = response.json()
         answer = response_data["choices"][0]["message"]["content"]
         task = Task(question, answer)
         analyser = Analyser(g_analyser_options)
         output = analyser.perform(task)
-        return str(output)
+        return jsonify(output.full())
     else:
         return jsonify({"error": "Unable to communicate with OpenAI API"}), response.status_code
 
