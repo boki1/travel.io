@@ -1,7 +1,8 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from '../Home/index';
-import ".//styles.css"
+import Destinations from "../Destinations/index";
+import "./styles.css"
+
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/destinations" element={<Destinations />} />
       </Routes>
     </Router>
   );

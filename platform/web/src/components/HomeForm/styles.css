@@ -7,13 +7,12 @@
     letter-spacing: 0.1rem;
     margin-bottom: 1rem;
     min-width: 25%;
-    direction: none;
-    
+
 }
 
 .button {
-    border-radius: 0;
-    color: #fff;
+        border-radius: 0;
+        color: #fff;
     padding: 1rem 1.5rem;
     letter-spacing: 0.1rem;
     margin-bottom: 1rem;
