@@ -1,13 +1,14 @@
-from os import listdir
 import json
 import os
-import requests
-from flask import Flask, request, jsonify
-import openai
-from dotenv import load_dotenv
+from os import listdir
 
-from config import *
+import openai
+import requests
+from dotenv import load_dotenv
+from flask import Flask, request, jsonify
+
 from analyzer import *
+from config import *
 
 
 def debug_main():
@@ -28,6 +29,7 @@ def debug_main():
     for fname in listdir(test_path):
         task = create_task_from_desc(f'{test_path}/{fname}')
         output = analyser.perform(task)
+        print(f"For input: '{fname}' output is '{output}'")
 
 
 # We are not called this way usually. The analyzer module is supposed to be
@@ -53,14 +55,14 @@ def openai_communication():
     }
 
     # Get input data from the client request
-    input_data = request.get_data(as_text=True)
-    if not input_data:
+    question = request.get_data(as_text=True)
+    if not question:
         return jsonify({"error": "No input data provided"}), 400
 
-    # Use input_data as the messages for the API request
+    # Use question as the messages for the API request
     data = {
         "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": input_data}],
+        "messages": [{"role": "user", "content": question}],
         "temperature": 0.7,
     }
 
@@ -71,13 +73,21 @@ def openai_communication():
     )
 
     if response.status_code == 200:
-        return jsonify(response.json())
+        # FIXME: rationalize this
+        response_data = response.json()
+        answer = response_data["choices"][0]["message"]["content"]
+        task = Task(question, answer)
+        analyser = Analyser(g_analyser_options)
+        output = analyser.perform(task)
+        return jsonify(output.full())
     else:
         return jsonify({"error": "Unable to communicate with OpenAI API"}), response.status_code
 
 
 if DEBUG_MODE:
     debug_main()
+elif __name__ == '__main__':
+    # This line loads the values from the .env file into the environment
+    load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), 'props.env'))
 
-if __name__ == '__main__':
     app.run()
