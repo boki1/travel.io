@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FloatingLabel, Form, Button, Row, Col } from 'react-bootstrap';
 import { HomeFormDTO } from '../../DTO/HomeFormDTO';
-import ExploreButton from '../ExploreButton/ExploreButton';
 import { postReq } from '../../services/makeRequests';
 import './styles.css';
 
@@ -61,14 +60,16 @@ const HomeForm = () => {
                     </FloatingLabel>
                 </Col>
             </Row>
-            <div className='descriptionWrapper'>
-                <FloatingLabel label="Add description for your vacation... (max 1500 words)">
-                    <Form.Control className='input' placeholder=' ' type='text'
-                        as='textarea' value={vacationDescription} onInput={(event: React.FormEvent<HTMLInputElement>) => setVacationDescription(event.currentTarget.value)} />
-                </FloatingLabel>
 
-                <ExploreButton onButtonClick={onButtonClick} />
-            </div>
+            <FloatingLabel label="Add description for your vacation... (max 1500 words)">
+                <Form.Control className='input' placeholder=' ' type='text'
+                    as='textarea' value={vacationDescription} onInput={(event: React.FormEvent<HTMLInputElement>) => setVacationDescription(event.currentTarget.value)} />
+            </FloatingLabel>
+
+            <Button className='button' variant="primary" type="submit"
+                onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => onButtonClick(event)}>
+                Submit
+            </Button>
         </Form>
     )
 }
