@@ -6,7 +6,7 @@ from countryinfo import CountryInfo
 from geopy.geocoders import Nominatim
 from bs4 import BeautifulSoup as bs
 
-from scripts.config import debug_print, g_openai_hints
+from scripts.config import debug_print, g_openai_hints, g_analyser_options, hint_marker
 from scripts.task import *
 
 
@@ -43,9 +43,11 @@ class Analyser:
 
     def perform(self, task: Task) -> Out:
         locations = self.extract_locations(task)
-        soup = bs(task.inp_answer)
-        landmarks = [lm_obj.text for lm_obj in soup.find_all(self.options['openai_hints']['landmark_marker'])]
-        activities = [act_obj.text for act_obj in soup.find_all(self.options['openai_hints']['activity_marker'])]
+        soup = bs(task.inp_answer, features="lxml")
+        landmark_marker = hint_marker(self.options['openai_hints']['landmark_marker'])
+        activity_marker = hint_marker(self.options['openai_hints']['activity_marker'])
+        landmarks = [lm_obj.text for lm_obj in soup.find_all(landmark_marker)]
+        activities = [act_obj.text for act_obj in soup.find_all(activity_marker)]
         out = Out(locations, activities, landmarks)
         return out
 
