@@ -1,9 +1,11 @@
 package com.fmicodes.comm.services;
 
+import com.fmicodes.comm.DTO.Location;
 import com.fmicodes.comm.exceptions.DeserializingJSONException;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.asynchttpclient.Response;
+import org.asynchttpclient.request.body.generator.BodyGenerator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,6 +13,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -65,5 +70,25 @@ public class AnalyzerService {
         }
 
         return analyzedMessageResponse;
+    }
+
+    public String getAirportIATACodeByLocation(Location location) {
+        AsyncHttpClient client = new DefaultAsyncHttpClient();
+        String airportIATACode = "";
+        try {
+            Response response = client.prepare("POST", "http://" + analyzerHost + "/api/v1/airports")
+                    .setHeader("Content-Type", "application/json")
+                    .setBody("{\"city\": \"" + location.getCity() + "\", \"country\": \"" + location.getCountry() + "\"}")
+                    .execute()
+                    .get();
+
+            airportIATACode = response.getResponseBody();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("ERROR - Communicating with Flask API: " + e.getMessage());
+        }
+
+        System.out.println("IATA CODE FROM PYTHON: " + airportIATACode);
+
+        return airportIATACode;
     }
 }

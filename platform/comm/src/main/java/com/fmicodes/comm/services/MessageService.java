@@ -40,7 +40,9 @@ public class MessageService {
     }
 
     public ArrayList<Hotel> getHotelsByParams(String city, String country, String checkInDate, String checkOutDate, Double maximumBudget) {
-        return bookingService.getHotelsByParams(city, country, checkInDate, checkOutDate, maximumBudget);
+        String airportIATACode = analyzerService.getAirportIATACodeByLocation(new Location(city, country));
+        ArrayList<Hotel> hotelSuggestions = bookingService.getHotelsByParams(city, country, checkInDate, checkOutDate, maximumBudget, airportIATACode);
+        return hotelSuggestions;
     }
 
     public ArrayList<Location> getLocationDataFromOpenAIResponse(String openAIResponse) {
@@ -69,12 +71,13 @@ public class MessageService {
         return googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500).toString();
     }
 
-    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, String departureDate) {
+    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, String departureDate, Location departureLocation) {
+        String departureAirportIATACode = analyzerService.getAirportIATACodeByLocation(departureLocation);
 
         ArrayList<VacationOffer> vacationOffers = new ArrayList<>();
         for (Hotel hotel : hotels) {
             System.out.println("HOTEL: " + hotel.getHotelName() + " AIRPORT CODE: " + hotel.getAirportCode());
-            Flight flight = ryanAirService.getFlightBetweenTwoAirports("DUB", hotel.getAirportCode(), departureDate);
+            Flight flight = ryanAirService.getFlightBetweenTwoAirports(departureAirportIATACode, hotel.getAirportCode(), departureDate);
 
             System.out.println("HOTEL DATA: " + hotel);
             System.out.println(" NEARBY RESTAURANTS: " + getNearbyRestaurants(hotel));
