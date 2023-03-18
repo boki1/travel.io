@@ -34,8 +34,8 @@ public class MessageController {
 
         VacationSuggestion vacationSuggestions = new VacationSuggestion();
 
-        ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(cityMock, countryMock);
-        vacationSuggestions.setHotelSuggestions(hotelSuggestions);
+//        ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(cityMock, countryMock);
+//        vacationSuggestions.setHotelSuggestions(hotelSuggestions);
 
         return new ResponseEntity<>(vacationSuggestions, null, HttpStatus.OK);
     }
