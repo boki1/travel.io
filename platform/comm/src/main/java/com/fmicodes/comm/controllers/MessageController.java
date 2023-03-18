@@ -40,7 +40,8 @@ public class MessageController {
         }
 
         ArrayList<VacationSuggestion> vacationSuggestions = new ArrayList<>();
-        for (Location location : locationData) {
+//        for (Location location : locationData) {
+        Location location = locationData.get(0);
             ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(location.getCity(), location.getCountry(), vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), vacationDescription.getMaxPrice());
 
             ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions, vacationDescription.getCheckInDate());
@@ -50,7 +51,7 @@ public class MessageController {
             vacationSuggestion.setVacationOffers(vacationOffers);
 
             vacationSuggestions.add(vacationSuggestion);
-        }
+//        }
 
         return new ResponseEntity<>(vacationSuggestions, null, HttpStatus.OK);
     }
