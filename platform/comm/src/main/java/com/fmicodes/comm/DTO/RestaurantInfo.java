@@ -4,9 +4,9 @@ public class RestaurantInfo {
     private String name;
     private String photoUrl;
     private String location;
-    private double rating;
+    private Double rating;
     private Integer priceLevel;
-    private int userRatingsTotal;
+    private Integer userRatingsTotal;
     private String openingHours;
     private String googleMapsLink;
 

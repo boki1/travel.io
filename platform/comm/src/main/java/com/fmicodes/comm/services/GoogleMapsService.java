@@ -33,12 +33,13 @@ public class GoogleMapsService {
                 .url(url)
                 .build();
 
+        List<RestaurantInfo> restaurants = new ArrayList<>();
+
         try (Response response = client.newCall(request).execute()) {
             String jsonResponse = Objects.requireNonNull(response.body()).string();
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(jsonResponse);
 
-            List<RestaurantInfo> restaurants = new ArrayList<>();
 
             if (jsonNode.has("results")) {
                 for (JsonNode result : jsonNode.get("results")) {
@@ -100,10 +101,9 @@ public class GoogleMapsService {
                     restaurants.add(restaurant);
                 }
             }
-
-            return restaurants;
         } catch (IOException e) {
             throw new RuntimeException("ERROR - Getting nearby restaurants from Google Maps API: " + e.getMessage());
         }
+        return restaurants;
     }
 }
