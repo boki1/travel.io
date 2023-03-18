@@ -5,6 +5,7 @@ import com.fmicodes.comm.DTO.VacationSuggestion;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,17 +21,10 @@ public class MessageController {
 
     @PostMapping
     public ResponseEntity<VacationSuggestion> makeVacationSuggestion(@RequestBody VacationDescription vacationDescription) {
-        // Call python code to read gpt's output. Python code receives string and returns a map
-
-        // based on python code response, make API calls to: bookingAPI, skyscannerAPI and googleMapsAPI
-
-        // return 3-4 VacationSuggestion objects with data for: location (city, country), hotels, flights and attractions
-
-        // These will be extracted from the python code response, I PROMISE
         String cityMock = "London";
         String countryMock = "United Kingdom";
 
-        String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
+//        String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
 
         VacationSuggestion vacationSuggestions = new VacationSuggestion();
 
