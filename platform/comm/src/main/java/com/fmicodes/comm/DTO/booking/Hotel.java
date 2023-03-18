@@ -13,6 +13,8 @@ public class Hotel {
 
     private String url;
 
+    private String airportCode;
+
 
     public Integer getHotelId() {
         return hotelId;
@@ -62,6 +64,14 @@ public class Hotel {
         this.url = url;
     }
 
+    public void setAirportCode(String airportCode) {
+        this.airportCode = airportCode;
+    }
+
+    public String getAirportCode() {
+        return airportCode;
+    }
+
     @Override
     public String toString() {
         return "Hotel{" +
@@ -73,4 +83,5 @@ public class Hotel {
                 ", url='" + url + '\'' +
                 '}';
     }
+
 }

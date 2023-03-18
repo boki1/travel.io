@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -15,8 +16,8 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class AnalyzerService {
 
-    @Value("${analyzer.api.host}")
-    private String analyzerHost;
+    @Value("${analyzer.host}")
+    private static String analyzerHost;
 
 
     public String analyzeMessage(String message) {
@@ -62,7 +63,6 @@ public class AnalyzerService {
             }
 
         }
-
 
         try {
             client.close();
