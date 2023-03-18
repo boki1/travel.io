@@ -3,6 +3,7 @@ package com.fmicodes.comm.controllers;
 import com.fmicodes.comm.DTO.VacationDescription;
 import com.fmicodes.comm.DTO.VacationSuggestion;
 import com.fmicodes.comm.DTO.booking.Hotel;
+import com.fmicodes.comm.DTO.travel.Flight;
 import com.fmicodes.comm.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,8 +29,11 @@ public class MessageController {
 
         VacationSuggestion vacationSuggestions = new VacationSuggestion();
 
-        ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(cityMock, countryMock);
-        vacationSuggestions.setHotelSuggestions(hotelSuggestions);
+//        ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(cityMock, countryMock);
+//        vacationSuggestions.setHotelSuggestions(hotelSuggestions);
+
+        ArrayList<Flight> routesResponse = messageService.getAirplaneRoutesByParams("LGW", "DUB", "2023-11-28");
+        vacationSuggestions.setFlightSuggestions(routesResponse);
 
         return new ResponseEntity<>(vacationSuggestions, null, HttpStatus.OK);
     }

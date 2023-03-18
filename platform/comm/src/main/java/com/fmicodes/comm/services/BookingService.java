@@ -18,13 +18,13 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class BookingService {
 
-    @Value("${booking.api.host}")
+    @Value("${booking.host}")
     private String bookingAPIHost;
 
     private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
 
     public ArrayList<Hotel> getHotelsByParams(String city, String country) {
-        StringBuilder url = new StringBuilder("https://booking-com.p.rapidapi.com/v1/hotels/search?");
+        StringBuilder url = new StringBuilder("https://" + bookingAPIHost + "/v1/hotels/search?");
         url.append("adults_number=2");           // REQUIRED
         url.append("&dest_type=city");           // REQUIRED
         url.append("&filter_by_currency=USD");   // REQUIRED
@@ -109,7 +109,7 @@ public class BookingService {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
         String destinationsResponse = null;
         try {
-            Response response = client.prepare("GET", "https://booking-com.p.rapidapi.com/v1/hotels/locations?name=" + cityName + "&locale=en-gb")
+            Response response = client.prepare("GET", "https://" + bookingAPIHost + "/v1/hotels/locations?name=" + cityName + "&locale=en-gb")
                     .setHeader("X-RapidAPI-Key", rapidApiKey)
                     .setHeader("X-RapidAPI-Host", bookingAPIHost)
                     .execute()

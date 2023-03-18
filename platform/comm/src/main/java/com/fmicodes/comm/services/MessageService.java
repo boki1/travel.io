@@ -1,6 +1,7 @@
 package com.fmicodes.comm.services;
 
 import com.fmicodes.comm.DTO.booking.Hotel;
+import com.fmicodes.comm.DTO.travel.Flight;
 import com.fmicodes.comm.services.util.CredentialsUtil;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
@@ -35,6 +36,9 @@ public class MessageService {
     @Autowired
     private BookingService bookingService;
 
+    @Autowired
+    private RyanAirService ryanAirService;
+
     private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
 
     public String getMessageAnalysis(String message) {
@@ -45,6 +49,11 @@ public class MessageService {
     public ArrayList<Hotel> getHotelsByParams(String city, String country) {
         ArrayList<Hotel> hotelSuggestions = bookingService.getHotelsByParams(city, country);
         return hotelSuggestions;
+    }
+
+    public ArrayList<Flight> getAirplaneRoutesByParams(String locationAirportCode, String destinationAirportCode, String originDepartureDate) {
+        ArrayList<Flight> routesResponse = ryanAirService.getFlightsBetweenTwoAirports(locationAirportCode, destinationAirportCode, originDepartureDate);
+        return routesResponse;
     }
 
 
