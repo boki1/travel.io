@@ -6,22 +6,10 @@ class Location(typing.NamedTuple):
     country: str
 
 
-class ActionTopic(typing.NamedTuple):
-    location: Location
-    topic: str
-    # TODO: Maybe hardcode an enumeration for this value? e.g enum { sport, art, music, ... }
-    category: str
-
-
-class Landmark(typing.NamedTuple):
-    name: str
-    location: Location
-
-
 class Out(typing.NamedTuple):
     locations: list[Location]
-    action_topics: list[ActionTopic]
-    landmarks: list[Landmark]
+    action_topics: list[str]
+    landmarks: list[str]
 
     def full(self):
         # FIXME: Make JSON nicer. This looks kind of bad :/

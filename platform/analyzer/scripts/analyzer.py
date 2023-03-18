@@ -42,12 +42,14 @@ class Analyser:
         return location_list
 
     def perform(self, task: Task) -> Out:
+        def cleanup(s: str):
+            return s.strip(' \n').replace('\n', ' ')
         locations = self.extract_locations(task)
         soup = bs(task.inp_answer, features="lxml")
         landmark_marker = hint_marker(self.options['openai_hints']['landmark_marker'])
         activity_marker = hint_marker(self.options['openai_hints']['activity_marker'])
-        landmarks = [lm_obj.text for lm_obj in soup.find_all(landmark_marker)]
-        activities = [act_obj.text for act_obj in soup.find_all(activity_marker)]
+        landmarks = list(set([cleanup(lm_obj.text) for lm_obj in soup.find_all(landmark_marker)]))
+        activities = list(set([cleanup(act_obj.text) for act_obj in soup.find_all(activity_marker)]))
         out = Out(locations, activities, landmarks)
         return out
 
