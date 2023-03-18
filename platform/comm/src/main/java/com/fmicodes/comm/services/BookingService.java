@@ -1,6 +1,7 @@
 package com.fmicodes.comm.services;
 
 import com.fmicodes.comm.DTO.booking.Hotel;
+import com.fmicodes.comm.exceptions.DeserializingJSONException;
 import com.fmicodes.comm.exceptions.DestinationNotFoundException;
 import com.fmicodes.comm.services.util.CredentialsUtil;
 import org.asynchttpclient.AsyncHttpClient;
@@ -59,16 +60,14 @@ public class BookingService {
                     .get();
 
             hotelsResponse = response.getResponseBody();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("ERROR: Calling the get hotels API: " + e.getMessage());
         }
 
         try {
             client.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("ERROR: Closing client: " + e.getMessage());
         }
 
         JSONArray hotelsArray = new JSONArray();
@@ -78,8 +77,7 @@ public class BookingService {
                 hotelsArray = responseBodyJson.getJSONArray("result");
             }
         } catch (JSONException e) {
-            System.out.println("ERROR: Parsing hotels response body to JSON");
-            throw new RuntimeException(e);
+            throw new DeserializingJSONException("ERROR: Parsing hotels response body to JSON: " + e.getMessage());
         }
 
         ArrayList<Hotel> hotelSuggestions = new ArrayList<>();
@@ -101,12 +99,12 @@ public class BookingService {
                 if (hotelJSON.has("review_score") && !hotelJSON.isNull("review_score")) {
                     hotel.setReviewScore(hotelJSON.getDouble("review_score"));
                 }
+
                 hotel.setMaxPhotoUrl(hotelJSON.getString("max_photo_url"));
 
                 hotelSuggestions.add(hotel);
             } catch (JSONException e) {
-                System.out.println("ERROR: Parsing hotel JSON object");
-                throw new RuntimeException(e);
+                throw new DeserializingJSONException("ERROR: Parsing hotel JSON object: " + e.getMessage());
             }
         }
 
@@ -127,24 +125,21 @@ public class BookingService {
                     .get();
 
             destinationsResponse = response.getResponseBody();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("ERROR - Fetching destinations from /v1/hotels/locations: " + e.getMessage());
         }
 
         try {
             client.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("ERROR - Closing AsyncHttpClient: " + e.getMessage());
         }
 
         JSONArray destinationsArray = null;
         try {
             destinationsArray = new JSONArray(destinationsResponse);
         } catch (JSONException e) {
-            System.out.println("ERROR: Parsing destinations response body to JSON");
-            throw new RuntimeException(e);
+            throw new DeserializingJSONException("ERROR: Parsing destinations response body to JSON: " + e.getMessage());
         }
 
         Integer destinationId = null;
@@ -180,7 +175,7 @@ public class BookingService {
         return hotelsWithinBudget;
     }
 
-    public ArrayList<Hotel> checkAirportsCompatibility(ArrayList<Hotel> hotels) throws IOException, ExecutionException, InterruptedException {
+    public ArrayList<Hotel> checkAirportsCompatibility(ArrayList<Hotel> hotels) throws IOException, ExecutionException, InterruptedException, JSONException {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
         for (Hotel hotel : hotels) {
            Response response = client.prepare("GET", "https://" + bookingAPIHost + "/v1/hotels/nearby-places?locale=en-gb&hotel_id=" + hotel.getHotelId())
@@ -189,17 +184,12 @@ public class BookingService {
                     .execute()
                     .get();
 
-            try {
                 JSONObject responseBodyJson = new JSONObject(response.getResponseBody());
                 JSONObject transport = responseBodyJson.getJSONObject("transport");
                 if (transport.has("airport")) {
                     JSONObject airport = transport.getJSONObject("airport");
                     hotel.setAirportCode(airport.getString("code"));
                 }
-
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
-            }
 
         }
 

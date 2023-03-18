@@ -3,7 +3,10 @@ package com.fmicodes.comm.services;
 import com.fmicodes.comm.DTO.VacationOffer;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.DTO.travel.Flight;
+import com.fmicodes.comm.exceptions.AirportCompatibilityException;
+import com.fmicodes.comm.exceptions.DeserializingJSONException;
 import com.fmicodes.comm.services.util.CredentialsUtil;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,18 +57,16 @@ public class MessageService {
 
         try {
             hotels = bookingService.checkAirportsCompatibility(hotels);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        } catch (IOException | RuntimeException | InterruptedException | ExecutionException e) {
+            throw new AirportCompatibilityException("ERROR - AirportCompatibility request failed: " + e.getMessage());
+        } catch (JSONException e) {
+            throw new DeserializingJSONException("ERROR - Deserializing response from airportCompatibility API: " + e.getMessage());
         }
 
         ArrayList<VacationOffer> vacationOffers = new ArrayList<>();
         for (Hotel hotel : hotels) {
             System.out.println("HOTEL: " + hotel.getHotelName() + " AIRPORT CODE: " + hotel.getAirportCode());
-            Flight flight = ryanAirService.getFlightBetweenTwoAirports("SOF", hotel.getAirportCode(), departureDate);
+            Flight flight = ryanAirService.getFlightBetweenTwoAirports("DUB", hotel.getAirportCode(), departureDate);
             VacationOffer vacationOffer = new VacationOffer();
             vacationOffer.setHotel(hotel);
             vacationOffer.setFlight(flight);
