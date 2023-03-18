@@ -62,7 +62,7 @@ const HomeForm = () => {
             </Row>
 
             <FloatingLabel label="Add description for your vacation... (max 1500 words)">
-                <Form.Control className='input' placeholder=' ' type='text'
+                <Form.Control className='input textarea' placeholder=' ' type='text'
                     as='textarea' value={vacationDescription} onInput={(event: React.FormEvent<HTMLInputElement>) => setVacationDescription(event.currentTarget.value)} />
             </FloatingLabel>
 

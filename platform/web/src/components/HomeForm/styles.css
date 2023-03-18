@@ -38,3 +38,8 @@
     display: flex;
     justify-content: space-between;
 }
+
+.textarea{
+    resize: none;
+    overflow: auto;
+}
