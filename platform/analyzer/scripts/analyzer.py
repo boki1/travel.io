@@ -2,13 +2,10 @@ import json
 import re
 import unittest
 from os import listdir
-import re
 
-from countryinfo import CountryInfo
-from geopy.geocoders import Nominatim
 from bs4 import BeautifulSoup as bs
 
-from scripts.config import debug_print, g_openai_hints, g_analyser_options, hint_marker
+from scripts.config import debug_print
 from scripts.task import *
 
 
@@ -24,10 +21,10 @@ class Analyser:
 
     def perform(self, task: Task) -> Out:
         raw = self.extract(task)
-        out = self.prepare_out(raw)
-        return out
+        prepped = self.prepare_out(raw)
+        return Out(destinations={'destinations': prepped})
 
-    def prepare_out(self, destinations):
+    def prepare_out(self, destinations) -> Out:
         for dest in destinations:
             country, city = dest['location'].split(', ')
             description = self.cleanup_description(dest['description'].text).strip(' \n')
@@ -36,7 +33,7 @@ class Analyser:
             del dest['description']
         return destinations
 
-    def extract(self, task: Task) -> Out:
+    def extract(self, task: Task):
         soup = bs(task.inp_answer, features='html.parser')
         destination_tags = soup.find_all('destination')
         destinations = []
