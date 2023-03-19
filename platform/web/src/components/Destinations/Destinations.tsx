@@ -7,16 +7,20 @@ import './styles.css'
 export default function Destinations() {
     const destinations = JSON.parse(localStorage.getItem("destinations")!);
     console.log('destinations', destinations);
-
-
     return (
-        <div className="container" id="destinations">
-            {
-                destinations?.map((destination: DestinationDTO) =>
-                    <Destination destination={destination}/>
-                )
-            }
-        </div>
+        <>
+            <div className="main">
+                <h1 className="titleName">Here are our</h1>
+                <h1 className="titleName">suggestions</h1>
+                <div className="container" id="destinations">
+                    {
+                        destinations?.map((destination: DestinationDTO) =>
+                            <Destination destination={destination}/>
+                        )
+                    }
+                </div>
+            </div>
 
+        </>
     );
 }

@@ -12,7 +12,6 @@ export default function Destination({destination}: { destination: DestinationDTO
                 <div className="image" style={{backgroundImage: `url(${img})`}}></div>
             </div>
 
-
         </>
     );
 }

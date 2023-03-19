@@ -47,7 +47,7 @@ export default function LoadingSpinner() {
     return (
         <>
             <h1 className="titleLoading">While you are waiting your offer, you can check our trip suggestions</h1>
-            <Carousel indicators={false} controls={false} interval={3000} pause={false}>
+            <Carousel indicators={false} controls={false} interval={3000}>
                 {
                     loadingItems.map((loadingItem, index) =>
                         <Carousel.Item key={index} >
