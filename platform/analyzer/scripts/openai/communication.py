@@ -16,12 +16,11 @@ class OpenAICommunication:
     def hint():
         global g_openai_hints
         return \
-            f"""
-                Provide data, formatted as: {g_openai_hints['location_fmt']}
-                Mark each landmark, town, facilities or other specific locations and
-                establishments enclosed in a XML-like tag {g_openai_hints['landmark_marker']}
-                and each vacation activity verb phrase with {g_openai_hints['activity_marker']}.
-                Make sure to put corresponding closing tags.
+            """
+            Provide the data, formatted in an XML-fashion: <LOCATION>Country, City</LOCATION> <DESCRIPTION>...</DESCRIPTION>.
+            In the description mark each landmark, town, facilities or other specific locations and establishments enclosed
+            in a XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. Make sure to put corresponding
+            closing tags. Also wrap each <LOCATION>-<DESCRIPTION> pair in a <DESTINATION> tag.
             """
 
     def get_openai_answer(self, question):
@@ -41,7 +40,7 @@ class OpenAICommunication:
         data = {
             "model": "gpt-3.5-turbo",
             "messages": [{"role": "user", "content": question}],
-            "temperature": 0,
+            "temperature": 0.1,
         }
 
         response = requests.post(
