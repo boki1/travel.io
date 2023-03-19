@@ -18,13 +18,7 @@ class Landmark(typing.NamedTuple):
 
 
 class Out(typing.NamedTuple):
-    locations: list[Location]
-    activities: list[Activity]
-    landmarks: list[Landmark]
-
-    def full(self):
-        # FIXME: Make JSON nicer. This looks kind of bad :/
-        return self._asdict()
+    destinations: dict
 
 
 class Task:

@@ -32,7 +32,7 @@ def openai_route():
     task = Task(question, answer)
     analyser = Analyser(g_analyser_options)
     output = analyser.perform(task)
-    return jsonify(output.full())
+    return jsonify(output)
 
 
 @app.route('/api/v1/airports', methods=['POST'])
