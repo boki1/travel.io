@@ -47,7 +47,7 @@ export default function LoadingSpinner() {
     return (
         <>
             <h1 className="titleLoading">While you are waiting your offer, you can check our trip suggestions</h1>
-            <Carousel indicators={false} controls={false} interval={3000}>
+            <Carousel indicators={false} controls={false} interval={3000} pause={false}>
                 {
                     loadingItems.map((loadingItem, index) =>
                         <Carousel.Item key={index} >
@@ -55,8 +55,8 @@ export default function LoadingSpinner() {
                                 <div className="inner">
                                     <div className="titleCard">{loadingItem.city}</div>
                                     <div className="descriptionCard">{loadingItem.description}</div>
-                                    <time className="subtitle"><h3>Top 5 places to visit, while there:</h3>{loadingItem.suggestions.map((suggestion) =>
-                                        <h3>{suggestion}</h3>)}</time>
+                                    <time className="subtitle"><h3 className="attractions">Top 5 places to visit, while there:</h3>{loadingItem.suggestions.map((suggestion) =>
+                                        <h3 className="attractions">{suggestion}</h3>)}</time>
                                 </div>
                             </div>
                         </Carousel.Item>
