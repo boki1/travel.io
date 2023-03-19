@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 
-html, body{
-    background-color:white;
-}
-
 a {
     color: black;
     text-decoration: none;
@@ -62,7 +58,7 @@ a {
 
     top: 35%;
     left: 7%;
-} 
+}
 
 .image {
     position: absolute;

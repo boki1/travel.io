@@ -1,7 +1,6 @@
 package com.fmicodes.comm.controllers;
 
-import com.fmicodes.comm.DTO.VacationDescription;
-import com.fmicodes.comm.DTO.VacationSuggestion;
+import com.fmicodes.comm.DTO.*;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/messages")
@@ -18,25 +18,37 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
+    private static final Integer MAXIMUM_NUMBER_OF_LOCATIONS = 4;
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        errorResponse.setMessage(e.getMessage());
+
+        return new ResponseEntity<>(errorResponse, null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @PostMapping
-    public ResponseEntity<VacationSuggestion> makeVacationSuggestion(@RequestBody VacationDescription vacationDescription) {
-        // Call python code to read gpt's output. Python code receives string and returns a map
-
-        // based on python code response, make API calls to: bookingAPI, skyscannerAPI and googleMapsAPI
-
-        // return 3-4 VacationSuggestion objects with data for: location (city, country), hotels, flights and attractions
-
-        // These will be extracted from the python code response, I PROMISE
-        String cityMock = "London";
-        String countryMock = "United Kingdom";
-
+    public ResponseEntity<ArrayList<VacationSuggestion>> makeVacationSuggestion(@RequestBody VacationDescription vacationDescription) {
         String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
+        Location currentLocation = new Location(vacationDescription.getCurrentCity(), vacationDescription.getCurrentCountry());
 
-        VacationSuggestion vacationSuggestions = new VacationSuggestion();
+        ArrayList<Location> locationData = messageService.getLocationDataFromOpenAIResponse(analyzerResponse);
+        locationData = (ArrayList<Location>) locationData.stream().limit(MAXIMUM_NUMBER_OF_LOCATIONS).collect(Collectors.toList());
 
-        ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(cityMock, countryMock);
-        vacationSuggestions.setHotelSuggestions(hotelSuggestions);
+        ArrayList<VacationSuggestion> vacationSuggestions = new ArrayList<>();
 
+        for (Location location : locationData) {
+            ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(location.getCity(), location.getCountry(), vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), vacationDescription.getMaxPrice());
+            ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions, vacationDescription.getCheckInDate(), currentLocation);
+
+            VacationSuggestion vacationSuggestion = new VacationSuggestion();
+            vacationSuggestion.setLocation(location);
+            vacationSuggestion.setVacationOffers(vacationOffers);
+
+            vacationSuggestions.add(vacationSuggestion);
+        }
         return new ResponseEntity<>(vacationSuggestions, null, HttpStatus.OK);
     }
 

@@ -1,1 +1,1 @@
-export {default as Destination} from './Destinations'
+export {default as Destinations} from './Destinations'

@@ -1,9 +1,10 @@
-from collections import namedtuple
 import typing
+
 
 class Location(typing.NamedTuple):
     city: str
     country: str
+
 
 class ActionTopic(typing.NamedTuple):
     location: Location
@@ -11,17 +12,24 @@ class ActionTopic(typing.NamedTuple):
     # TODO: Maybe hardcode an enumeration for this value? e.g enum { sport, art, music, ... }
     category: str
 
+
 class Landmark(typing.NamedTuple):
     name: str
     location: Location
+
 
 class Out(typing.NamedTuple):
     locations: list[Location]
     action_topics: list[ActionTopic]
     landmarks: list[Landmark]
 
+    def full(self):
+        # FIXME: Make JSON nicer. This looks kind of bad :/
+        return self._asdict()
+
 
 class Task:
+    extracted_locations: list[Location]
 
     def __init__(self, question, full_answer):
         self.inp_question = question
@@ -32,5 +40,3 @@ class Task:
 
     def populate(self):
         pass
-
-

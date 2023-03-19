@@ -13,6 +13,15 @@ public class Hotel {
 
     private String url;
 
+    private String airportCode;
+
+    private Double longitude;
+
+    private Double latitude;
+
+    private Double price;
+
+    private String currency;
 
     public Integer getHotelId() {
         return hotelId;
@@ -62,6 +71,46 @@ public class Hotel {
         this.url = url;
     }
 
+    public void setAirportCode(String airportCode) {
+        this.airportCode = airportCode;
+    }
+
+    public String getAirportCode() {
+        return airportCode;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     @Override
     public String toString() {
         return "Hotel{" +
@@ -71,6 +120,11 @@ public class Hotel {
                 ", address='" + address + '\'' +
                 ", maxPhotoUrl='" + maxPhotoUrl + '\'' +
                 ", url='" + url + '\'' +
+                ", airportCode='" + airportCode + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", price=" + price +
+                ", currency='" + currency + '\'' +
                 '}';
     }
 }
