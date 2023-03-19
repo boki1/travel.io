@@ -50,13 +50,11 @@ def airport_iata_route():
 
 
 if DEBUG_MODE:
-    def suite():
+    def testsuite():
         suite = unittest.TestSuite()
-        suite.addTest(TestAnalyzer('test_city_to_country_list'))
-        suite.addTest(TestAnalyzer('test_france_task'))
-        suite.addTest(TestAnalyzer('test_country_to_name_basic_lib'))
+        suite.addTest(TestAnalyzer('test_samples'))
         return suite
 
 
     runner = unittest.TextTestRunner()
-    runner.run(suite())
+    runner.run(testsuite())

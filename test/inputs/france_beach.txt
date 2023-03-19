@@ -1,16 +1,18 @@
 -- I love France and would like to go on a beach vacation there in July this year, please
 -- suggest me some nice resorts on the Atlantic ocean.
-
-Sure! Here are some nice beach resorts on the Atlantic Ocean in France that you might want to
-consider: Biarritz: A popular resort town located on the Atlantic coast in the Basque region. It is
-known for its beautiful beaches, great surf, and lively nightlife. La Rochelle: A picturesque port
-town in western France, known for its sandy beaches, historic landmarks, and scenic harbor. It is
-also a great base for exploring the nearby islands of Île de Ré and Île d'Oléron. Saint-Jean-de-Luz:
-A charming coastal town in the Basque region, known for its golden beaches, picturesque harbor, and
-relaxed atmosphere. It is also a great place to enjoy local Basque cuisine. Hossegor: A laid-back
-seaside town in southwestern France, known for its excellent surf breaks, beautiful beaches, and
-relaxed vibe. It is also a popular destination for golfers, with several top-rated golf courses in
-the area. Cap Ferret: A chic resort town located on a narrow peninsula on the Atlantic coast. It is
-known for its beautiful beaches, upscale restaurants, and trendy nightlife. These are just a few
-options, but there are many other lovely beach resorts along the Atlantic coast of France that you
-might want to explore.
+1. Biarritz, France: A popular seaside resort town on the Atlantic coast with a beautiful
+beach and surf culture. Relax on the sandy beaches and try surfing with <ACTIVITY>surfing
+lessons</ACTIVITY>. Visit the <LNDMARK>Rocher de la Vierge</LNDMARK>, a rock formation with
+a beautiful view of the sea, and explore the historic city center with its boutiques and cafes.
+2. La Rochelle, France: A historic port city on the Bay of Biscay with a vibrant atmosphere
+and beautiful beaches. Take a stroll along the old harbor and visit the <LNDMARK>Towers of
+La Rochelle</LNDMARK>, two medieval towers that offer stunning views of the city and the sea.
+Relax on the sandy beaches and enjoy seafood specialties in the many restaurants and cafes.
+3. Cap Ferret, France: A quiet and charming peninsula on the Atlantic coast with beautiful
+beaches and pine forests. Take a bike ride through the nature reserves and explore the local
+oyster farms. Relax on the sandy beaches and enjoy water activities such as <ACTIVITY>kayaking
+</ACTIVITY> and <ACTIVITY>paddleboarding</ACTIVITY>.
+4. Hossegor, France: A popular beach town on the Atlantic coast known for its surfing and
+natural beauty. Surf on the famous waves, relax on the sandy beaches, and explore the local
+markets and boutiques. Take a day trip to the nearby forests and lakes or visit the <LNDMARK>
+ferNotre Dame des Landes Church</LNDMARK>, a beautiful example of regional architecture.

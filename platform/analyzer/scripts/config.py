@@ -1,9 +1,21 @@
 DEBUG_MODE = True
 
+g_openai_hints = {
+    'location_fmt': 'NumberBullet. City, Country: Description.',
+    'landmark_marker': '<LNDMARK>',
+    'activity_marker': '<ACTIVITY>'
+}
+
+
+def hint_marker(m):
+    return m.strip('<>').lower()
+
+
 # Configuration passed to the Analyser ctor at init.
 g_analyser_options = {
-    'nominatim_language': 'en'
+    'openai_hints': g_openai_hints
 }
+
 
 # Useful utilities not related to real functionality.
 

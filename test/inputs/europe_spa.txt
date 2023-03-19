@@ -1,12 +1,23 @@
 -- The perfect vacation for me includes: a luxurious SPA hotel in the mountains in a resort full of
 -- mineral water. Suggest me some destinations on the old continent.
-
-Sure, here are a few suggestions for luxurious SPA hotels in mountain resorts with mineral water in
-Europe: Bad Gastein, Austria: This historic spa town is situated in the Austrian Alps and is known
-for its thermal waters. The town offers various luxury SPA hotels such as the Grand Hotel de
-l'Europe, which features a modern SPA, indoor and outdoor pools, and stunning mountain views. Vals,
-Switzerland: This tiny mountain village in the Swiss Alps is famous for its thermal baths and is
-home to the renowned Therme Vals, a stunning modern SPA designed by architect Peter Zumthor.
-Rila Monastery, Bulgaria: The Rila Monastery is located in the Rila Mountains and is surrounded
-by natural mineral springs. The nearby village of Sapareva Banya offers various SPA hotels that
-use the mineral water for treatments, such as the Aqua Club Termal Hotel.
+1. Baden-Baden, Germany: Located in the Black Forest region, Baden-Baden is known for its thermal baths and luxurious spa hotels, such as the Brenners Park-Hotel & Spa. <LNDMARK>Brenners Park-Hotel & Spa</LNDMARK> offers a variety of spa treatments and facilities, as well as a stunning view of the surrounding mountains.
+<ACTIVITY>Relaxing in thermal baths and indulging in spa treatments</ACTIVITY>
+2. Vals, Switzerland: Vals is a small mountain village in the Swiss Alps known for
+its natural hot springs and modern spa architecture. The Therme Vals <LNDMARK>Therme
+Vals</LNDMARK> is a famous spa complex designed by Swiss architect Peter Zumthor and
+is regarded as one of the best in the world.
+<ACTIVITY>Enjoying the natural hot springs and the unique spa architecture</ACTIVITY>
+3. Hévíz, Hungary: Hévíz is a town in western Hungary known for its thermal lake, which
+is the largest biologically active natural thermal lake in the world. The Lotus Therme Hotel
+& Spa <LNDMARK>Lotus Therme Hotel & Spa</LNDMARK> is a luxurious spa hotel located near the
+lake and offers a variety of wellness treatments.
+<ACTIVITY>Swimming in the thermal lake and enjoying the spa treatments</ACTIVITY>
+4. Abano Terme, Italy: Abano Terme is a town in the Veneto region of Italy known for its hot
+springs and mud baths. The Abano Grand Hotel <LNDMARK>Abano Grand Hotel</LNDMARK> is a luxurious
+spa hotel located in the heart of the town and offers a variety of wellness treatments and
+facilities.
+<ACTIVITY>Indulging in mud baths and hot springs, enjoying the Italian cuisine</ACTIVITY>
+5. Kitzbühel, Austria: Kitzbühel is a small town located in the Austrian Alps known for its
+ski slopes and natural beauty. The A-ROSA Kitzbühel <LNDMARK>A-ROSA Kitzbühel</LNDMARK> is a
+luxurious spa hotel located in the mountains and offers a variety of wellness treatments and
+facilities. <ACTIVITY>Skiing, enjoying the mountain views and indulging in spa treatments</ACTIVITY>

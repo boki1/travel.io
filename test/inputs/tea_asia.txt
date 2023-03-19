@@ -1,23 +1,21 @@
 -- Give me a vacation suggestion for a couple that loves drinking tea. I was thinking of somewhere
 -- in Asia.
-
-If you and your partner love drinking tea, then Asia is a fantastic destination for you! There are
-many beautiful places in Asia that are known for their tea culture and offer a perfect getaway for
-tea lovers. Here are some vacation suggestions for you: Japan: Japan is a tea lover's paradise, and
-there are many regions in Japan that are famous for their tea. One such region is Uji, which is just
-south of Kyoto. Uji is known for producing high-quality green tea, and you can visit tea fields and
-participate in tea ceremonies. You can also visit tea houses in Kyoto, such as the famous Ippodo Tea
-Co. There are many tea-related events and festivals in Japan, so you can plan your trip around them.
-China: China is the birthplace of tea, and there are many places in China where you can experience
-tea culture. One such place is Hangzhou, which is famous for its Longjing tea. You can visit tea
-plantations and take part in tea tastings. You can also visit the China Tea Museum in Hangzhou to
-learn about the history of tea in China. India: India is famous for its chai tea, and there are many
-regions in India that produce high-quality tea. One such region is Darjeeling, which is located in
-the foothills of the Himalayas. Darjeeling tea is considered one of the best teas in the world, and
-you can visit tea gardens and take part in tea tastings. You can also visit the Darjeeling Himalayan
-Railway, which is a UNESCO World Heritage Site. Taiwan: Taiwan is known for its high-mountain tea,
-which is grown in the mountains of Taiwan. You can visit tea plantations in Nantou and
-participate in tea tastings. You can also visit tea houses in Taipei, such as the Wistaria Tea
-House, which is over 100 years old. These are just a few suggestions for a tea-themed vacation
-in Asia. Each of these destinations offers a unique tea culture, and you can learn a lot about
-tea while also enjoying beautiful scenery and delicious food.
+1. Hangzhou, China: Known for its Longjing tea, Hangzhou is home to many tea plantations
+and tea shops where you can sample and buy the famous green tea. Visit the <LNDMARK>West Lake
+</LNDMARK> and the <LNDMARK>Lingyin Temple</LNDMARK> while in Hangzhou. <ACTIVITY>Visit tea
+plantations and shops</ACTIVITY> <ACTIVITY>Sample Longjing tea</ACTIVITY> <ACTIVITY>Explore West
+Lake</ACTIVITY> <ACTIVITY>Visit Lingyin Temple</ACTIVITY>
+2. Darjeeling, India: Known for its world-famous tea, Darjeeling is situated in the foothills of
+the Himalayas. The town is surrounded by lush green tea plantations and offers scenic views of the
+mountains. Visit the <LNDMARK>Tiger Hill</LNDMARK> to watch the sunrise over the Himalayas and the
+<LNDMARK>Darjeeling Himalayan Railway</LNDMARK>, a UNESCO World Heritage Site. <ACTIVITY>Visit tea
+plantations and shops</ACTIVITY> <ACTIVITY>Sample Darjeeling tea</ACTIVITY> <ACTIVITY>Watch the
+sunrise over the Himalayas from Tiger Hill</ACTIVITY> <ACTIVITY>Take a ride on the Darjeeling
+Himalayan Railway</ACTIVITY>
+3. Kyoto, Japan: Known for its traditional Japanese tea ceremony, Kyoto is a great destination for
+tea lovers. The city is home to many traditional tea houses where you can experience the tea
+ceremony and learn about Japanese tea culture. Visit the <LNDMARK>Kinkaku-ji Temple</LNDMARK> and the
+<LNDMARK>Fushimi Inari Shrine</LNDMARK> while in Kyoto. <ACTIVITY>Experience a traditional Japanese
+tea ceremony</ACTIVITY> <ACTIVITY>Visit traditional tea houses</ACTIVITY><ACTIVITY>Learn about
+Japanese tea culture</ACTIVITY> <ACTIVITY>Visit Kinkaku-ji Temple</ACTIVITY><ACTIVITY>Visit Fushimi
+Inari Shrine</ACTIVITY>

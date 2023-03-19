@@ -1,0 +1,28 @@
+-- I want to visit some cities where I can drink coffee.
+--
+-- Provide data, formatted as: NumberBullet. City, Country: Description. Mark each landmark in an
+-- XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. 
+1. Vienna, Austria: Known for its Viennese coffee culture, with traditional cafes such
+as Café Central and Café Sacher. <LNDMARK>Vienna State Opera</LNDMARK>, <LNDMARK>St.
+Stephen's Cathedral</LNDMARK>, <LNDMARK>Belvedere Palace</LNDMARK>, <LNDMARK>Prater Park
+</LNDMARK>. Enjoy drinking coffee in traditional coffee houses and cafes. <ACTIVITY>
+Drinking coffee in a traditional Viennese coffeehouse</ACTIVITY>.
+2. Istanbul, Turkey: Famous for its Turkish coffee, with popular cafes such as Mandabatmaz
+and Fazil Bey. <LNDMARK>Blue Mosque</LNDMARK>, <LNDMARK>Hagia Sophia</LNDMARK>, <LNDMARK>
+Topkapi Palace</LNDMARK>, <LNDMARK>Grand Bazaar</LNDMARK>. Enjoy drinking Turkish coffee
+with a view of the city. <ACTIVITY>Drinking Turkish coffee in a rooftop café</ACTIVITY>.
+3. Rome, Italy: Known for its strong espresso and cappuccino, with cafes such as Sant'Eustachio
+and Tazza d'Oro. <LNDMARK>Colosseum</LNDMARK>, <LNDMARK>Pantheon</LNDMARK>, <LNDMARK>Trevi
+Fountain</LNDMARK>, <LNDMARK>Villa Borghese</LNDMARK>. Enjoy sipping on a cappuccino while
+people-watching in a piazza. <ACTIVITY>Drinking espresso in a local café</ACTIVITY>.
+4. Seattle, USA: Famous for its coffee culture, with iconic cafes such as Starbucks and
+Tully's. <LNDMARK>Space Needle</LNDMARK>, <LNDMARK>Pike Place Market</LNDMARK>, <LNDMARK>
+Gum Wall</LNDMARK>, <LNDMARK>Olympic Sculpture Park</LNDMARK>. Enjoy drinking coffee in
+the city where Starbucks originated. <ACTIVITY>Visiting the first Starbucks store and trying
+a local roast</ACTIVITY>.
+5. Melbourne, Australia: Known for its specialty coffee shops, with popular cafes such
+as Proud Mary and Seven Seeds. <LNDMARK>Federation Square</LNDMARK>, <LNDMARK>Royal
+Botanic Gardens Victoria</LNDMARK>, <LNDMARK>National Gallery of Victoria</LNDMARK>,
+<LNDMARK>St. Kilda Beach</LNDMARK>. Enjoy trying unique blends and single-origin coffee
+in trendy cafes. <ACTIVITY>Exploring the city's laneways and trying different coffee shops
+</ACTIVITY>.
