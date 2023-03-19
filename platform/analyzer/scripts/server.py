@@ -41,12 +41,14 @@ def airport_iata_route():
     airport_city = data['city']
     airport_country = data['country']
 
-    filtered_airports = {iata_code: airport_obj for iata_code, airport_obj in g_airports.items() \
-                         if airport_obj.city == airport_city and airport_obj.country == airport_country}
-
-    if len(filtered_airports) > 0:
-        return list(filtered_airports.keys())[0]
-    return ''
+    selected_airports = set()
+    for _, airport_obj in g_airports.items():
+        if airport_obj.city == airport_city and airport_obj.country == airport_country:
+            selected_airports.add(airport_obj)
+    if not len(selected_airports):
+        return jsonify({'error': f'no viable suggestion in provided city, country ({airport_city}, {airport_country})'})
+    selected_airport = list(selected_airports)[0]
+    return jsonify(selected_airport._asdict())
 
 
 if DEBUG_MODE:
