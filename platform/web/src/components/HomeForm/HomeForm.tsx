@@ -32,7 +32,6 @@ const HomeForm = ({ setShowLoading }: { setShowLoading: React.Dispatch<React.Set
 
         if (err) {
             setShowLoading(false);
-
         } else {
             localStorage.setItem('destinations', JSON.stringify(data));
             window.location.href = '/destinations';

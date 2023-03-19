@@ -9,6 +9,7 @@ a {
     flex-direction: column;
     background-color: white;
 }
+
 .wrapper {
     border-radius: 25px;
     position: relative;

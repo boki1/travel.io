@@ -2,6 +2,7 @@ import os
 
 import requests
 from flask import json, request
+from scripts.config import g_openai_hints
 
 
 class OpenAICommunication:
@@ -10,6 +11,17 @@ class OpenAICommunication:
 
     def run(self):
         self.app.run(host=os.getenv('FLASK_RUN_HOST', '0.0.0.0'), port=os.getenv('FLASK_RUN_PORT', 5005))
+
+    @staticmethod
+    def hint():
+        global g_openai_hints
+        return \
+            """
+            Provide the data, formatted in an XML-fashion: <LOCATION>Country, City</LOCATION> <DESCRIPTION>...</DESCRIPTION>.
+            In the description mark each landmark, town, facilities or other specific locations and establishments enclosed
+            in a XML-like tag <LNDMARK> and each vacation activity verb phrase with <ACTIVITY>. Make sure to put corresponding
+            closing tags. Also wrap each <LOCATION>-<DESCRIPTION> pair in a <DESTINATION> tag.
+            """
 
     def get_openai_answer(self, question):
         if not question:
@@ -22,11 +34,13 @@ class OpenAICommunication:
             "Authorization": f"Bearer {openai_api_key}",
         }
 
-        question += " Provide data, formatted as: City, Country: Description."
+        # Hint OpenAI in order to omit unnecessary data processing of the response.
+        question += OpenAICommunication.hint()
+
         data = {
             "model": "gpt-3.5-turbo",
             "messages": [{"role": "user", "content": question}],
-            "temperature": 0.2,
+            "temperature": 0.1,
         }
 
         response = requests.post(

@@ -1,13 +1,14 @@
 -- I have been a baklava lover my whole life and the next weekend I am planning to do a trip abroad,
 -- suggest me a city, close to Bulgaria which is famous for its baklava.
-
-If you are a baklava lover and are planning a trip close to Bulgaria, I recommend visiting Istanbul,
-Turkey. Istanbul is a city that is famous for its baklava, which is a sweet and flaky pastry made
-with layers of phyllo dough and filled with nuts, honey, and spices. There are many pastry shops
-in Istanbul that are renowned for their baklava, such as Karaköy Güllüoğlu and Hafız Mustafa.
-These shops have been making baklava for generations, using traditional recipes and techniques.
-In addition to baklava, Istanbul has a lot to offer in terms of culture, history, and cuisine.
-You can visit famous landmarks like the Hagia Sophia and the Blue Mosque, explore the Grand
-Bazaar and other markets, and try other Turkish specialties like kebabs, Turkish delight, and
-Turkish coffee. Overall, Istanbul is a great destination for baklava lovers and anyone looking to
-experience the vibrant culture and history of Turkey.
+Certainly! Here are some cities near Bulgaria that are famous for their baklava:
+1. Istanbul, Turkey: Known for its rich history and culture, Istanbul is famous for
+its baklava. The city has numerous shops and bakeries that sell various types of baklava,
+such as pistachio, walnut, and hazelnut. You can visit the iconic <LNDMARK>Hagia Sophia</LNDMARK>
+and the <LNDMARK>Blue Mosque</LNDMARK> and then indulge in a baklava tasting at one of the local
+bakeries.<ACTIVITY> Baklava tasting</ACTIVITY>, <ACTIVITY>visiting Hagia Sophia</ACTIVITY>,
+<ACTIVITY>visiting the Blue Mosque</ACTIVITY>.
+2. Thessaloniki, Greece: Thessaloniki is another city famous for its baklava. Here, you can
+visit traditional pastry shops and taste the delicious sweet treat made with layers of phyllo
+pastry, nuts, and honey syrup. You can also explore the charming old town and visit the <LNDMARK>
+White Tower</LNDMARK>, a symbol of the city.<ACTIVITY> Baklava tasting</ACTIVITY>, <ACTIVITY>
+baklexploring the old town</ACTIVITY>, <ACTIVITY>visiting the White Tower</ACTIVITY>.

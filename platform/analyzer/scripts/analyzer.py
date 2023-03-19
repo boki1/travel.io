@@ -2,8 +2,7 @@ import re
 import unittest
 from os import listdir
 
-from countryinfo import CountryInfo
-from geopy.geocoders import Nominatim
+from bs4 import BeautifulSoup as bs
 
 from scripts.config import debug_print
 from scripts.task import *
@@ -12,61 +11,44 @@ from scripts.task import *
 class Analyser:
 
     def __init__(self, options: dict):
-        self.geolocator = Nominatim(user_agent="my_app")
         self.options = options
 
     @staticmethod
-    def _country_from_full_location(location) -> str:
-        # FIXME: Ugly access to country field.
-        return location.raw.get('display_name').split(',')[-1].strip()
-
-    # Locates the country that a given city resides in.
-    # Returns a list with possibilities.
-    def _city_to_countries(self, city: str) -> list[str]:
-        locations = self.geolocator.geocode(city, exactly_one=False, language="en")
-        country_names = list({Analyser._country_from_full_location(loc) for loc in locations})
-        debug_print(f'_city_to_countries: country_names "{country_names}"')
-        return country_names
-
-    @staticmethod
-    def _produce_city(country: str):
-        return CountryInfo(country).capital()
-
-    def get_locations_serial(self, task: Task) -> list[Location]:
-        location_list = []
-        suggestions = task.inp_answer.strip().split('\n')
-
-        for suggestion in suggestions:
-            if not suggestion.strip():
-                continue  # Ignore empty lines
-
-            suggestion_data = re.sub(r'^\d+\. ', '', suggestion)
-
-            # Remove the index number
-            suggestion_data_result = suggestion_data.split(': ', 1)
-            if len(suggestion_data_result) != 2:
-                continue
-            city_country, _ = suggestion_data_result
-
-            city_country_result = city_country.split(', ', 1)
-            if len(city_country_result) != 2:
-                continue
-            city, country = city_country_result
-
-            location_list.append(Location(city.strip(), country.strip()))
-
-        task.extracted_locations = location_list
-        return location_list
+    def cleanup_description(description_raw: str) -> str:
+        pattern = r'<.*?>'
+        return re.sub(pattern, '', description_raw)
 
     def perform(self, task: Task) -> Out:
-        locations = self.get_locations_serial(task)
-        debug_print(f'Locations: "{locations}"')
-        action_topics = []
-        landmarks = []
+        raw = self.extract(task)
+        prepped = self.prepare_out(raw)
+        return Out(destinations={'destinations': prepped})
 
-        # TODO: Populate with data :). Working on it...
-        out = Out(locations, action_topics, landmarks)
-        return out
+    def prepare_out(self, destinations) -> Out:
+        for dest in destinations:
+            country, city = dest['location'].split(', ')
+            description = self.cleanup_description(dest['description'].text).strip(' \n')
+            loc = Location(city, country, description)
+            dest['location'] = loc._asdict()
+            del dest['description']
+        return destinations
+
+    def extract(self, task: Task):
+        soup = bs(task.inp_answer, features='html.parser')
+        destination_tags = soup.find_all('destination')
+        destinations = []
+        for destination in destination_tags:
+            location = destination.find('location').text
+            description = destination.find('description')
+            landmarks = [lndmark.text for lndmark in description.find_all('lndmark')]
+            activities = [activity.text for activity in description.find_all('activity')]
+            destination_info = {
+                'location': location,
+                'landmarks': landmarks,
+                'activities': activities,
+                'description': description
+            }
+            destinations.append(destination_info)
+        return destinations
 
 
 # TODO: Move to travel.io/test/feature/
@@ -74,23 +56,7 @@ class TestAnalyzer(unittest.TestCase):
 
     def setUp(self):
         global g_analyser_options
-        self.a = Analyser(g_analyser_options)
-
-    def test_city_to_country_list(self):
-        expected = 'Bulgaria'
-        countries_that_contain_sofia = self.a._city_to_countries('Sofia')
-        debug_print(f'countries_that_contain_sofia = "{countries_that_contain_sofia}"')
-        self.assertTrue(expected in countries_that_contain_sofia)
-
-        expected = 'France'
-        countries_that_contain_basque_region = self.a._city_to_countries('Basque')
-        debug_print(f'countries_that_contain_basque = "{countries_that_contain_basque_region}"')
-        self.assertTrue(expected in countries_that_contain_basque_region)
-
-        expected = 'Germany'
-        countries_that_contain_berlin = self.a._city_to_countries('Berlin')
-        debug_print(f'countries_that_contain_berlin = "{countries_that_contain_berlin}"')
-        self.assertTrue(expected in countries_that_contain_berlin)
+        self.analyzer = Analyser(g_analyser_options)
 
     @staticmethod
     def create_task_from_desc(fname_path: str) -> Task:
@@ -103,37 +69,26 @@ class TestAnalyzer(unittest.TestCase):
                     t.inp_answer += line
         return t
 
-    def test_france_task(self):
-        fpath = '../../../test/inputs/france_beach.txt'
-        task = TestAnalyzer.create_task_from_desc(fpath)
-        out = self.a.perform(task)
-        expected_location = Location(city='Basque', country='France')
-        self.assertEqual(out.locations[0], expected_location)
+    @staticmethod
+    def for_each_sample():
+        samples_path = '../../../test/inputs/'
+        for sample_path in listdir(samples_path):
+            sample_task = TestAnalyzer.create_task_from_desc(f'{samples_path}/{sample_path}')
+            yield sample_task
 
-    def test_perform_sample_tasks(self):
-        test_path = '../../../test/inputs'
-        for fname in listdir(test_path):
-            task = TestAnalyzer.create_task_from_desc(f'{test_path}/{fname}')
-            output = self.a.perform(task)
-            print(f"For input: '{fname}' output is '{output}'")
+    def test_samples(self):
+        def test_sample(sample_task) -> bool:
+            out = self.analyzer.extract(sample_task)
+            debug_print(f'Locations: [{out.locations}]')
+            debug_print(f'Landmarks: [{out.landmarks}]')
+            debug_print(f'Activities: [{out.activities}]')
+            return True  # :)
 
-    # Figure out how to use this library's API
-    def test_country_to_name_basic_lib(self):
-        geolocator = Nominatim(user_agent="my_app")
-        cities = {"Paris": "France", "Sofia": "Bulgaria", "Basque": "France"}
-        for city, expected_country in cities.items():
-            locations = geolocator.geocode(city, exactly_one=False, language="en")
-            country_names = list({Analyser._country_from_full_location(loc) for loc in locations})
-            self.assertTrue(expected_country in country_names)
+        for sample_task in TestAnalyzer.for_each_sample():
+            self.assertTrue(test_sample(sample_task))
 
-    def test_produce_country(self):
-        self.assertEqual(Analyser._produce_city("Bulgaria"), "Sofia")
-        self.assertEqual(Analyser._produce_city("Cambodia"), "Phnom Penh")
-        self.assertNotEqual(Analyser._produce_city("Greece"), "Gondor")
-
-    def test_only_country_task(self):
-        fpath = '../../test/inputs/only_country.txt'
-        task = TestAnalyzer.create_task_from_desc(fpath)
-        out = self.a.perform(task)
-        expected_location = Location(city='Sofia', country='Bulgaria')
-        self.assertEqual(out.locations[0], expected_location)
+    def test_parsing(self):
+        test_path = '../../../test/inputs/france_beach.txt'
+        sample = TestAnalyzer.create_task_from_desc(test_path)
+        out = self.analyzer.perform(sample)
+        print(out)

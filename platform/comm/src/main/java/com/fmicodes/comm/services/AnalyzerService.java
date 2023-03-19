@@ -1,22 +1,23 @@
 package com.fmicodes.comm.services;
 
 import com.fmicodes.comm.DTO.Location;
+import com.fmicodes.comm.DTO.OpenAIDestinationResponse;
 import com.fmicodes.comm.exceptions.DeserializingJSONException;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.asynchttpclient.Response;
-import org.asynchttpclient.request.body.generator.BodyGenerator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+
+
 
 @Service
 public class AnalyzerService {
@@ -25,9 +26,9 @@ public class AnalyzerService {
     private String analyzerHost;
 
 
-    public String analyzeMessage(String message) {
+    public ArrayList<OpenAIDestinationResponse> analyzeMessage(String message) {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
-        String analyzedMessageResponse = null;
+        String analyzedMessageResponse;
         try {
             Response response = client.prepare("POST", "http://" + analyzerHost + "/api/v1/analyzer")
                     .setBody(message)
@@ -39,28 +40,53 @@ public class AnalyzerService {
             throw new RuntimeException("ERROR - Communicating with Flask API: " + e.getMessage());
         }
 
-        JSONObject analyzedMessageJSON;
+        JSONArray analyzedMessageJSON;
         try {
-            analyzedMessageJSON = new JSONObject(analyzedMessageResponse);
+            analyzedMessageJSON = new JSONArray(analyzedMessageResponse);
         } catch (JSONException e) {
             throw new DeserializingJSONException("ERROR - Deserializing analyzedMessageResponse " + e.getMessage());
         }
 
-        JSONArray locationsJSONArray;
+        ArrayList<OpenAIDestinationResponse> openAIDestinationResponses = new ArrayList<>();
+        JSONObject destinationsJSONObject;
         try {
-            locationsJSONArray = analyzedMessageJSON.getJSONArray("locations");
+            destinationsJSONObject = analyzedMessageJSON.getJSONObject(0);
+            JSONArray destinationsJSONArray = destinationsJSONObject.getJSONArray("destinations");
 
-            for (int i = 0; i < locationsJSONArray.length(); i++) {
+            for (int i = 0; i < destinationsJSONArray.length(); i++) {
 
-                JSONArray locationJSON;
-                locationJSON = locationsJSONArray.getJSONArray(i);
-                String city = locationJSON.getString(1);
+                JSONObject destinationJSONObject = destinationsJSONArray.getJSONObject(i);
 
-                System.out.println("CITY: " + city);
+                JSONObject locationJSON = destinationJSONObject.getJSONObject("location");
+                String city = locationJSON.getString("city");
+                String country = locationJSON.getString("country");
+                String description = locationJSON.getString("description");
+
+                Location location = new Location(city, country, description);
+
+                ArrayList<String> landmarksArrayList = new ArrayList<>();
+                JSONArray landmarks = destinationJSONObject.getJSONArray("landmarks");
+                for (int j = 0; j < landmarks.length(); j++) {
+                    landmarksArrayList.add(landmarks.getString(j));
+                }
+
+                ArrayList<String> activitiesArrayList = new ArrayList<>();
+                JSONArray activities = destinationJSONObject.getJSONArray("activities");
+                for (int j = 0; j < activities.length(); j++) {
+                    activitiesArrayList.add(activities.getString(j));
+                }
+
+                OpenAIDestinationResponse openAIDestinationResponse = new OpenAIDestinationResponse();
+                openAIDestinationResponse.setLocation(location);
+                openAIDestinationResponse.setLandmarks(landmarksArrayList);
+                openAIDestinationResponse.setActivities(activitiesArrayList);
+
+
+                openAIDestinationResponses.add(openAIDestinationResponse);
             }
 
         } catch (JSONException e) {
-            throw new DeserializingJSONException("ERROR - Deserializing locationsJSONArray: " + e.getMessage());
+            throw new DeserializingJSONException("ERROR - Deserializing destinationsJSONArray: " + e.getMessage());
         }
 
         try {
@@ -69,12 +95,12 @@ public class AnalyzerService {
             throw new RuntimeException("ERROR - Closing AsyncHttpClient: " + e.getMessage());
         }
 
-        return analyzedMessageResponse;
+        return openAIDestinationResponses;
     }
 
     public String getAirportIATACodeByLocation(Location location) {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
-        String airportIATACode = "";
+        String airportIATACode;
         try {
             Response response = client.prepare("POST", "http://" + analyzerHost + "/api/v1/airports")
                     .setHeader("Content-Type", "application/json")
@@ -86,8 +112,6 @@ public class AnalyzerService {
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException("ERROR - Communicating with Flask API: " + e.getMessage());
         }
-
-        System.out.println("IATA CODE FROM PYTHON: " + airportIATACode);
 
         return airportIATACode;
     }

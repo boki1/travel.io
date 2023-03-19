@@ -1,21 +1,22 @@
 -- I am a young man who enjoys seeing developed urban areas, please suggest me where should I travel
 -- to be satisfied.
-
-There are many developed urban areas around the world that you might enjoy visiting. Here are a few
-suggestions: Tokyo, Japan: Tokyo is one of the largest and most developed cities in the world, with
-a population of over 13 million people. It is famous for its high-tech architecture, advanced
-transportation system, and cutting-edge technology. New York City, United States: New York City is
-often referred to as the "capital of the world" due to its status as a global hub for finance,
-culture, and entertainment. It is home to many iconic landmarks such as the Empire State
-Building, Times Square, and the Statue of Liberty. Singapore: Singapore is a small island
-nation that is known for its ultra-modern architecture, high-tech infrastructure, and clean
-streets. It is a popular destination for those interested in urban planning and sustainable
-development. Dubai, United Arab Emirates: Dubai is a city that has undergone rapid development
-over the past few decades, with a focus on creating luxury shopping and entertainment
-destinations. It is known for its towering skyscrapers, extravagant malls, and man-made
-islands. Shanghai, China: Shanghai is a city that is rapidly developing into a global economic
-hub, with a population of over 24 million people. It is known for its impressive skyline,
-historic landmarks, and modern architecture. These are just a few suggestions, but there are
-many other cities around the world that offer a similar urban experience. When choosing a
-destination, it's important to consider factors such as cost, safety, and local culture in
-addition to the level of urban development.
+1. Tokyo, Japan: A bustling metropolis with a mix of traditional and modern architecture,
+including the Tokyo Tower <LNDMARK>Tokyo Tower</LNDMARK> and the Tokyo Skytree <LNDMARK>Tokyo
+Skytree</LNDMARK>. Enjoy shopping in Shibuya <LNDMARK>Shibuya</LNDMARK>, sightseeing in Shinjuku
+<LNDMARK>Shinjuku</LNDMARK>, and visiting the Imperial Palace <LNDMARK>Imperial Palace</LNDMARK>.
+2. New York City, USA: A cultural hub with iconic landmarks such as the Statue of Liberty
+<LNDMARK>Statue of Liberty</LNDMARK>, the Empire State Building <LNDMARK>Empire State Building
+</LNDMARK>, and Central Park <LNDMARK>Central Park</LNDMARK>. Enjoy the nightlife in Times Square
+<LNDMARK>Times Square</LNDMARK> and Broadway <LNDMARK>Broadway</LNDMARK>, and visit museums such as
+the Metropolitan Museum of Art <LNDMARK>Metropolitan Museum of Art</LNDMARK> and the Museum of Modern
+Art <LNDMARK>Museum of Modern Art</LNDMARK>.
+3. Shanghai, China: A modern city with unique architecture such as the Oriental Pearl Tower
+<LNDMARK>Oriental Pearl Tower</LNDMARK> and the Shanghai Tower <LNDMARK>Shanghai Tower</LNDMARK>.
+Enjoy shopping on Nanjing Road <LNDMARK>Nanjing Road</LNDMARK>, sightseeing in the Bund <LNDMARK>
+The Bund</LNDMARK>, and visiting Yuyuan Garden <LNDMARK>Yuyuan Garden</LNDMARK> for a taste of
+traditional Chinese architecture and culture.
+4. Dubai, UAE: A city known for its modern architecture such as the Burj Khalifa <LNDMARK>Burj
+Khalifa</LNDMARK> and the Palm Jumeirah <LNDMARK>Palm Jumeirah</LNDMARK>. Enjoy shopping in the
+Dubai Mall <LNDMARK>Dubai Mall</LNDMARK>, visiting the Dubai Fountain <LNDMARK>Dubai Fountain
+</LNDMARK>, and experiencing the indoor ski resort <ACTIVITY>skiing</ACTIVITY> at Ski Dubai
+<LNDMARK>Ski Dubai</LNDMARK>.

@@ -4,13 +4,12 @@ import typing
 class Location(typing.NamedTuple):
     city: str
     country: str
+    description: str
 
 
-class ActionTopic(typing.NamedTuple):
+class Activity(typing.NamedTuple):
+    name: str
     location: Location
-    topic: str
-    # TODO: Maybe hardcode an enumeration for this value? e.g enum { sport, art, music, ... }
-    category: str
 
 
 class Landmark(typing.NamedTuple):
@@ -19,13 +18,7 @@ class Landmark(typing.NamedTuple):
 
 
 class Out(typing.NamedTuple):
-    locations: list[Location]
-    action_topics: list[ActionTopic]
-    landmarks: list[Landmark]
-
-    def full(self):
-        # FIXME: Make JSON nicer. This looks kind of bad :/
-        return self._asdict()
+    destinations: dict
 
 
 class Task:
