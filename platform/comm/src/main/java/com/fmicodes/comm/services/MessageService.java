@@ -14,15 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-/**
- * Destination IDs:
- * -2601889: London
- * -1746443: Berlin
- * -755070: Istanbul
- */
-
-// TODO: do not make API calls for linking City to Airport code, because that can be done with a simple HashMap<String, ArrayList<String>> cityNameToAirportCodes
-
 @Service
 public class MessageService {
 
