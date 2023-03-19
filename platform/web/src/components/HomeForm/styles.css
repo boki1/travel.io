@@ -18,25 +18,28 @@
     width: 100%;
 }
 
-.form-floating>label
-{
+.form-floating > label {
     color: #fff;
 }
 
-.form-floating>.form-control:focus~label
-{
+.form-floating > .form-control:focus ~ label {
     color: #000000;
 }
 
-.container{
+.container {
     display: flex;
     justify-content: space-between;
     width: 100%;
     padding: 0;
 }
 
-.subContainer{
+.subContainer {
     width: 45%;
     display: flex;
     justify-content: space-between;
+}
+
+.textarea{
+    resize: none;
+    overflow: auto;
 }

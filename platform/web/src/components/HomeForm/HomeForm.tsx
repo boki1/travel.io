@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
-import {FloatingLabel, Form, Button, Row, Col} from 'react-bootstrap';
-import {HomeFormDTO} from '../../DTO/HomeFormDTO';
-import {postReq} from '../../services/makeRequests';
+import React, { useState } from 'react';
+import { FloatingLabel, Form, Button, Row, Col } from 'react-bootstrap';
+import { HomeFormDTO } from '../../DTO/HomeFormDTO';
+import { postReq } from '../../services/makeRequests';
 import './styles.css';
+import {json} from "stream/consumers";
 
 
 const HomeForm = ({setShowLoading}: { setShowLoading: React.Dispatch<React.SetStateAction<boolean>> }) => {
@@ -34,7 +35,9 @@ const HomeForm = ({setShowLoading}: { setShowLoading: React.Dispatch<React.SetSt
             setShowLoading(false)
             console.log(err);
         } else {
-            setShowLoading(false)
+            localStorage.setItem('destinations',JSON.stringify(data));
+            window.location.href = '/destinations';
+            setShowLoading(false);
             console.log(data);
         }
     };
@@ -46,8 +49,8 @@ const HomeForm = ({setShowLoading}: { setShowLoading: React.Dispatch<React.SetSt
 
     return (
         <Form>
-            <Row className=''>
-                <Col className=''>
+            <Row>
+                <Col>
                     <FloatingLabel label="Enter max price of the vacation">
                         <Form.Control className='input' placeholder=' ' type="number" value={maxPrice}
                                       onInput={(event: React.FormEvent<HTMLInputElement>) => setMaxPrice(parseFloat(event.currentTarget.value))}/>
@@ -58,7 +61,7 @@ const HomeForm = ({setShowLoading}: { setShowLoading: React.Dispatch<React.SetSt
                                       onInput={(event: React.FormEvent<HTMLInputElement>) => modifyCity(event)}/>
                     </FloatingLabel>
                 </Col>
-                <Col className=''>
+                <Col>
                     <FloatingLabel label="Check in date">
                         <Form.Control className='input' placeholder=' ' type="date" value={checkInDate}
                                       onInput={(event: React.FormEvent<HTMLInputElement>) => setCheckInDate(event.currentTarget.value)}/>
@@ -77,7 +80,7 @@ const HomeForm = ({setShowLoading}: { setShowLoading: React.Dispatch<React.SetSt
             </FloatingLabel>
 
             <Button className='button' variant="primary" type="submit"
-                    onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => onButtonClick(event)}>
+                onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => onButtonClick(event)}>
                 Submit
             </Button>
         </Form>

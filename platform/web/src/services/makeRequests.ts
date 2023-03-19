@@ -11,7 +11,8 @@ export const postReq = async (url: string, body: any, headers?: Record<string, s
         });
         const data = await response.json();
         return Promise.resolve([data, null]);
-    } catch (err) {
+    }
+    catch (err) {
         return Promise.resolve([null, err]);
     }
 };

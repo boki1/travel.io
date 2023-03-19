@@ -1,13 +1,12 @@
-import {ClockLoader} from "react-spinners";
-import './styles.css';
-import './styles.css';
-import {LoadingItemDTO} from "../../DTO/LoadingItemDTO";
+import { ClockLoader } from "react-spinners";
+import { LoadingItemDTO } from "../../DTO/LoadingItemDTO";
 import buenos_aires from '../../assets/loadingAssets/BuenosAires.png';
 import florence from '../../assets/loadingAssets/Florence.png';
 import madrid from '../../assets/loadingAssets/Madrid.png';
 import plovdiv from '../../assets/loadingAssets/Plovdiv.png';
 import seoul from '../../assets/loadingAssets/Seoul.png';
 import Carousel from 'react-bootstrap/Carousel';
+import './styles.css';
 
 
 export default function LoadingSpinner() {
@@ -48,11 +47,11 @@ export default function LoadingSpinner() {
     return (
         <>
             <h1 className="titleLoading">While you are waiting your offer, you can check our trip suggestions</h1>
-            <Carousel indicators={false} controls={false} interval={3000} pause={false}>
+            <Carousel indicators={false} controls={false} interval={3000}>
                 {
                     loadingItems.map((loadingItem, index) =>
                         <Carousel.Item key={index} >
-                            <div className="card" style={{backgroundImage: `url(${loadingItem.imageSource})`}}>
+                            <div className="card" style={{ backgroundImage: `url(${loadingItem.imageSource})` }}>
                                 <div className="inner">
                                     <div className="titleCard">{loadingItem.city}</div>
                                     <div className="descriptionCard">{loadingItem.description}</div>
@@ -65,7 +64,7 @@ export default function LoadingSpinner() {
                 }
             </Carousel>
             <div className='spinLoader'>
-                <ClockLoader size={120}/>
+                <ClockLoader size={120} />
             </div>
         </>
     );
