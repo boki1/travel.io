@@ -1,12 +1,8 @@
-import {Flight} from "./travel/Flight";
-import {Hotel} from "./travel/Hotel";
+import {VacationOfferDTO} from "./travel/VacationOfferDTO";
 import {Location} from "./travel/Location"
 
 export interface DestinationDTO{
 
     location: Location;
-    hotel: Hotel;
-    flight: Flight;
-
-
+    vacationOffers: VacationOfferDTO[];
 }
