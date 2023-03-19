@@ -30,28 +30,31 @@ public class MessageController {
 
     @PostMapping
     public ResponseEntity<ArrayList<VacationSuggestion>> makeVacationSuggestion(@RequestBody VacationDescription vacationDescription) {
-        String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
+        ArrayList<OpenAIDestinationResponse> analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
         Location currentLocation = new Location(vacationDescription.getCurrentCity(),
                 vacationDescription.getCurrentCountry(),
                 vacationDescription.getVacationDescription());
 
-        ArrayList<Location> locationData = messageService.getLocationDataFromOpenAIResponse(analyzerResponse);
-        locationData = locationData
+
+        analyzerResponse = analyzerResponse
                 .stream()
                 .limit(MAXIMUM_NUMBER_OF_LOCATIONS)
                 .collect(Collectors.toCollection(ArrayList::new));
 
         ArrayList<VacationSuggestion> vacationSuggestions = new ArrayList<>();
 
-        for (Location location : locationData) {
-            ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(location,
+        for (OpenAIDestinationResponse destination : analyzerResponse) {
+            Location locationData = destination.getLocation();
+
+
+            ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(locationData,
                     vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), vacationDescription.getMaxPrice());
 
             ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions,
-                    currentLocation, vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate());
+                    currentLocation, vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), destination.getLandmarks(), destination.getActivities());
 
             VacationSuggestion vacationSuggestion = new VacationSuggestion();
-            vacationSuggestion.setLocation(location);
+            vacationSuggestion.setLocation(locationData);
             vacationSuggestion.setVacationOffers(vacationOffers);
 
             vacationSuggestions.add(vacationSuggestion);

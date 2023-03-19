@@ -29,6 +29,8 @@ public class Hotel {
 
     private ArrayList<RestaurantInfo> nearbyRestaurants;
 
+    private ArrayList<String> suggestedActivities;
+
     public Integer getHotelId() {
         return hotelId;
     }
@@ -123,6 +125,14 @@ public class Hotel {
 
     public void setNearbyRestaurants(ArrayList<RestaurantInfo> nearbyRestaurants) {
         this.nearbyRestaurants = nearbyRestaurants;
+    }
+
+    public ArrayList<String> getSuggestedActivities() {
+        return suggestedActivities;
+    }
+
+    public void setSuggestedActivities(ArrayList<String> suggestedActivities) {
+        this.suggestedActivities = suggestedActivities;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.fmicodes.comm.services;
 
 import com.fmicodes.comm.DTO.Location;
+import com.fmicodes.comm.DTO.OpenAIDestinationResponse;
+import com.fmicodes.comm.DTO.RestaurantInfo;
 import com.fmicodes.comm.DTO.VacationOffer;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.DTO.travel.Flight;
@@ -35,7 +37,7 @@ public class MessageService {
     @Autowired
     private GoogleMapsService googleMapsService;
 
-    public String getMessageAnalysis(String message) {
+    public ArrayList<OpenAIDestinationResponse> getMessageAnalysis(String message) {
         return analyzerService.analyzeMessage(message);
     }
 
@@ -67,11 +69,7 @@ public class MessageService {
         return locationData;
     }
 
-    public String getNearbyRestaurants(Hotel hotel) {
-        return googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500).toString();
-    }
-
-    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, Location departureLocation, String departureDate, String returnDate) {
+    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, Location departureLocation, String departureDate, String returnDate, ArrayList<String> landmarks, ArrayList<String> suggestedActivities) {
         String originAirportCode = analyzerService.getAirportIATACodeByLocation(departureLocation);
 
         Flight flight = null;
@@ -82,11 +80,12 @@ public class MessageService {
 
         ArrayList<VacationOffer> vacationOffers = new ArrayList<>();
         for (Hotel hotel : hotels) {
+            hotel.setSuggestedActivities(suggestedActivities);
             System.out.println("HOTEL: " + hotel.getHotelName() + " AIRPORT CODE: " + hotel.getAirportCode());
 
-            System.out.println("HOTEL DATA: " + hotel);
-            System.out.println(" NEARBY RESTAURANTS: " + getNearbyRestaurants(hotel));
+            hotel.setNearbyRestaurants(googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500));
 
+            System.out.println("HOTEL DATA: " + hotel);
 
             VacationOffer vacationOffer = new VacationOffer();
             vacationOffer.setHotel(hotel);
