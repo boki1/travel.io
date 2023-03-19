@@ -16,7 +16,10 @@ def hint_marker(m):
 
 # Configuration passed to the Analyser ctor at init.
 g_analyser_options = {
-    'openai_hints': g_openai_hints
+    'openai_hints': g_openai_hints,
+    'openai_temperature': 0.1,
+    'openai_responses_at_once': 5,
+    'openai_model': "gpt-3.5-turbo",
 }
 
 
