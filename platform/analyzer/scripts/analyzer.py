@@ -1,4 +1,3 @@
-import json
 import re
 import unittest
 from os import listdir
@@ -29,7 +28,7 @@ class Analyser:
             country, city = dest['location'].split(', ')
             description = self.cleanup_description(dest['description'].text).strip(' \n')
             loc = Location(city, country, description)
-            dest['location'] = json.dumps(loc._asdict())
+            dest['location'] = loc._asdict()
             del dest['description']
         return destinations
 
