@@ -2,7 +2,6 @@ package com.fmicodes.comm.services;
 
 import com.fmicodes.comm.DTO.Location;
 import com.fmicodes.comm.DTO.OpenAIDestinationResponse;
-import com.fmicodes.comm.DTO.RestaurantInfo;
 import com.fmicodes.comm.DTO.VacationOffer;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.DTO.travel.Flight;
@@ -48,7 +47,6 @@ public class MessageService {
 
     public ArrayList<Location> getLocationDataFromOpenAIResponse(String openAIResponse) {
         ArrayList<Location> locationData = new ArrayList<>();
-        System.out.println("OPEN AI RESPONSE: " + openAIResponse);
 
         try {
             JSONObject openAIResponseJSON = new JSONObject(openAIResponse);
@@ -59,6 +57,7 @@ public class MessageService {
                 String country = locationArray.getString(1);
                 String description = locationArray.getString(2);
                 Location location = new Location(city, country, description);
+
 
                 locationData.add(location);
             }
@@ -73,7 +72,7 @@ public class MessageService {
         String originAirportCode = analyzerService.getAirportIATACodeByLocation(departureLocation);
 
         Flight flight = null;
-        if (hotels.size() != 0) {
+        if (!hotels.isEmpty()) {
             flight = ryanAirService.getFlightBetweenTwoAirports(originAirportCode,
                     hotels.get(0).getAirportCode(), departureDate, returnDate);
         }
@@ -81,12 +80,7 @@ public class MessageService {
         ArrayList<VacationOffer> vacationOffers = new ArrayList<>();
         for (Hotel hotel : hotels) {
             hotel.setSuggestedActivities(suggestedActivities);
-            System.out.println("HOTEL: " + hotel.getHotelName() + " AIRPORT CODE: " + hotel.getAirportCode());
-
             hotel.setNearbyRestaurants(googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500));
-
-            System.out.println("HOTEL DATA: " + hotel);
-
             VacationOffer vacationOffer = new VacationOffer();
             vacationOffer.setHotel(hotel);
             vacationOffer.setFlight(flight);
