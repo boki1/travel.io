@@ -39,10 +39,9 @@ public class MessageService {
         return analyzerService.analyzeMessage(message);
     }
 
-    public ArrayList<Hotel> getHotelsByParams(String city, String country, String checkInDate, String checkOutDate, Double maximumBudget) {
-        String airportIATACode = analyzerService.getAirportIATACodeByLocation(new Location(city, country));
-        ArrayList<Hotel> hotelSuggestions = bookingService.getHotelsByParams(city, country, checkInDate, checkOutDate, maximumBudget, airportIATACode);
-        return hotelSuggestions;
+    public ArrayList<Hotel> getHotelsByParams(Location location, String checkInDate, String checkOutDate, Double maximumBudget) {
+        String airportIATACode = analyzerService.getAirportIATACodeByLocation(location);
+        return bookingService.getHotelsByParams(location, checkInDate, checkOutDate, maximumBudget, airportIATACode);
     }
 
     public ArrayList<Location> getLocationDataFromOpenAIResponse(String openAIResponse) {
@@ -56,7 +55,8 @@ public class MessageService {
                 JSONArray locationArray = locations.getJSONArray(i);
                 String city = locationArray.getString(0);
                 String country = locationArray.getString(1);
-                Location location = new Location(city, country);
+                String description = locationArray.getString(2);
+                Location location = new Location(city, country, description);
 
                 locationData.add(location);
             }
@@ -71,13 +71,18 @@ public class MessageService {
         return googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500).toString();
     }
 
-    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, String departureDate, Location departureLocation) {
-        String departureAirportIATACode = analyzerService.getAirportIATACodeByLocation(departureLocation);
+    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, Location departureLocation, String departureDate, String returnDate) {
+        String originAirportCode = analyzerService.getAirportIATACodeByLocation(departureLocation);
+
+        Flight flight = null;
+        if (hotels.size() != 0) {
+            flight = ryanAirService.getFlightBetweenTwoAirports(originAirportCode,
+                    hotels.get(0).getAirportCode(), departureDate, returnDate);
+        }
 
         ArrayList<VacationOffer> vacationOffers = new ArrayList<>();
         for (Hotel hotel : hotels) {
             System.out.println("HOTEL: " + hotel.getHotelName() + " AIRPORT CODE: " + hotel.getAirportCode());
-            Flight flight = ryanAirService.getFlightBetweenTwoAirports(departureAirportIATACode, hotel.getAirportCode(), departureDate);
 
             System.out.println("HOTEL DATA: " + hotel);
             System.out.println(" NEARBY RESTAURANTS: " + getNearbyRestaurants(hotel));

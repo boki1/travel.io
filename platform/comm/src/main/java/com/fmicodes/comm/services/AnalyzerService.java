@@ -5,7 +5,6 @@ import com.fmicodes.comm.exceptions.DeserializingJSONException;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.asynchttpclient.Response;
-import org.asynchttpclient.request.body.generator.BodyGenerator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,9 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -27,7 +23,7 @@ public class AnalyzerService {
 
     public String analyzeMessage(String message) {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
-        String analyzedMessageResponse = null;
+        String analyzedMessageResponse;
         try {
             Response response = client.prepare("POST", "http://" + analyzerHost + "/api/v1/analyzer")
                     .setBody(message)
@@ -74,7 +70,7 @@ public class AnalyzerService {
 
     public String getAirportIATACodeByLocation(Location location) {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
-        String airportIATACode = "";
+        String airportIATACode;
         try {
             Response response = client.prepare("POST", "http://" + analyzerHost + "/api/v1/airports")
                     .setHeader("Content-Type", "application/json")

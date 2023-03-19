@@ -1,7 +1,7 @@
 package com.fmicodes.comm.services;
 
+import com.fmicodes.comm.DTO.Location;
 import com.fmicodes.comm.DTO.booking.Hotel;
-import com.fmicodes.comm.exceptions.AirportCompatibilityException;
 import com.fmicodes.comm.exceptions.DeserializingJSONException;
 import com.fmicodes.comm.services.util.CredentialsUtil;
 import org.asynchttpclient.AsyncHttpClient;
@@ -22,16 +22,13 @@ import java.util.stream.Collectors;
 @Service
 public class BookingService {
 
+    private static final String rapidApiKey = CredentialsUtil.getRapidAPIKey();
+    private static final Integer MAX_HOTELS_SUGGESTION = 2;
+    private static final Double HOTEL_PRICE_BUFFER = 0.15;
     @Value("${booking.host}")
     private String bookingAPIHost;
 
-    private static String rapidApiKey = CredentialsUtil.getRapidAPIKey();
-
-    private static final Integer MAX_HOTELS_SUGGESTION = 2;
-    private static final Integer MAX_HOTELS_SUGGESTION_TEST_PURPOSES = 3;
-    private static final Double HOTEL_PRICE_BUFFER = 0.15;
-
-    public ArrayList<Hotel> getHotelsByParams(String city, String country, String checkInDate, String checkOutDate, Double maximumBudget, String airportCode) {
+    public ArrayList<Hotel> getHotelsByParams(Location location, String checkInDate, String checkOutDate, Double maximumBudget, String airportCode) {
         StringBuilder url = new StringBuilder("https://" + bookingAPIHost + "/v1/hotels/search?");
         url.append("adults_number=2");
         url.append("&dest_type=city");
@@ -43,10 +40,10 @@ public class BookingService {
         url.append("&units=metric");
         url.append("&room_number=1");
 
-        Integer destinationID = getDestinationIdByCityAndCountry(city, country);
+        Integer destinationID = getDestinationIdByCityAndCountry(location);
         if (destinationID != null) {
             System.out.println("DESTINATION ID THAT WE END UP USING: " + destinationID);
-            url.append("&dest_id=" + destinationID);
+            url.append("&dest_id=").append(destinationID);
         } else {
             // TODO: Handle case when destinationID is null after API call
             url.append("&dest_id=" + "-1746443"); // stupid error handling for now
@@ -55,7 +52,7 @@ public class BookingService {
         }
 
         AsyncHttpClient client = new DefaultAsyncHttpClient();
-        String hotelsResponse = null;
+        String hotelsResponse;
         try {
             Response response = client.prepare("GET", url.toString())
                     .setHeader("X-RapidAPI-Key", rapidApiKey)
@@ -116,19 +113,35 @@ public class BookingService {
 
         hotelSuggestions = accountForMaximumBudget(hotelSuggestions, maximumBudget);
 
-        // For testing purposes we want to thin out this array as it makes a bunch of calls to the booking API and we have a limit on those.
-        hotelSuggestions = (ArrayList<Hotel>) hotelSuggestions.stream().limit(MAX_HOTELS_SUGGESTION_TEST_PURPOSES).collect(Collectors.toList());
         hotelSuggestions = filterHotels(hotelSuggestions);
 
         return hotelSuggestions;
     }
 
+    public ArrayList<Hotel> filterHotels(ArrayList<Hotel> hotels) {
+        hotels = hotels
+                .stream()
+                .filter(hotel -> hotel.getAirportCode() != null)
+                .collect(Collectors.toCollection(ArrayList::new));
+        hotels = hotels
+                .stream()
+                .filter(hotel -> hotel.getReviewScore() != null)
+                .sorted(Comparator.comparing(Hotel::getReviewScore).reversed())
+                .collect(Collectors.toCollection(ArrayList::new));
 
-    private Integer getDestinationIdByCityAndCountry(String cityName, String countryName) {
+        hotels = hotels
+                .stream()
+                .limit(MAX_HOTELS_SUGGESTION)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        return hotels;
+    }
+
+    private Integer getDestinationIdByCityAndCountry(Location location) {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
-        String destinationsResponse = null;
+        String destinationsResponse;
         try {
-            Response response = client.prepare("GET", "https://" + bookingAPIHost + "/v1/hotels/locations?name=" + cityName + "&locale=en-gb")
+            Response response = client.prepare("GET", "https://" + bookingAPIHost + "/v1/hotels/locations?name=" + location.getCity() + "&locale=en-gb")
                     .setHeader("X-RapidAPI-Key", rapidApiKey)
                     .setHeader("X-RapidAPI-Host", bookingAPIHost)
                     .execute()
@@ -145,7 +158,7 @@ public class BookingService {
             throw new RuntimeException("ERROR - Closing AsyncHttpClient: " + e.getMessage());
         }
 
-        JSONArray destinationsArray = null;
+        JSONArray destinationsArray;
         try {
             destinationsArray = new JSONArray(destinationsResponse);
         } catch (JSONException e) {
@@ -157,7 +170,7 @@ public class BookingService {
             try {
                 JSONObject destination = destinationsArray.getJSONObject(i);
 
-                if (destination.get("country").equals(countryName) && destination.getInt("dest_id") < 0) {
+                if (destination.get("country").equals(location.getCountry()) && destination.getInt("dest_id") < 0) {
                     destinationId = destination.getInt("dest_id");
                 }
             } catch (JSONException e) {
@@ -168,49 +181,13 @@ public class BookingService {
         return destinationId;
     }
 
-    public ArrayList<Hotel> filterHotels(ArrayList<Hotel> hotels) {
-        hotels = hotels.stream().filter(hotel -> hotel.getAirportCode() != null).collect(Collectors.toCollection(ArrayList::new));
-        hotels.stream().filter(hotel -> hotel.getReviewScore() != null).sorted(Comparator.comparing(Hotel::getReviewScore).reversed()).collect(Collectors.toList());
-
-        hotels = (ArrayList<Hotel>) hotels.stream().limit(MAX_HOTELS_SUGGESTION).collect(Collectors.toList());
-
-        return hotels;
-    }
-
     private ArrayList<Hotel> accountForMaximumBudget(ArrayList<Hotel> hotels, Double maximumBudget) {
-        maximumBudget += maximumBudget * HOTEL_PRICE_BUFFER; // Add a 15% buffer to the maximum budget.
+        Double finalMaximumBudget = maximumBudget + maximumBudget * HOTEL_PRICE_BUFFER;
 
-        Double finalMaximumBudget = maximumBudget;
-        hotels.stream().filter(hotel -> hotel.getPrice() <= finalMaximumBudget).collect(Collectors.toList());
-
-        return hotels;
+        System.out.println("Hotel prices:" + hotels.stream().map(Hotel::getPrice).toList());
+        return hotels
+                .stream()
+                .filter(hotel -> hotel.getPrice() <= finalMaximumBudget)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
-
-    public ArrayList<Hotel> checkAirportsCompatibility(ArrayList<Hotel> hotels) throws IOException, ExecutionException, InterruptedException, JSONException {
-        AsyncHttpClient client = new DefaultAsyncHttpClient();
-        for (Hotel hotel : hotels) {
-            Response response = client.prepare("GET", "https://" + bookingAPIHost + "/v1/hotels/nearby-places?locale=en-gb&hotel_id=" + hotel.getHotelId())
-                    .setHeader("X-RapidAPI-Key", rapidApiKey)
-                    .setHeader("X-RapidAPI-Host", bookingAPIHost)
-                    .execute()
-                    .get();
-
-            JSONObject responseBodyJson = new JSONObject(response.getResponseBody());
-
-            if (responseBodyJson.has("transport")) {
-                JSONObject transport = responseBodyJson.getJSONObject("transport");
-                if (transport.has("airport")) {
-                    JSONObject airport = transport.getJSONObject("airport");
-                    hotel.setAirportCode(airport.getString("code"));
-                }
-            }
-
-        }
-
-        client.close();
-
-
-        return hotels;
-    }
-
 }
