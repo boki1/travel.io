@@ -1,3 +1,4 @@
+import json
 import re
 import unittest
 from os import listdir
@@ -27,22 +28,13 @@ class Analyser:
         return out
 
     def prepare_out(self, destinations):
-        locations = []
-        activities = []
-        landmarks = []
         for dest in destinations:
             country, city = dest['location'].split(', ')
             description = self.cleanup_description(dest['description'].text).strip(' \n')
             loc = Location(city, country, description)
-            locations.append(loc)
-            for landmark in dest['landmarks']:
-                lm = Landmark(name=landmark, location=loc)
-            landmarks.append(lm)
-            for activity in dest['activities']:
-                act = Activity(name=activity, location=loc)
-            activities.append(act)
-        out = Out(locations, activities, landmarks)
-        return out
+            dest['location'] = json.dumps(loc._asdict())
+            del dest['description']
+        return destinations
 
     def extract(self, task: Task) -> Out:
         soup = bs(task.inp_answer, features='html.parser')
