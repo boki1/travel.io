@@ -15,10 +15,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/messages")
 public class MessageController {
 
+    private static final Integer MAXIMUM_NUMBER_OF_LOCATIONS = 4;
     @Autowired
     private MessageService messageService;
-
-    private static final Integer MAXIMUM_NUMBER_OF_LOCATIONS = 4;
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception e) {
@@ -32,16 +31,24 @@ public class MessageController {
     @PostMapping
     public ResponseEntity<ArrayList<VacationSuggestion>> makeVacationSuggestion(@RequestBody VacationDescription vacationDescription) {
         String analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
-        Location currentLocation = new Location(vacationDescription.getCurrentCity(), vacationDescription.getCurrentCountry());
+        Location currentLocation = new Location(vacationDescription.getCurrentCity(),
+                vacationDescription.getCurrentCountry(),
+                vacationDescription.getVacationDescription());
 
         ArrayList<Location> locationData = messageService.getLocationDataFromOpenAIResponse(analyzerResponse);
-        locationData = (ArrayList<Location>) locationData.stream().limit(MAXIMUM_NUMBER_OF_LOCATIONS).collect(Collectors.toList());
+        locationData = locationData
+                .stream()
+                .limit(MAXIMUM_NUMBER_OF_LOCATIONS)
+                .collect(Collectors.toCollection(ArrayList::new));
 
         ArrayList<VacationSuggestion> vacationSuggestions = new ArrayList<>();
 
         for (Location location : locationData) {
-            ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(location.getCity(), location.getCountry(), vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), vacationDescription.getMaxPrice());
-            ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions, vacationDescription.getCheckInDate(), currentLocation);
+            ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(location,
+                    vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), vacationDescription.getMaxPrice());
+
+            ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions,
+                    currentLocation, vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate());
 
             VacationSuggestion vacationSuggestion = new VacationSuggestion();
             vacationSuggestion.setLocation(location);

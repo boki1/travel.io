@@ -4,6 +4,7 @@ import typing
 class Location(typing.NamedTuple):
     city: str
     country: str
+    description: str
 
 
 class ActionTopic(typing.NamedTuple):
