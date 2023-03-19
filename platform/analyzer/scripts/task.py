@@ -7,10 +7,20 @@ class Location(typing.NamedTuple):
     description: str
 
 
+class Activity(typing.NamedTuple):
+    name: str
+    location: Location
+
+
+class Landmark(typing.NamedTuple):
+    name: str
+    location: Location
+
+
 class Out(typing.NamedTuple):
     locations: list[Location]
-    action_topics: list[str]
-    landmarks: list[str]
+    activities: list[Activity]
+    landmarks: list[Landmark]
 
     def full(self):
         # FIXME: Make JSON nicer. This looks kind of bad :/

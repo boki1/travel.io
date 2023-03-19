@@ -1,9 +1,12 @@
-DEBUG_MODE = True
+DEBUG_MODE = False
 
 g_openai_hints = {
-    'location_fmt': 'NumberBullet. City, Country: Description.',
+    'location_fmt': '<LOCATION>Country, City</LOCATION> Description.',
     'landmark_marker': '<LNDMARK>',
-    'activity_marker': '<ACTIVITY>'
+    'activity_marker': '<ACTIVITY>',
+    'location_marker': '<LOCATION>',
+    'destination_marker': '<DESTINATION>',
+    'description_marker': '<DESCRIPTION>',
 }
 
 

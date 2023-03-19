@@ -1,18 +1,30 @@
 -- I love France and would like to go on a beach vacation there in July this year, please
 -- suggest me some nice resorts on the Atlantic ocean.
-1. Biarritz, France: A popular seaside resort town on the Atlantic coast with a beautiful
-beach and surf culture. Relax on the sandy beaches and try surfing with <ACTIVITY>surfing
-lessons</ACTIVITY>. Visit the <LNDMARK>Rocher de la Vierge</LNDMARK>, a rock formation with
-a beautiful view of the sea, and explore the historic city center with its boutiques and cafes.
-2. La Rochelle, France: A historic port city on the Bay of Biscay with a vibrant atmosphere
-and beautiful beaches. Take a stroll along the old harbor and visit the <LNDMARK>Towers of
-La Rochelle</LNDMARK>, two medieval towers that offer stunning views of the city and the sea.
-Relax on the sandy beaches and enjoy seafood specialties in the many restaurants and cafes.
-3. Cap Ferret, France: A quiet and charming peninsula on the Atlantic coast with beautiful
-beaches and pine forests. Take a bike ride through the nature reserves and explore the local
-oyster farms. Relax on the sandy beaches and enjoy water activities such as <ACTIVITY>kayaking
-</ACTIVITY> and <ACTIVITY>paddleboarding</ACTIVITY>.
-4. Hossegor, France: A popular beach town on the Atlantic coast known for its surfing and
-natural beauty. Surf on the famous waves, relax on the sandy beaches, and explore the local
-markets and boutiques. Take a day trip to the nearby forests and lakes or visit the <LNDMARK>
-ferNotre Dame des Landes Church</LNDMARK>, a beautiful example of regional architecture.
+Sure, here are some nice resorts on the Atlantic ocean in France for a beach vacation in July:
+<DESTINATION>
+  <LOCATION>France, Biarritz</LOCATION>
+  <DESCRIPTION>
+    <LNDMARK>Grand Plage</LNDMARK> is a popular beach with golden sand and clear water, ideal for sunbathing, swimming, and surfing. 
+    <LNDMARK>Rocher de la Vierge</LNDMARK> is a rocky promontory with a statue of the Virgin Mary overlooking the sea, offering great views and photo opportunities.
+    <LNDMARK>Miramar Palace</LNDMARK> is a beautiful palace built in the 19th century for Empress Eugenie, now converted into a hotel and spa.
+    <ACTIVITY>Surfing</ACTIVITY> is a popular activity in Biarritz, with many surf schools and rental shops available.
+  </DESCRIPTION>
+</DESTINATION>
+<DESTINATION>
+  <LOCATION>France, La Rochelle</LOCATION>
+  <DESCRIPTION>
+    <LNDMARK>La Concurrence Beach</LNDMARK> is a sandy beach near the city center, with many restaurants and shops nearby.
+    <LNDMARK>Old Port</LNDMARK> is a picturesque harbor with colorful boats and lively atmosphere, surrounded by historic buildings and cafes.
+    <LNDMARK>Maritime Museum</LNDMARK> is a museum dedicated to the maritime history of La Rochelle, with many exhibits and interactive displays.
+    <ACTIVITY>Sailing</ACTIVITY> is a popular activity in La Rochelle, with many boat rental and sailing schools available.
+  </DESCRIPTION>
+</DESTINATION>
+<DESTINATION>
+  <LOCATION>France, Arcachon</LOCATION>
+  <DESCRIPTION>
+    <LNDMARK>Dune du Pilat</LNDMARK> is a large sand dune overlooking the ocean, offering breathtaking views and a challenging climb.
+    <LNDMARK>Arcachon Bay</LNDMARK> is a shallow lagoon with many oyster farms and fishing villages, offering boat tours and seafood restaurants.
+    <LNDMARK>Cap Ferret</LNDMARK> is a peninsula with many beaches and pine forests, accessible by ferry or car.
+    <ACTIVITY>Kite surfing</ACTIVITY> is a popular activity in Arcachon, with many kite schools and rental shops available.
+  </DESCRIPTION>
+</DESTINATION>

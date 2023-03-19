@@ -1,6 +1,7 @@
 import re
 import unittest
 from os import listdir
+import re
 
 from countryinfo import CountryInfo
 from geopy.geocoders import Nominatim
@@ -15,43 +16,51 @@ class Analyser:
     def __init__(self, options: dict):
         self.options = options
 
-    def extract_locations(self, task: Task) -> list[Location]:
-        location_list = []
-        suggestions = task.inp_answer.strip().split('\n')
-
-        for suggestion in suggestions:
-            if not suggestion.strip():
-                continue  # Ignore empty lines
-
-            suggestion_data = re.sub(r'^\d+\. ', '', suggestion)
-
-            # Remove the index number
-            suggestion_data_result = suggestion_data.split(': ', 1)
-            if len(suggestion_data_result) != 2:
-                continue
-            city_country, description = suggestion_data_result
-
-            city_country_result = city_country.split(', ', 1)
-            if len(city_country_result) != 2:
-                continue
-            city, country = city_country_result
-
-            location_list.append(Location(city.strip(), country.strip(), description.strip()))
-
-        task.extracted_locations = location_list
-        return location_list
+    @staticmethod
+    def cleanup_description(description_raw: str) -> str:
+        pattern = r'<.*?>'
+        return re.sub(pattern, '', description_raw)
 
     def perform(self, task: Task) -> Out:
-        def cleanup(s: str):
-            return s.strip(' \n').replace('\n', ' ')
-        locations = self.extract_locations(task)
-        soup = bs(task.inp_answer, features="lxml")
-        landmark_marker = hint_marker(self.options['openai_hints']['landmark_marker'])
-        activity_marker = hint_marker(self.options['openai_hints']['activity_marker'])
-        landmarks = list(set([cleanup(lm_obj.text) for lm_obj in soup.find_all(landmark_marker)]))
-        activities = list(set([cleanup(act_obj.text) for act_obj in soup.find_all(activity_marker)]))
+        raw = self.extract(task)
+        out = self.prepare_out(raw)
+        return out
+
+    def prepare_out(self, destinations):
+        locations = []
+        activities = []
+        landmarks = []
+        for dest in destinations:
+            country, city = dest['location'].split(', ')
+            description = self.cleanup_description(dest['description'].text).strip(' \n')
+            loc = Location(city, country, description)
+            locations.append(loc)
+            for landmark in dest['landmarks']:
+                lm = Landmark(name=landmark, location=loc)
+            landmarks.append(lm)
+            for activity in dest['activities']:
+                act = Activity(name=activity, location=loc)
+            activities.append(act)
         out = Out(locations, activities, landmarks)
         return out
+
+    def extract(self, task: Task) -> Out:
+        soup = bs(task.inp_answer, features='html.parser')
+        destination_tags = soup.find_all('destination')
+        destinations = []
+        for destination in destination_tags:
+            location = destination.find('location').text
+            description = destination.find('description')
+            landmarks = [lndmark.text for lndmark in description.find_all('lndmark')]
+            activities = [activity.text for activity in description.find_all('activity')]
+            destination_info = {
+                'location': location,
+                'landmarks': landmarks,
+                'activities': activities,
+                'description': description
+            }
+            destinations.append(destination_info)
+        return destinations
 
 
 # TODO: Move to travel.io/test/feature/
@@ -81,11 +90,17 @@ class TestAnalyzer(unittest.TestCase):
 
     def test_samples(self):
         def test_sample(sample_task) -> bool:
-            out = self.analyzer.perform(sample_task)
+            out = self.analyzer.extract(sample_task)
             debug_print(f'Locations: [{out.locations}]')
             debug_print(f'Landmarks: [{out.landmarks}]')
-            debug_print(f'Activities: [{out.action_topics}]')
+            debug_print(f'Activities: [{out.activities}]')
             return True  # :)
 
         for sample_task in TestAnalyzer.for_each_sample():
             self.assertTrue(test_sample(sample_task))
+
+    def test_parsing(self):
+        test_path = '../../../test/inputs/france_beach.txt'
+        sample = TestAnalyzer.create_task_from_desc(test_path)
+        out = self.analyzer.perform(sample)
+        print(out)
