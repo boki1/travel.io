@@ -1,4 +1,4 @@
-package com.fmicodes.comm.DTO;
+package com.fmicodes.comm.DTO.mapsAPI;
 
 public class RestaurantInfo {
     private String name;

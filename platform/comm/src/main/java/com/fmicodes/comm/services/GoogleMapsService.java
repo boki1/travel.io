@@ -2,8 +2,16 @@ package com.fmicodes.comm.services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fmicodes.comm.DTO.RestaurantInfo;
+import com.fmicodes.comm.DTO.Location;
+import com.fmicodes.comm.DTO.mapsAPI.Landmark;
+import com.fmicodes.comm.DTO.mapsAPI.RestaurantInfo;
 import com.fmicodes.comm.services.util.CredentialsUtil;
+import com.google.maps.GeoApiContext;
+import com.google.maps.PlacesApi;
+import com.google.maps.errors.ApiException;
+import com.google.maps.model.PlaceDetails;
+import com.google.maps.model.PlacesSearchResponse;
+import com.google.maps.model.PlacesSearchResult;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -11,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,6 +27,39 @@ import java.util.Objects;
 public class GoogleMapsService {
     private static final String mapsApiKey = CredentialsUtil.getMapsAPIKey();
     private final OkHttpClient client = new OkHttpClient();
+    private final GeoApiContext context;
+
+    public GoogleMapsService() {
+        context = new GeoApiContext.Builder().apiKey(mapsApiKey).build();
+    }
+
+    public List<Landmark> searchLandmarks(List<String> landmarksList, Location location) {
+        List<Landmark> landmarks = new ArrayList<>();
+
+        try {
+            for (String landmarkLiteral : landmarksList) {
+                PlacesSearchResponse response = PlacesApi.textSearchQuery(context,
+                        landmarkLiteral + " in " + location.getCity() + " " + location.getCountry()).await();
+
+                PlacesSearchResult result = response.results[0];
+                PlaceDetails details = PlacesApi.placeDetails(context, result.placeId).await();
+                Landmark landmark = new Landmark(
+                        details.name,
+                        details.formattedAddress,
+                        details.geometry.location.lat,
+                        details.geometry.location.lng,
+                        details.openingHours != null ? Arrays.toString(details.openingHours.weekdayText) : null,
+                        details.openingHours != null ? details.rating : null,
+                        details.openingHours != null ? details.openingHours.openNow : null
+                );
+                landmarks.add(landmark);
+            }
+        } catch (ApiException | InterruptedException | IOException e) {
+            throw new RuntimeException("Failed fetching landmarks with exception: " + e.getMessage());
+        }
+
+        return landmarks;
+    }
 
     public String getPhotoUrl(String photoReference, int maxHeight, int maxWidth) {
         return "https://maps.googleapis.com/maps/api/place/photo?maxheight=" + maxHeight + "&maxwidth=" + maxWidth
@@ -58,7 +100,7 @@ public class GoogleMapsService {
                         restaurant.setLocation(result.get("vicinity").asText());
                     }
 
-                    if (result.has("rating")) {
+                    if (result.has("rating") && result.get("rating") != null) {
                         restaurant.setRating(result.get("rating").asDouble());
                     }
 

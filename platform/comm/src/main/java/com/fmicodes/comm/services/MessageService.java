@@ -1,8 +1,6 @@
 package com.fmicodes.comm.services;
 
-import com.fmicodes.comm.DTO.Location;
-import com.fmicodes.comm.DTO.OpenAIDestinationResponse;
-import com.fmicodes.comm.DTO.VacationOffer;
+import com.fmicodes.comm.DTO.*;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.DTO.travel.Flight;
 import com.fmicodes.comm.services.util.CredentialsUtil;
@@ -59,7 +57,11 @@ public class MessageService {
         return locationData;
     }
 
-    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, Location departureLocation, String departureDate, String returnDate, ArrayList<String> landmarks, ArrayList<String> suggestedActivities) {
+    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels,
+                                                         Location departureLocation,
+                                                         String departureDate,
+                                                         String returnDate,
+                                                         ArrayList<String> suggestedActivities) {
         String originAirportCode = analyzerService.getAirportIATACodeByLocation(departureLocation);
 
         Flight flight = null;
@@ -72,14 +74,31 @@ public class MessageService {
         for (Hotel hotel : hotels) {
             hotel.setSuggestedActivities(suggestedActivities);
             hotel.setNearbyRestaurants(googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500));
+
             VacationOffer vacationOffer = new VacationOffer();
             vacationOffer.setHotel(hotel);
             vacationOffer.setFlight(flight);
+
             vacationOffers.add(vacationOffer);
         }
+
+
 
         return vacationOffers;
     }
 
 
+    public VacationSuggestion prepareVacationSuggestion(Location locationData,
+                                                        ArrayList<VacationOffer> vacationOffers,
+                                                        ArrayList<String> landmarks,
+                                                        ArrayList<String> activities) {
+        VacationSuggestion vacationSuggestion = new VacationSuggestion();
+
+        vacationSuggestion.setLocation(locationData);
+        vacationSuggestion.setVacationOffers(vacationOffers);
+        vacationSuggestion.setLandmarks(googleMapsService.searchLandmarks(landmarks, locationData));
+        vacationSuggestion.setActivities(activities);
+
+        return vacationSuggestion;
+    }
 }
