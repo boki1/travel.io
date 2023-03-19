@@ -184,6 +184,7 @@ public class BookingService {
     private ArrayList<Hotel> accountForMaximumBudget(ArrayList<Hotel> hotels, Double maximumBudget) {
         Double finalMaximumBudget = maximumBudget + maximumBudget * HOTEL_PRICE_BUFFER;
 
+        System.out.println("Hotel prices:" + hotels.stream().map(Hotel::getPrice).toList());
         return hotels
                 .stream()
                 .filter(hotel -> hotel.getPrice() <= finalMaximumBudget)

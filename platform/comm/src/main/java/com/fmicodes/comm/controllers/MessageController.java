@@ -44,8 +44,11 @@ public class MessageController {
         ArrayList<VacationSuggestion> vacationSuggestions = new ArrayList<>();
 
         for (Location location : locationData) {
-            ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(location, vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), vacationDescription.getMaxPrice());
-            ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions, vacationDescription.getCheckInDate(), currentLocation);
+            ArrayList<Hotel> hotelSuggestions = messageService.getHotelsByParams(location,
+                    vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), vacationDescription.getMaxPrice());
+
+            ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions,
+                    currentLocation, vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate());
 
             VacationSuggestion vacationSuggestion = new VacationSuggestion();
             vacationSuggestion.setLocation(location);

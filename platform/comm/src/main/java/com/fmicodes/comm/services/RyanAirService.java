@@ -24,11 +24,14 @@ public class RyanAirService {
     @Value("${ryanair.host}")
     private String ryanAirHost;
 
-    public Flight getFlightBetweenTwoAirports(String locationAirportCode, String destinationAirportCode, String originDepartureDate) {
+    public Flight getFlightBetweenTwoAirports(String originAirportCode, String destinationAirportCode, String originDepartureDate, String destinationDepartureDate) {
         AsyncHttpClient client = new DefaultAsyncHttpClient();
         JSONArray originToDestinationRoutes = null;
         try {
-            Response response = client.prepare("GET", "https://ryanair.p.rapidapi.com/flights?origin_code=" + locationAirportCode + "&destination_code=" + destinationAirportCode + "&origin_departure_date=" + originDepartureDate + "&destination_departure_date=2023-10-28")
+            Response response = client.prepare("GET", "https://ryanair.p.rapidapi.com/flights?origin_code=" +
+                            originAirportCode + "&destination_code=" +
+                            destinationAirportCode + "&origin_departure_date=" +
+                            originDepartureDate + "&destination_departure_date=" + destinationDepartureDate)
                     .setHeader("X-RapidAPI-Key", rapidApiKey)
                     .setHeader("X-RapidAPI-Host", ryanAirHost)
                     .execute()
@@ -80,10 +83,10 @@ public class RyanAirService {
             return null;
         }
 
-        return sortFlightsByPriceDesc(availableFlights).get(0); // We are only interested in the cheapest flight option.
+        return sortFlightsByPriceAsc(availableFlights).get(0); // We are only interested in the cheapest flight option.
     }
 
-    private ArrayList<Flight> sortFlightsByPriceDesc(ArrayList<Flight> flights) {
+    private ArrayList<Flight> sortFlightsByPriceAsc(ArrayList<Flight> flights) {
         flights.sort(Comparator.comparing(Flight::getPrice));
 
         return flights;

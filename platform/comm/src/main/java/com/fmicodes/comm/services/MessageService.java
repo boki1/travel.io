@@ -71,13 +71,18 @@ public class MessageService {
         return googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500).toString();
     }
 
-    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, String departureDate, Location departureLocation) {
-        String departureAirportIATACode = analyzerService.getAirportIATACodeByLocation(departureLocation);
+    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, Location departureLocation, String departureDate, String returnDate) {
+        String originAirportCode = analyzerService.getAirportIATACodeByLocation(departureLocation);
+
+        Flight flight = null;
+        if (hotels.size() != 0) {
+            flight = ryanAirService.getFlightBetweenTwoAirports(originAirportCode,
+                    hotels.get(0).getAirportCode(), departureDate, returnDate);
+        }
 
         ArrayList<VacationOffer> vacationOffers = new ArrayList<>();
         for (Hotel hotel : hotels) {
             System.out.println("HOTEL: " + hotel.getHotelName() + " AIRPORT CODE: " + hotel.getAirportCode());
-            Flight flight = ryanAirService.getFlightBetweenTwoAirports(departureAirportIATACode, hotel.getAirportCode(), departureDate);
 
             System.out.println("HOTEL DATA: " + hotel);
             System.out.println(" NEARBY RESTAURANTS: " + getNearbyRestaurants(hotel));
