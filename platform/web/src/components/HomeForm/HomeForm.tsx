@@ -28,18 +28,17 @@ const HomeForm = ({ setShowLoading }: { setShowLoading: React.Dispatch<React.Set
 
         setShowLoading(true);
 
-        // const [data, err] = await postReq('messages', formData);
+        const [data, err] = await postReq('messages', formData);
 
-
-        // if (false) {
-        //     setShowLoading(false)
-        //     console.log(err);
-        // } else {
-            localStorage.setItem('destinations', JSON.stringify([{ "vacationOffers": [{ "hotel": { "hotelId": 54276, "hotelName": "Victoria Garden Bordeaux Centre", "reviewScore": 7.9, "address": "127 Cours De La Somme", "maxPhotoUrl": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/374005004.jpg?k=e0e03a94a86173b65d2090104554df21be7572133b4ef35d7dbac96d67419912&o=", "url": "https://www.booking.com/hotel/fr/victoria-garden-suites-bordeaux.html", "airportCode": "{\"action_topics\":[],\"landmarks\":[],\"locations\":[[\"Bordeaux\",\"France\"]]}\n", "longitude": -0.572630167007446, "latitude": 44.8257317653906, "price": 663.4, "currency": "EUR" }, "flight": null }, { "hotel": { "hotelId": 8678030, "hotelName": "Beautiful apartment Bordeaux with lovely terrace", "reviewScore": 8.3, "address": "14 Rue Jules Steeg", "maxPhotoUrl": "https://cf.bstatic.com/xdata/images/hotel/max1280x900/367983455.jpg?k=fab9662810226c96c8b334eba5b07a998be7cf040c059ec43dbeea41cc137f60&o=", "url": "https://www.booking.com/hotel/fr/beautiful-apartment-bordeaux-with-lovely-terrace.html", "airportCode": "{\"action_topics\":[],\"landmarks\":[],\"locations\":[[\"Bordeaux\",\"France\"]]}\n", "longitude": -0.5668322, "latitude": 44.8268729, "price": 815.025, "currency": "EUR" }, "flight": null }], "location": { "city": "Bordeaux", "country": "France" } }]));
+        if (err) {
+            setShowLoading(false)
+            console.log(err);
+        } else {
+            localStorage.setItem('destinations', JSON.stringify(data));
             window.location.href = '/destinations';
-            // setShowLoading(false);
-        //     console.log(data);
-        // }
+            setShowLoading(false);
+            console.log(data);
+        }
     };
 
     const modifyCity = (e: React.FormEvent<HTMLInputElement>) => {
