@@ -3,13 +3,10 @@ package com.fmicodes.comm.DTO;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.DTO.travel.Flight;
 
-import java.util.ArrayList;
-
 public class VacationOffer {
     private Hotel hotel;
 
     private Flight flight;
-
 
 
     public Hotel getHotel() {

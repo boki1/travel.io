@@ -1,6 +1,6 @@
 package com.fmicodes.comm.DTO.booking;
 
-import com.fmicodes.comm.DTO.RestaurantInfo;
+import com.fmicodes.comm.DTO.mapsAPI.RestaurantInfo;
 
 import java.util.ArrayList;
 

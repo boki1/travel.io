@@ -51,11 +51,11 @@ public class MessageController {
                     vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), vacationDescription.getMaxPrice());
 
             ArrayList<VacationOffer> vacationOffers = messageService.bundleVacationOffers(hotelSuggestions,
-                    currentLocation, vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(), destination.getLandmarks(), destination.getActivities());
+                    currentLocation, vacationDescription.getCheckInDate(), vacationDescription.getCheckOutDate(),
+                    destination.getActivities());
 
-            VacationSuggestion vacationSuggestion = new VacationSuggestion();
-            vacationSuggestion.setLocation(locationData);
-            vacationSuggestion.setVacationOffers(vacationOffers);
+            VacationSuggestion vacationSuggestion = messageService.prepareVacationSuggestion(locationData, vacationOffers,
+                    destination.getLandmarks(), destination.getActivities());
 
             vacationSuggestions.add(vacationSuggestion);
         }
