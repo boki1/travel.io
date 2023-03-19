@@ -1,3 +1,5 @@
+import { Location } from './Location';
+
 export interface Flight{
     departureAirportCode: string;
     arrivalAirportCode:string;
@@ -5,4 +7,5 @@ export interface Flight{
     currency:string;
     departureDateTime:string;
     arrivalDateTime:string;
+    location: Location;
 }

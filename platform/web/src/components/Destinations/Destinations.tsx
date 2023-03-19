@@ -1,7 +1,7 @@
 import img from '../../assets/rome_pic.webp'
 import img2 from "../../assets/dubai.webp"
-import {DestinationDTO} from "../../DTO/DestinationDTO";
-import {Destination} from '../Destination';
+import { DestinationDTO } from "../../DTO/DestinationDTO";
+import { Destination } from '../Destination';
 import './styles.css'
 
 export default function Destinations() {
@@ -20,7 +20,6 @@ export default function Destinations() {
                     }
                 </div>
             </div>
-
         </>
     );
 }

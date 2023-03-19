@@ -1,4 +1,4 @@
-const apiURL = "http://192.168.100.209:8080/api/v1";
+const apiURL = "http://10.108.6.110:8080/api/v1";
 
 export const postReq = async (url: string, body: any, headers?: Record<string, string>) => {
     try {

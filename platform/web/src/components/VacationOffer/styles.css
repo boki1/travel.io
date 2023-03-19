@@ -1,0 +1,63 @@
+.vacationOffer {
+    display: flex;
+    width: fit-content;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    max-width: 80rem;
+    margin: 1rem;
+}
+
+img {
+    width: 20rem;
+    height: auto;
+    max-height: 20rem;
+}
+
+.hotelDescription {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: fit-content;
+    padding: 1rem;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    font-size: 4rem;
+}
+
+.hotelName{
+    font-size: 1.2vw;
+    font-weight: 500;
+    color: #000;
+}
+
+p{
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #000;
+    margin: 0;
+}
+
+.hotelPrice{
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #000;
+    text-align: end;
+}
+
+.fligthDescription {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: fit-content;
+    padding-left: 1rem;
+}
+
+.active {
+    border: 1px solid #000;
+    border-radius: 4px; 
+}
+

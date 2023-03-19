@@ -3,10 +3,10 @@ import { FloatingLabel, Form, Button, Row, Col } from 'react-bootstrap';
 import { HomeFormDTO } from '../../DTO/HomeFormDTO';
 import { postReq } from '../../services/makeRequests';
 import './styles.css';
-import {json} from "stream/consumers";
+import { json } from "stream/consumers";
 
 
-const HomeForm = ({setShowLoading}: { setShowLoading: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const HomeForm = ({ setShowLoading }: { setShowLoading: React.Dispatch<React.SetStateAction<boolean>> }) => {
     const [vacationDescription, setVacationDescription] = useState('');
     const [maxPrice, setMaxPrice] = useState<number>();
     const [currentCity, setCurrentCity] = useState('');
@@ -30,12 +30,10 @@ const HomeForm = ({setShowLoading}: { setShowLoading: React.Dispatch<React.SetSt
 
         const [data, err] = await postReq('messages', formData);
 
-
         if (err) {
             setShowLoading(false);
-            console.log(err);
         } else {
-            localStorage.setItem('destinations',JSON.stringify(data));
+            localStorage.setItem('destinations', JSON.stringify(data));
             window.location.href = '/destinations';
             setShowLoading(false);
             console.log(data);
@@ -53,30 +51,30 @@ const HomeForm = ({setShowLoading}: { setShowLoading: React.Dispatch<React.SetSt
                 <Col>
                     <FloatingLabel label="Enter max price of the vacation">
                         <Form.Control className='input' placeholder=' ' type="number" value={maxPrice}
-                                      onInput={(event: React.FormEvent<HTMLInputElement>) => setMaxPrice(parseFloat(event.currentTarget.value))}/>
+                            onInput={(event: React.FormEvent<HTMLInputElement>) => setMaxPrice(parseFloat(event.currentTarget.value))} />
                     </FloatingLabel>
                     <FloatingLabel label="Enter City/Country of departure">
                         <Form.Control className='input' placeholder=' ' type="text"
-                                      value={`${currentCity || ''}/${currentCountry || ''}`}
-                                      onInput={(event: React.FormEvent<HTMLInputElement>) => modifyCity(event)}/>
+                            value={`${currentCity || ''}/${currentCountry || ''}`}
+                            onInput={(event: React.FormEvent<HTMLInputElement>) => modifyCity(event)} />
                     </FloatingLabel>
                 </Col>
                 <Col>
                     <FloatingLabel label="Check in date">
                         <Form.Control className='input' placeholder=' ' type="date" value={checkInDate}
-                                      onInput={(event: React.FormEvent<HTMLInputElement>) => setCheckInDate(event.currentTarget.value)}/>
+                            onInput={(event: React.FormEvent<HTMLInputElement>) => setCheckInDate(event.currentTarget.value)} />
                     </FloatingLabel>
                     <FloatingLabel label="Check out date">
                         <Form.Control className='input' placeholder=' ' type="date" value={checkOutDate}
-                                      onInput={(event: React.FormEvent<HTMLInputElement>) => setCheckOutDate(event.currentTarget.value)}/>
+                            onInput={(event: React.FormEvent<HTMLInputElement>) => setCheckOutDate(event.currentTarget.value)} />
                     </FloatingLabel>
                 </Col>
             </Row>
 
             <FloatingLabel label="Add description for your vacation... (max 1500 words)">
-                <Form.Control className='input descriptionTextInput' placeholder=' ' type='text' style = {{height:'10rem'}}
-                              as='textarea' value={vacationDescription}
-                              onInput={(event: React.FormEvent<HTMLInputElement>) => setVacationDescription(event.currentTarget.value)}/>
+                <Form.Control className='input' placeholder=' ' type='text'
+                    as='textarea' value={vacationDescription}
+                    onInput={(event: React.FormEvent<HTMLInputElement>) => setVacationDescription(event.currentTarget.value)} />
             </FloatingLabel>
 
             <Button className='button' variant="primary" type="submit"
