@@ -1,6 +1,7 @@
 package com.fmicodes.comm.services;
 
 import com.fmicodes.comm.DTO.Location;
+import com.fmicodes.comm.DTO.OpenAIDestinationResponse;
 import com.fmicodes.comm.DTO.VacationOffer;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.DTO.travel.Flight;
@@ -12,15 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-
-/**
- * Destination IDs:
- * -2601889: London
- * -1746443: Berlin
- * -755070: Istanbul
- */
-
-// TODO: do not make API calls for linking City to Airport code, because that can be done with a simple HashMap<String, ArrayList<String>> cityNameToAirportCodes
 
 @Service
 public class MessageService {
@@ -35,7 +27,7 @@ public class MessageService {
     @Autowired
     private GoogleMapsService googleMapsService;
 
-    public String getMessageAnalysis(String message) {
+    public ArrayList<OpenAIDestinationResponse> getMessageAnalysis(String message) {
         return analyzerService.analyzeMessage(message);
     }
 
@@ -46,7 +38,6 @@ public class MessageService {
 
     public ArrayList<Location> getLocationDataFromOpenAIResponse(String openAIResponse) {
         ArrayList<Location> locationData = new ArrayList<>();
-        System.out.println("OPEN AI RESPONSE: " + openAIResponse);
 
         try {
             JSONObject openAIResponseJSON = new JSONObject(openAIResponse);
@@ -58,6 +49,7 @@ public class MessageService {
                 String description = locationArray.getString(2);
                 Location location = new Location(city, country, description);
 
+
                 locationData.add(location);
             }
         } catch (JSONException e) {
@@ -67,27 +59,19 @@ public class MessageService {
         return locationData;
     }
 
-    public String getNearbyRestaurants(Hotel hotel) {
-        return googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500).toString();
-    }
-
-    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, Location departureLocation, String departureDate, String returnDate) {
+    public ArrayList<VacationOffer> bundleVacationOffers(ArrayList<Hotel> hotels, Location departureLocation, String departureDate, String returnDate, ArrayList<String> landmarks, ArrayList<String> suggestedActivities) {
         String originAirportCode = analyzerService.getAirportIATACodeByLocation(departureLocation);
 
         Flight flight = null;
-        if (hotels.size() != 0) {
+        if (!hotels.isEmpty()) {
             flight = ryanAirService.getFlightBetweenTwoAirports(originAirportCode,
                     hotels.get(0).getAirportCode(), departureDate, returnDate);
         }
 
         ArrayList<VacationOffer> vacationOffers = new ArrayList<>();
         for (Hotel hotel : hotels) {
-            System.out.println("HOTEL: " + hotel.getHotelName() + " AIRPORT CODE: " + hotel.getAirportCode());
-
-            System.out.println("HOTEL DATA: " + hotel);
-            System.out.println(" NEARBY RESTAURANTS: " + getNearbyRestaurants(hotel));
-
-
+            hotel.setSuggestedActivities(suggestedActivities);
+            hotel.setNearbyRestaurants(googleMapsService.getNearbyRestaurants(hotel.getLatitude(), hotel.getLongitude(), 500));
             VacationOffer vacationOffer = new VacationOffer();
             vacationOffer.setHotel(hotel);
             vacationOffer.setFlight(flight);

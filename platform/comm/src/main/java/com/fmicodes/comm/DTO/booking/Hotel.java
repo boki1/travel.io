@@ -1,5 +1,9 @@
 package com.fmicodes.comm.DTO.booking;
 
+import com.fmicodes.comm.DTO.RestaurantInfo;
+
+import java.util.ArrayList;
+
 public class Hotel {
 
     private Integer hotelId;
@@ -22,6 +26,10 @@ public class Hotel {
     private Double price;
 
     private String currency;
+
+    private ArrayList<RestaurantInfo> nearbyRestaurants;
+
+    private ArrayList<String> suggestedActivities;
 
     public Integer getHotelId() {
         return hotelId;
@@ -109,6 +117,22 @@ public class Hotel {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public ArrayList<RestaurantInfo> getNearbyRestaurants() {
+        return nearbyRestaurants;
+    }
+
+    public void setNearbyRestaurants(ArrayList<RestaurantInfo> nearbyRestaurants) {
+        this.nearbyRestaurants = nearbyRestaurants;
+    }
+
+    public ArrayList<String> getSuggestedActivities() {
+        return suggestedActivities;
+    }
+
+    public void setSuggestedActivities(ArrayList<String> suggestedActivities) {
+        this.suggestedActivities = suggestedActivities;
     }
 
     @Override
