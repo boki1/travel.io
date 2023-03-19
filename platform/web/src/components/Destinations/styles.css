@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 
-html, body{
+/* html, body{
     background-color:white;
-}
+} */
 
 a {
     color: black;
@@ -51,8 +51,6 @@ a {
     background: black;
 }
 
-
-/*************/
 .content {
     overflow:auto;
     position: absolute;
