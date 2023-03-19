@@ -32,7 +32,7 @@ const HomeForm = ({setShowLoading}: { setShowLoading: React.Dispatch<React.SetSt
 
 
         if (err) {
-            setShowLoading(false)
+            setShowLoading(false);
             console.log(err);
         } else {
             localStorage.setItem('destinations',JSON.stringify(data));
@@ -74,7 +74,7 @@ const HomeForm = ({setShowLoading}: { setShowLoading: React.Dispatch<React.SetSt
             </Row>
 
             <FloatingLabel label="Add description for your vacation... (max 1500 words)">
-                <Form.Control className='input' placeholder=' ' type='text'
+                <Form.Control className='input descriptionTextInput' placeholder=' ' type='text' style = {{height:'10rem'}}
                               as='textarea' value={vacationDescription}
                               onInput={(event: React.FormEvent<HTMLInputElement>) => setVacationDescription(event.currentTarget.value)}/>
             </FloatingLabel>

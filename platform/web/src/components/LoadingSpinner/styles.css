@@ -6,11 +6,11 @@
     z-index: 100;
     position: absolute;
     word-wrap: break-word;
-    margin-left: 5rem;
-    margin-top: 5rem;
+    margin-left: 5vw;
+    margin-top: 5vw;
     color: white;
     max-width: 50%;
-    font-size: 5rem;
+    font-size: 5vw;
     text-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 
 }
@@ -28,7 +28,7 @@
     width: 100%;
     margin: 0 auto;
     position: relative;
-    padding: 20px;
+    padding: 2vw;
     box-sizing: border-box;
     display: flex;
     align-items: flex-end;
@@ -51,7 +51,7 @@
     align-items: center;
     background-color: rgba(255, 255, 255, 0.8);
     box-sizing: border-box;
-    padding: 40px;
+    padding: 2vw;
 }
 @media (min-width: 768px) {
     .inner {
@@ -61,30 +61,34 @@
 }
 
 .titleCard {
-    font-size: 5rem;
+    font-size: 5vw;
     color: #000033;
     text-align: center;
     font-weight: 850;
     position: relative;
-    margin: 0 0 80px 0;
+    margin: 0 0 4vw 0;
     border-bottom: solid;
 }
 @media (min-width: 768px) {
     .titleCard {
-        font-size: 5rem;
+        font-size: 5vw;
     }
 }
 
 .descriptionCard{
     text-align: center;
     color: #000033;
-    font-size: 2rem;
+    font-size: 2vw;
     margin: 0 0 2rem 0;
 }
 
 .subtitle {
     color: #000033;
     text-align: center;
+}
+
+.attractions{
+    font-size: 1.5vw;
 }
 
 .spinLoader {

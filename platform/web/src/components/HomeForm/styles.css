@@ -7,6 +7,20 @@
     letter-spacing: 0.1rem;
     margin-bottom: 1rem;
     min-width: 25%;
+    height: 100rem;
+    resize: none;
+}
+
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 .button {
