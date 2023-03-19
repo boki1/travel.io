@@ -31,8 +31,8 @@ const HomeForm = ({ setShowLoading }: { setShowLoading: React.Dispatch<React.Set
         const [data, err] = await postReq('messages', formData);
 
         if (err) {
-            setShowLoading(false)
-            console.log(err);
+            setShowLoading(false);
+
         } else {
             localStorage.setItem('destinations', JSON.stringify(data));
             window.location.href = '/destinations';

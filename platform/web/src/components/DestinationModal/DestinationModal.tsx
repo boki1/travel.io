@@ -11,7 +11,11 @@ export default function DestinationModal({ destination, isOpen, setIsOpen }:
     { destination: DestinationDTO, isOpen: boolean, setIsOpen: (isOpen: boolean) => void }) {
     const [selectedOffer, setSelectedOffer] = useState<VacationOfferDTO | null>(destination?.vacationOffers[0] || null);
 
-    destination.location.coordinates = { lat: 41.9028, lng: 12.4964 };
+    console.log('destination1', destination);
+    const center = {
+        lat: destination.vacationOffers[0].hotel.latitude,
+        lng: destination.vacationOffers[0].hotel.longitude,
+    };
 
     return (
         <Modal isOpen={isOpen}>
@@ -20,14 +24,19 @@ export default function DestinationModal({ destination, isOpen, setIsOpen }:
                 <button className="modal__close" onClick={() => setIsOpen(false)}>X</button>
             </div>
             <hr />
-            
             <div className="vacationOffers">
                 {destination.vacationOffers.map((offer, index) => (
                     <VacationOffer key={index} vacationOffer={offer} setSelectedOffer={setSelectedOffer} />
                 ))}
             </div>
+            <GoogleMap offer={selectedOffer} center={center} />
 
-            <GoogleMap offer={selectedOffer} center={destination.location.coordinates} />
+            <div>
+                {/* <div className='landmarks'>
+                    <h3>Landmarks</h3>
+                </div> */}
+            </div>
+
         </Modal>
     )
 }

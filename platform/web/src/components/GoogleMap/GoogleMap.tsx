@@ -5,8 +5,8 @@ import { VacationOfferDTO } from '../../DTO/travel/VacationOfferDTO';
 export default function GoogleMap({ offer, center }: { offer: VacationOfferDTO | null, center: { lat: number, lng: number } }) {
 
     const containerStyle = {
-        width: '400px',
-        height: '400px'
+        width: '50%',
+        height: '50%'
     };
 
     return (
@@ -18,8 +18,6 @@ export default function GoogleMap({ offer, center }: { offer: VacationOfferDTO |
                 center={center}
                 zoom={10}
             >
-                { /* Child components, such as markers, info windows, etc. */}
-                <></>
             </Map>
         </LoadScript>
     )

@@ -3,7 +3,7 @@ export interface Location {
     city: string;
     country: string;
     coordinates: {
-        lat: number;
-        lng: number;
+        latitude: number;
+        longitude: number;
     };
 }
