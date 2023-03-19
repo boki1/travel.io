@@ -35,9 +35,9 @@ const HomeForm = ({setShowLoading}: { setShowLoading: React.Dispatch<React.SetSt
             setShowLoading(false)
             console.log(err);
         } else {
-            // localStorage.setItem('destinations',JSON.stringify(data));
-            // window.location.href = '/destinations';
-            // setShowLoading(false);
+            localStorage.setItem('destinations',JSON.stringify(data));
+            window.location.href = '/destinations';
+            setShowLoading(false);
             console.log(data);
         }
     };

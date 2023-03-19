@@ -8,7 +8,7 @@ export default function Destination({destination}: { destination: DestinationDTO
         <>
             <div className="wrapper">
                 <div className="header header_home">{destination.location.city}/{destination.location.country}</div>
-                <div className="content content_home">You can enjoy good whether and amazing food</div>
+                <div className="content content_home">{destination.location.description}</div>
                 <div className="image" style={{backgroundImage: `url(${img})`}}></div>
             </div>
 
