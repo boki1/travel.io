@@ -17,7 +17,7 @@ public class UnsplashService {
         String destinationsResponse;
         AsyncHttpClient client = new DefaultAsyncHttpClient();
         try {
-            Response response = client.prepare("GET", "https://api.unsplash.com/search/photos?page=1&query=" + location)
+            Response response = client.prepare("GET", "https://api.unsplash.com/search/photos?page=1&query=" + location + " landscape")
                     .setHeader("Authorization", "Client-ID " + "7394sfnNucC9j1r5olgGsJ2-hiE6_28Xdi7R1KBC1rE")
                     .execute()
                     .get();

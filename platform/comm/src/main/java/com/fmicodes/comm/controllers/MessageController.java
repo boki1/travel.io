@@ -10,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
+
+import static com.fasterxml.jackson.databind.cfg.CoercionInputShape.Array;
 
 @RestController
 @RequestMapping("/api/v1/messages")
@@ -19,9 +22,6 @@ public class MessageController {
     private static final Integer MAXIMUM_NUMBER_OF_LOCATIONS = 4;
     @Autowired
     private MessageService messageService;
-
-    @Autowired
-    private UnsplashService unsplashService;
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception e) {
@@ -32,15 +32,6 @@ public class MessageController {
         return new ResponseEntity<>(errorResponse, null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> testNewFeatures(@RequestParam(name = "location", required = true) String location) {
-        String image = unsplashService.getUnsplashImage(location);
-
-        System.out.println(image);
-
-        return new ResponseEntity<>(image, null, HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<ArrayList<VacationSuggestion>> makeVacationSuggestion(@RequestBody VacationDescription vacationDescription) {
         ArrayList<OpenAIDestinationResponse> analyzerResponse = messageService.getMessageAnalysis(vacationDescription.getVacationDescription());
@@ -48,14 +39,12 @@ public class MessageController {
                 vacationDescription.getCurrentCountry(),
                 vacationDescription.getVacationDescription());
 
-
         analyzerResponse = analyzerResponse
                 .stream()
                 .limit(MAXIMUM_NUMBER_OF_LOCATIONS)
                 .collect(Collectors.toCollection(ArrayList::new));
 
         ArrayList<VacationSuggestion> vacationSuggestions = new ArrayList<>();
-
         for (OpenAIDestinationResponse destination : analyzerResponse) {
             Location locationData = destination.getLocation();
 

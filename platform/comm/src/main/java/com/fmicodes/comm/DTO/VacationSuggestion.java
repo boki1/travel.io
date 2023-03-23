@@ -12,6 +12,8 @@ public class VacationSuggestion {
     private Location location;
     List<String> activities;
 
+    private String cardDisplayImage;
+
     public ArrayList<VacationOffer> getVacationOffers() {
         return vacationOffers;
     }
@@ -42,5 +44,13 @@ public class VacationSuggestion {
 
     public void setActivities(List<String> activities) {
         this.activities = activities;
+    }
+
+    public String getCardDisplayImage() {
+        return cardDisplayImage;
+    }
+
+    public void setCardDisplayImage(String cardDisplayImage) {
+        this.cardDisplayImage = cardDisplayImage;
     }
 }

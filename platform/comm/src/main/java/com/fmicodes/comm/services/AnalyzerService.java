@@ -99,19 +99,20 @@ public class AnalyzerService {
     }
 
     public String getAirportIATACodeByLocation(Location location) {
-        AsyncHttpClient client = new DefaultAsyncHttpClient();
-        String airportIATACode;
-        try {
-            Response response = client.prepare("POST", "http://" + analyzerHost + "/api/v1/airports")
-                    .setHeader("Content-Type", "application/json")
-                    .setBody("{\"city\": \"" + location.getCity() + "\", \"country\": \"" + location.getCountry() + "\"}")
-                    .execute()
-                    .get();
+        String airportIATACode = "SOF";
 
-            airportIATACode = response.getResponseBody();
-        } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException("ERROR - Communicating with Flask API: " + e.getMessage());
-        }
+//        AsyncHttpClient client = new DefaultAsyncHttpClient();
+//        try {
+//            Response response = client.prepare("POST", "http://" + analyzerHost + "/api/v1/airports")
+//                    .setHeader("Content-Type", "application/json")
+//                    .setBody("{\"city\": \"" + location.getCity() + "\", \"country\": \"" + location.getCountry() + "\"}")
+//                    .execute()
+//                    .get();
+//
+//            airportIATACode = response.getResponseBody();
+//        } catch (InterruptedException | ExecutionException e) {
+//            throw new RuntimeException("ERROR - Communicating with Flask API: " + e.getMessage());
+//        }
 
         return airportIATACode;
     }
