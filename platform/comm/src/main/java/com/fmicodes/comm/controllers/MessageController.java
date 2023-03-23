@@ -3,6 +3,7 @@ package com.fmicodes.comm.controllers;
 import com.fmicodes.comm.DTO.*;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.services.MessageService;
+import com.fmicodes.comm.services.UnsplashService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,9 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private UnsplashService unsplashService;
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception e) {
         ErrorResponse errorResponse = new ErrorResponse();
@@ -26,6 +30,15 @@ public class MessageController {
         errorResponse.setMessage(e.getMessage());
 
         return new ResponseEntity<>(errorResponse, null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> testNewFeatures(@RequestParam(name = "location", required = true) String location) {
+        String image = unsplashService.getUnsplashImage(location);
+
+        System.out.println(image);
+
+        return new ResponseEntity<>(image, null, HttpStatus.OK);
     }
 
     @PostMapping
