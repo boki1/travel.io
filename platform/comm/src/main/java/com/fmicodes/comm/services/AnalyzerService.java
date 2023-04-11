@@ -99,20 +99,21 @@ public class AnalyzerService {
     }
 
     public String getAirportIATACodeByLocation(Location location) {
-        String airportIATACode = "SOF";
+        String airportIATACode;
 
-//        AsyncHttpClient client = new DefaultAsyncHttpClient();
-//        try {
-//            Response response = client.prepare("POST", "http://" + analyzerHost + "/api/v1/airports")
-//                    .setHeader("Content-Type", "application/json")
-//                    .setBody("{\"city\": \"" + location.getCity() + "\", \"country\": \"" + location.getCountry() + "\"}")
-//                    .execute()
-//                    .get();
-//
-//            airportIATACode = response.getResponseBody();
-//        } catch (InterruptedException | ExecutionException e) {
-//            throw new RuntimeException("ERROR - Communicating with Flask API: " + e.getMessage());
-//        }
+        AsyncHttpClient client = new DefaultAsyncHttpClient();
+        try {
+            Response response = client.prepare("POST", "http://" + analyzerHost + "/api/v1/airports")
+                    .setHeader("Content-Type", "application/json")
+                    .setBody("{\"city\": \"" + location.getCity() + "\", \"country\": \"" + location.getCountry() + "\"}")
+                    .execute()
+                    .get();
+
+            JSONObject airportData = new JSONObject(response.getResponseBody());
+            airportIATACode = airportData.getString("iata");
+        } catch (InterruptedException | ExecutionException | JSONException e) {
+            throw new RuntimeException("ERROR - Communicating with airports API: " + e.getMessage());
+        }
 
         return airportIATACode;
     }

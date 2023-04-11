@@ -12,6 +12,7 @@ public class CredentialsUtil {
     private static final String CREDENTIALS_FILE_PATH = "src/main/resources/credentials.yaml";
     private static final String RAPID_API_KEY_YAML_VALUE = "rapidApiKey";
     private static final String MAPS_API_KEY_YAML_VALUE = "mapsApiKey";
+    private static final String UNSPLASH_API_KEY_YAML_VALUE = "unsplashApiKey";
 
     public static String getRapidAPIKey() {
         return getAPIKey(RAPID_API_KEY_YAML_VALUE);
@@ -19,6 +20,10 @@ public class CredentialsUtil {
 
     public static String getMapsAPIKey() {
         return getAPIKey(MAPS_API_KEY_YAML_VALUE);
+    }
+
+    public static String getUnsplashApiKey() {
+        return getAPIKey(UNSPLASH_API_KEY_YAML_VALUE);
     }
 
     private static String getAPIKey(String key) {

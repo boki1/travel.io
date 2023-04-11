@@ -1,5 +1,6 @@
 package com.fmicodes.comm.services;
 
+import com.fmicodes.comm.services.util.CredentialsUtil;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.asynchttpclient.Response;
@@ -12,13 +13,14 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class UnsplashService {
+    private static final String unsplashApiKey = CredentialsUtil.getUnsplashApiKey();
 
     public String getUnsplashImage(String location) {
         String destinationsResponse;
         AsyncHttpClient client = new DefaultAsyncHttpClient();
         try {
             Response response = client.prepare("GET", "https://api.unsplash.com/search/photos?page=1&query=" + location + " landscape")
-                    .setHeader("Authorization", "Client-ID " + "7394sfnNucC9j1r5olgGsJ2-hiE6_28Xdi7R1KBC1rE")
+                    .setHeader("Authorization", "Client-ID " + unsplashApiKey)
                     .execute()
                     .get();
 
