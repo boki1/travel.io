@@ -25,6 +25,9 @@ public class MessageService {
     @Autowired
     private GoogleMapsService googleMapsService;
 
+    @Autowired
+    private UnsplashService unsplashService;
+
     public ArrayList<OpenAIDestinationResponse> getMessageAnalysis(String message) {
         return analyzerService.analyzeMessage(message);
     }
@@ -98,6 +101,8 @@ public class MessageService {
         vacationSuggestion.setVacationOffers(vacationOffers);
         vacationSuggestion.setLandmarks(googleMapsService.searchLandmarks(landmarks, locationData));
         vacationSuggestion.setActivities(activities);
+
+        vacationSuggestion.setCardDisplayImage(unsplashService.getUnsplashImage(locationData.getCity() + " " + locationData.getCountry()));
 
         return vacationSuggestion;
     }

@@ -3,13 +3,17 @@ package com.fmicodes.comm.controllers;
 import com.fmicodes.comm.DTO.*;
 import com.fmicodes.comm.DTO.booking.Hotel;
 import com.fmicodes.comm.services.MessageService;
+import com.fmicodes.comm.services.UnsplashService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
+
+import static com.fasterxml.jackson.databind.cfg.CoercionInputShape.Array;
 
 @RestController
 @RequestMapping("/api/v1/messages")
@@ -35,14 +39,12 @@ public class MessageController {
                 vacationDescription.getCurrentCountry(),
                 vacationDescription.getVacationDescription());
 
-
         analyzerResponse = analyzerResponse
                 .stream()
                 .limit(MAXIMUM_NUMBER_OF_LOCATIONS)
                 .collect(Collectors.toCollection(ArrayList::new));
 
         ArrayList<VacationSuggestion> vacationSuggestions = new ArrayList<>();
-
         for (OpenAIDestinationResponse destination : analyzerResponse) {
             Location locationData = destination.getLocation();
 

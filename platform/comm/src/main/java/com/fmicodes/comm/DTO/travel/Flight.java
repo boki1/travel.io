@@ -1,5 +1,7 @@
 package com.fmicodes.comm.DTO.travel;
 
+import com.fmicodes.comm.DTO.Location;
+
 public class Flight {
 
     private String departureAirportCode;
@@ -10,6 +12,7 @@ public class Flight {
     private String departureDateTime;
     private String arrivalDateTime;
 
+    private Location landingLocation;
 
     public String getDepartureAirportCode() {
         return departureAirportCode;
@@ -59,7 +62,11 @@ public class Flight {
         this.arrivalDateTime = arrivalDateTime;
     }
 
+    public Location getLandingLocation() {
+        return landingLocation;
+    }
 
-
-
+    public void setLandingLocation(Location landingLocation) {
+        this.landingLocation = landingLocation;
+    }
 }
